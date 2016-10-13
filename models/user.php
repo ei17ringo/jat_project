@@ -26,6 +26,16 @@
             
         }
 
+        // login
+        public function login() {
+            $sql = sprintf('SELECT * FROM %s WHERE id=%s',
+                $this->table_name,
+                $id
+            );
+
+            return $sql;
+        }
+
         // show
         public function findById($id) {
             $sql = sprintf('SELECT * FROM %s WHERE id=%s',
@@ -37,7 +47,18 @@
         }
 
         // new (create)
-        public function create($blog) {
+        public function create($user) {
+            $sql = sprintf('INSERT INTO %s SET title="%s", body="%s", created=NOW()',
+                $this->table_name,
+                $blog['title'],
+                $blog['body']
+            );
+
+            return $sql;
+        }
+
+                // confirm (confirm)
+        public function confirm($user) {
             $sql = sprintf('INSERT INTO %s SET title="%s", body="%s", created=NOW()',
                 $this->table_name,
                 $blog['title'],

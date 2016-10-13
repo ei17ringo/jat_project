@@ -25,10 +25,10 @@
         public function login() {
             $User = new User($this->table_name, $this->action);
 
-            $sql = $User->findById($id);
+            $sql = $User->find('all');
 
             $blog = mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-            return $user;
+
         }
 
         public function show($id) {
@@ -40,14 +40,43 @@
             return $blog;
         }
 
-        public function _new($blog) {
+        public function create($POST) {
             if (!empty($blog)) {
-                $Blog = new Blog($this->table_name, $this->action);
-                $sql = $Blog->create($blog);
+                $User = new User($this->table_name, $this->action);
+                $sql = $User->create($blog);
 
                 mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
 
                 header("Location: index");
+            }
+        }
+
+        public function confirm($user) {
+            if (!empty($blog)) {
+                $User = new User($this->table_name, $this->action);
+                $sql = $User->create($user);
+
+                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
+
+                header("Location: index");
+            }
+        }
+
+        public function mypage() {
+            if (!empty($user)) {
+                $User = new User($this->table_name, $this->action);
+                $sql = $User->create($user);
+
+                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
+            }
+        }
+
+        public function profile() {
+            if (!empty($user)) {
+                $User = new User($this->table_name, $this->action);
+                $sql = $User->create($user);
+
+                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
             }
         }
 
