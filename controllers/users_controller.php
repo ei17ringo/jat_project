@@ -1,5 +1,5 @@
 <?php
-    class SpotsController {
+    class UsersController {
 
         // プロパティ (カプセル化)
         private $db = '';
