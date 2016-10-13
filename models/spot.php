@@ -1,6 +1,6 @@
 <?php
     // nsfwのmodelは最適なsql文を返す
-    class Blog {
+    class Spot {
 
         // プロパティ (カプセル化)
         private $table_name = '';
