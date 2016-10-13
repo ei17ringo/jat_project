@@ -1,6 +1,6 @@
 <?php
-    $BlogsController = new BlogsController($db, $table_name, $action);
-    $BlogsController->_new($_POST);
+    $SpotsController = new SpotsController($db, $table_name, $action);
+    $SpotsController->_new($_POST);
 ?>
 
 <div>
