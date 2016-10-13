@@ -75,7 +75,7 @@
 
 
         <?php
-          include('views/'. $resource . '/' $action .'.php');
+          include('views/'. $resource . '/' . $action .'.php');
         ?>
 
 
@@ -106,7 +106,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    
+
 </body>
 
 </html>

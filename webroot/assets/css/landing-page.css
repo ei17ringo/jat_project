@@ -1,0 +1,786 @@
+/*
+ * Start Bootstrap - Landing Page (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body,
+html {
+    width: 100%;
+    /*フッター領域が拡大するという不具合調整のため無力化*/
+/*    height: 100%;*/
+    font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.photo-upload{
+    position: relative;
+}
+
+.topnav {
+    font-size: 14px; 
+}
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.intro-header {
+    padding-top: 150px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../img/login.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.intro-header-index {
+    padding-top: 150px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+/*    text-align: center;*/
+    font-size: 20px;
+    font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+    color: #000000;
+    background: url(../img/index.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.intro-header-register {
+    padding-top: 150px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+/*    text-align: center;*/
+    font-size: 20px;
+    font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+    color: #000000;
+    background: url(../img/register.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.intro-header-plan-list {
+    padding-top: 150px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+/*    text-align: center;*/
+    font-size: 20px;
+    font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+    color: #000000;
+    background: url(../img/planlist.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.intro-header-mypage {
+    padding-top: 150px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #000000;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8
+
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+.modal-dialog {
+    opacity: 0.9;
+}
+
+.modal-dialog-index {
+    opacity: 0.8;
+    display: -webkit-flex;
+    display: flex;
+    max-width:100%;
+    margin:0 auto;
+}
+
+.modal-dialog-post {
+    opacity: 0.8;
+}
+
+.text-center {
+    color: black;
+}
+
+.checkbox-cokkie{
+    text-align: left;
+    color: #808080;
+    padding: 0px 0px 10px 15px;
+    font-size: 9px;
+}
+
+.pull-right{
+    padding-right: 15px;
+    padding-left: 0;
+    border-right: 5px solid #eee;
+    border-left: 0;
+}
+
+.pull-left{
+    padding-left: 15px;
+    padding-right: 0;
+    border-left: 5px solid #eee;
+    border-right: 0;
+}
+
+.col-md-12 dl{
+    border-bottom: 1px solid #e5e5e5;
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+}
+
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.content-section-a {
+    padding: 25px 0;
+    background-color: #f8f8f8;
+}
+
+.content-section-b {
+    padding: 25px 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.content-section-c {
+    padding: 25px 0;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.content-section-mypage {
+    padding-top: 100px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    background-color: #f8f8f8;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.plan-show{
+    max-height: 330px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.plan-content{
+    max-height: 300px;
+}
+
+.plan-content-profile{
+    height: 60px;
+    max-height:100px;
+}
+
+.plan-idea{
+    text-align: left;
+    padding-left: 30px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.plan-detail{
+    text-align: center;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.plan-detail-plan-list{
+    text-align: center;
+}
+
+.favorite-user-list{
+    height: 42px;
+    min-width: 210px;
+    max-width: 200px;
+    border: solid 1px #dcdcdc;
+    margin-top: 5px;
+}
+
+.favorite-user-picture {
+    float: left;
+    margin-left: 2px;
+}
+
+.favorite-number{
+    margin-top: 25px;
+}
+
+img.favorite-user-picture {
+    width: 40px;
+    height: 40px;
+}
+
+.favorite-user-name-area{
+    float: left;
+    margin-left: 10px;
+    margin-top: 11px;
+    font-size: 12px;
+    word-wrap: break-word;
+}
+
+.mypage-main {
+    background-color: #ffffff;
+}
+
+.mypage-profile {
+    background-color: #f8f8f8;
+
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading-spacer {
+    float: left;
+    width: 200px;
+    border-top: 3px solid #e7e7e7;
+}
+
+.banner {
+    padding: 100px 0;
+    color: #f8f8f8;
+    background: url(../img/banner-bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 3em;
+}
+
+.banner ul {
+    margin-bottom: 0;
+}
+
+.banner-social-buttons {
+    text-align: center;
+    margin-top: 0;
+}
+
+@media(max-width:1199px) {
+    ul.banner-social-buttons {
+        float: left;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width:767px) {
+    .banner h2 {
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+        font-size: 3em;
+    }
+
+    ul.banner-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.banner-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.comment-section{
+    list-style: none;
+    max-width: 800px;
+    width: 100%;
+    margin: 50px auto;
+    padding: 10px;
+}
+
+.comment{
+    display: flex;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    font: normal 13px sans-serif;
+}
+
+.comment.user-comment{
+    color:  #808080;
+}
+
+.comment.author-comment{
+    color:  #60686d;
+    justify-content: flex-end;
+}
+
+.index-comment{
+    display: flex;
+    border-radius: 3px;
+    flex-wrap: wrap;
+    font: normal 13px sans-serif;
+}
+
+.index-comment.index-user-comment{
+    color:  #808080;
+}
+
+.research{
+    border-radius: 3px;
+    flex-wrap: wrap;
+    margin-top: 7px;
+    margin-bottom: 7px;
+        /* サイドバーには固定幅を利用し、伸縮しないように設定します。（flex-grow のデフォルト値は 0）*/
+    -webkit-flex-shrink:0;
+    flex-shrink:0;
+    width: 70%;
+    height: 100%;
+}
+
+.control-label{
+    /* flex-grow を設定し、余白スペースいっぱいに自動で伸縮するように設定します。*/
+    -webkit-flex-grow:1;
+    flex-grow:1;
+    margin: 0 auto;
+    width: 30%;
+    height: 100%;
+    text-align: center;
+}
+
+/*---------------------------ゴミ箱、編集アイコン設置--------------------------*/
+
+.btn-set {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
+    line-height: 30px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    text-align: center;
+    border: solid 2px #6495ed;
+ /*   -webkit-box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 3px rgba(0,0,0,0.75);*/
+}
+
+.position-fix{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #1e90ff;
+    font-size: 18px;
+    width:150px;
+}
+
+.position-fix-favoritenum{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #1e90ff;
+    font-size: 18px;
+    min-width: 100px;
+}
+
+.position-fix-plan-list{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #1e90ff;
+    font-size: 20px;
+    width: 300px;
+}
+
+.tag-favonum{
+    display: inline-block;
+}
+
+.edit-btn{
+    margin: 0 auto;
+    padding: 8px;
+    width: 150px;
+}
+
+.tag-content{
+    margin-left: 30px;
+    max-height: 100px;
+    max-width: 330px;
+}
+
+.tag-content-mypage{
+    max-height: 100px;
+    max-width: 250px;
+    max-width: 600px;
+    margin-left: 50px;
+    padding-right: 25px;
+    float: left;
+}
+
+.glyphicon-tags{
+    max-width: 600px;
+    word-wrap: break-word;
+    display: inline-block;
+    float: left;
+}
+
+.glyphicon-tags-mypage{
+    max-width: 200px;
+    word-wrap: break-word;
+    float: left;
+}
+
+/*---------------------------ゴミ箱、編集アイコン設置完了--------------------------*/
+/*---------------------------マイページ旅路(不具合修正のため無力化)-------------------------------------*/
+/*.plans-title{
+    display: inline-flex;
+}*/
+/*---------------------------マイページ旅路完了-------------------------------------*/
+
+
+/* User and time info */
+
+.comment .info{
+    width: 17%;
+}
+
+.comment.user-comment .info{
+    text-align: right;
+}
+
+.comment.author-comment .info{
+    order: 3;
+}
+
+
+.comment .info a{   /* User name */
+    display: block;
+    text-decoration: none;
+    color: #656c71;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0 3px 0;
+}
+
+.comment .info span{    /* Time */
+    font-size: 11px;
+    color:  #9ca7af;
+}
+
+
+/* The user avatar */
+
+.comment .avatar{
+    width: 8%;
+}
+
+.comment.user-comment .avatar{
+    padding: 10px 18px 0 3px;
+}
+
+.comment.author-comment .avatar{
+    order: 2;
+    padding: 10px 3px 0 18px;
+}
+
+.comment .avatar img{
+    display: block;
+    border-radius: 50%;
+}
+
+.comment.user-comment .avatar img{
+    float: right;
+}
+
+
+
+
+
+/* The comment text */
+
+.comment p{
+    line-height: 1.5;
+    padding: 18px 22px;
+    width: 50%;
+    position: relative;
+    word-wrap: break-word;
+}
+
+.comment.user-comment p{
+    background-color:  #f3f3f3;
+}
+
+.index-comment.index-user-comment p{
+    background-color: #e2f8ff;
+}
+
+.comment.author-comment p{
+    background-color:  #e2f8ff;
+    order: 1;
+}
+
+.user-comment p:after{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid #f3f3f3;
+    left: -8px;
+    top: 18px;
+}
+
+.index-comment p{
+    line-height: 1.5;
+    padding: 10px 10px;
+    width: 100%;
+    position: relative;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.author-comment p:after{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid #e2f8ff;
+    right: -8px;
+    top: 18px;
+}
+
+
+
+
+/* Comment form */
+
+.write-new{
+    margin: 80px auto 0;
+    width: 50%;
+}
+
+.write-new textarea{
+    color:  #444;
+    font: inherit;
+
+    outline: 0;
+    border-radius: 3px;
+    border: 1px solid #cecece;
+    background-color:  #fefefe;
+    box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.06);
+    overflow: auto;
+
+    width:100%;
+    min-height: 80px;
+    padding: 15px 20px;
+}
+
+.write-new img{
+    border-radius: 50%;
+    margin-top: 15px;
+}
+
+.write-new button{
+    float:right;
+    background-color:  #87bae1;
+    box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    border: 0;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+
+    padding: 10px 25px;
+    margin-top: 18px;
+}
+
+
+
+/* Responsive styles */
+
+@media (max-width: 800px){
+    /* Make the paragraph in the comments take up the whole width,
+    forcing the avatar and user info to wrap to the next line*/
+    .comment p{
+        width: 100%;
+    }
+
+    /* Reverse the order of elements in the user comments,
+    so that the avatar and info appear after the text. */
+    .comment.user-comment .info{
+        order: 3;
+        text-align: left;
+    }
+
+    .comment.user-comment .avatar{
+        order: 2;
+    }
+
+    .comment.user-comment p{
+        order: 1;
+    }
+
+
+    /* Align toward the beginning of the container (to the left)
+    all the elements inside the author comments. */
+    .comment.author-comment{
+        justify-content: flex-start;
+    }
+
+
+    .comment-section{
+        margin-top: 10px;
+    }
+
+    .comment .info{
+        width: auto;
+    }
+
+    .comment .info a{
+        padding-top: 15px;
+    }
+
+    .comment.user-comment .avatar,
+    .comment.author-comment .avatar{
+        padding: 15px 10px 0 18px;
+        width: auto;
+    }
+
+    .comment.user-comment p:after,
+    .comment.author-comment p:after{
+        width: 12px;
+        height: 12px;
+        top: initial;
+        left: 28px;
+        bottom: -6px;
+    }
+
+    .write-new{
+        width: 100%;
+    }
+}
+
+/*----------------------register-------------------------------*/
+.register-info{
+    padding: 10px 0 0 10px;
+}
+
+.area-set{
+    padding-top: 15px;
+}
+
+.photo-upload{
+    padding-top: 20px;
+    font-size: 13px;
+}
+
+.register-btn{
+    padding-top: 15px;
+}
+
+/*----------------------<<END>>register------------------------*/
+
+/*----------------------plan_list------------------------------*/
+.btn-control{
+    padding: 20px 0px 10px 80px;
+}
+
+
+.plan-show{
+    padding: 0px 10px 0px 10px;
+    min-height: 275px;
+}
+
+.plans-title{
+    min-height: 150px;
+    max-height: 300px;
+}
+
+.plan-title{
+    text-align: center;
+    word-wrap: break-word;
+    min-height: 50px;
+    max-height: 400px;
+}
+
+.plan-title-name{
+    min-height: 30px;
+    max-height: 100px;
+    word-wrap: break-word;
+    padding-left: 20px;
+}
+
+/*----------------------<<END>>plan_list------------------------*/
+
+footer {
+    padding: 50px 0;
+    background-color: #e5e5ff;
+    position: relative;
+}
+
+p.copyright {
+    text-align: center;
+    margin: 15px 0 0;
+}
