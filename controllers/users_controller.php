@@ -22,6 +22,15 @@
             return $blogs;
         }
 
+        public function login() {
+            $User = new User($this->table_name, $this->action);
+
+            $sql = $User->findById($id);
+
+            $blog = mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
+            return $user;
+        }
+
         public function show($id) {
             $Blog = new Blog($this->table_name, $this->action);
 
