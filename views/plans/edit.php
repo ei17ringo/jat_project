@@ -1,12 +1,12 @@
 <?php
-    $BlogsController = new BlogsController($db, $table_name, $action);
-    $blog = $BlogsController->edit($id);
+    $plansController = new PlansController($db, $table_name, $action);
+    $plans = $PlansController->edit($id);
 ?>
 
 <div>
   <form action="" method="post">
     <div>
-      <input type="text" name="title" value="<?php echo $blog['title'] ?>">
+      <input type="text" name="title" value="<?php echo $plans['title'] ?>">
     </div>
     <div>
       <textarea name="body"><?php echo $blog['body'] ?></textarea>

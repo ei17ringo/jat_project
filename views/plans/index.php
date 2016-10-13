@@ -1,11 +1,11 @@
 <?php
-    $BlogsController = new BlogsController($db, $table_name, $action);
-    $blogs = $BlogsController->index();
+    $PlansController = new PlansController($db, $table_name, $action);
+    $plans = $PlansController->index();
 ?>
 
 <h2>記事一覧</h2>
 <div>
-  <a href="../blog/add">記事作成</a>
+  <a href="../plans/create">記事作成</a>
 </div>
 <?php while ($blog = mysqli_fetch_assoc($blogs)): ?>
     <ul>

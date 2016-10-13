@@ -1,6 +1,6 @@
 <?php
-    $BlogsController = new BlogsController($db, $table_name, $action);
-    $blog_record = $BlogsController->show($id);
+    $PlansController = new PlansController($db, $table_name, $action);
+    $plans_record = $plansController->show($id);
 
     $blog = mysqli_fetch_assoc($blog_record);
 ?>
