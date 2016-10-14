@@ -37,23 +37,23 @@
         }
 
         // new (create)
-        public function create($blog) {
-            $sql = sprintf('INSERT INTO %s SET title="%s", body="%s", created=NOW()',
-                $this->table_name,
-                $blog['title'],
-                $blog['body']
-            );
+        public function create($spot) {
+            // $sql = sprintf('INSERT INTO %s SET title="%s", body="%s", created=NOW()',
+            //     $this->table_name,
+            //     $spot['spot_name'],
+            //     $spot['adress']
+            // );
 
-            return $sql;
+            // return $sql;
         }
 
         // edit (update)
-        public function update($blog) {
+        public function update($spot) {
             $sql = sprintf('UPDATE %s SET title="%s", body="%s", modified=NOW() WHERE id=%s',
                 $this->table_name,
-                $blog['title'],
-                $blog['body'],
-                $blog['id']
+                $spot['title'],
+                $spot['body'],
+                $spot['id']
             );
 
             return $sql;
