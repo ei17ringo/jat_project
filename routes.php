@@ -1,26 +1,31 @@
 <?php
-    include('dbconnect.php');
 
-    $params = explode('/', $_GET['url']);
+  // １、GETパラメータを取得
+  // explode関数：第二引数の文字列を、第一引数の文字列で分解し、配列で返す関数。
+  $params = explode("/", $_GET['url']);
 
-    $resource = $params[0];
-    $action = $params[1];
+  // ２，パラメータの分解
+  $resource = $params[0];
+  $action  = $params[1];
+    // $idはオプションを取得するものであるが、オプションは存在するかわからないため、$id = 0;
+  $id = 0;
+  if (isset($params[2])) {
+    $id = $params[2];
+  }
 
-    // URLにidが指定された場合
-    if (count($params) > 2) {
-        $id = $params[2];
-    }
+  // POSTでデータが送られた場合
+  $post =  array();
+  if (!empty($_POST)) {
+    $post = $_POST;
+  }
 
     $table_name = singular2plural($resource);
 
-    include('./models/' . $resource . '.php'); // model呼び出す
-    include('./controllers/' . $table_name . '_controller.php'); // controller呼び出す
-    include('./views/helpers/application_helper.php'); // ヘルパーの読み込み
-    include('./views/layouts/application.php'); // レイアウトファイルを読み込み
 
-    // http://qiita.com/mpyw/items/41230bec5c02142ae691 参考
+  require('models/' . $resource . '.php'); // model呼び出す
+  require('./controllers/'. $table_name .'_controller.php'); // controller呼び出す
+
 ?>
-
 
 <?php
     // 単数形resource名の単語を複数形に変換する関数

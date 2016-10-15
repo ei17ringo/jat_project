@@ -1,107 +1,76 @@
 <?php
-    // nsfwのmodelは最適なsql文を返す
-    class User {
+  class User {
+    // プロパティ
+    private $dbconnect = '';
+    // コンストラクタ
+    function __construct() {
+      // DB接続ファイルを読み込む
+      require('dbconnect.php');
+      // DB接続設定の値をプロパティに代入
+      $this->dbconnect = $db;
+    }
 
-        // プロパティ (カプセル化)
-        private $table_name = '';
-        private $action = '';
+    function index() {
+      // SQLの実行
+      $sql     = 'SELECT * FROM `blogs` WHERE `delete_flag` = 0';
+      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $rtn     = array();
+      while ($result = mysqli_fetch_assoc($results)) {
+        $rtn[] = $result;
+      }
+      // 取得結果を返す
+      return $rtn;
+    }
 
-        // マジックメソッド
-        public function __construct($table_name, $action) {
-            $this->table_name = $table_name;
-            $this->action = $action;
-        }
+    function show($id) {
+      $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+        );
+      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $result  = mysqli_fetch_assoc($results);
 
-        // index
-        public function find($option) {
+      return $result;
+    }
 
-            // シンプルに全件取得
-            if ($option == 'all') {
-                $sql = sprintf('SELECT * FROM %s',
-                    $this->table_name
-                );
-
-                return $sql;
-            }
-            
-        }
-
-        // login
-        public function login() {
-            $sql = sprintf('SELECT * FROM %s WHERE id=%s',
-                $this->table_name,
-                $id
+    function confirm($post) {
+      $sql = sprintf('INSERT INTO `users` SET `user_name`="%s", `email`="%s", `password`="%s", `user_picture`="%s", `created`=now()',
+               
+                mysqli_real_escape_string($this->dbconnect, $user['user_name']),
+                mysqli_real_escape_string($this->dbconnect, $user['email']),
+                mysqli_real_escape_string($this->dbconnect, sha1($user['password'])),
+                mysqli_real_escape_string($this->dbconnect, $user['user_picture'])
             );
-
-            return $sql;
-        }
-
-        // show
-        public function findById($id) {
-            $sql = sprintf('SELECT * FROM %s WHERE id=%s',
-                $this->table_name,
-                $id
-            );
-
-            return $sql;
-        }
-
-        // new (create)
-        public function create($user) {
-            $sql = sprintf('INSERT INTO %s SET title="%s", body="%s", created=NOW()',
-                $this->table_name,
-                $blog['title'],
-                $blog['body']
-            );
-
-            return $sql;
-        }
-
-                // confirm (confirm)
-        public function confirm($user) {
-            $sql = sprintf('INSERT INTO %s SET title="%s", body="%s", created=NOW()',
-                $this->table_name,
-                $blog['title'],
-                $blog['body']
-            );
-
-            return $sql;
-        }
-
-        // edit (update)
-        public function update($blog) {
-            $sql = sprintf('UPDATE %s SET title="%s", body="%s", modified=NOW() WHERE id=%s',
-                $this->table_name,
-                $blog['title'],
-                $blog['body'],
-                $blog['id']
-            );
-
-            return $sql;
-        }
-
-        // destroy
-        public function destroy($id) {
-            $sql = sprintf('DELETE FROM %s WHERE id=%s',
-                $this->table_name,
-                $id
-            );
-
-            return $sql;
-        }
+            $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
 
     }
+
+
+    function edit($id) {
+      $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+        );
+      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $result  = mysqli_fetch_assoc($results);
+
+      return $result;
+    }
+
+    function update($post, $id) {
+      $sql = sprintf('UPDATE `blogs` SET `title`= "%s",`body`= "%s" WHERE `id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $post['title']),
+        mysqli_real_escape_string($this->dbconnect, $post['body']),
+        mysqli_real_escape_string($this->dbconnect, $id)
+        );
+      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+    }
+
+    function delete($id) {
+      $sql = sprintf('UPDATE `blogs` SET `delete_flag`= 1 WHERE `id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+        );
+      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+    }
+
+  }
+
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-

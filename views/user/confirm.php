@@ -13,7 +13,7 @@
 
                       <div class="modal-dialog">
                           <div class="modal-content">
-                            <form method="post" action="" class="form-horizontal" role="form">
+                            <form method="post" action="/jat_project/user/login" class="form-horizontal" role="form">
                             <input type="hidden" name="action" value="submit">
                               <div class="modal-header">
                                 <h1 class="text-center">登録内容確認</h1>
@@ -22,14 +22,14 @@
                                     <div class="form-group confirm-content">
                                         <label class="col-md-4 control-label">Username</label>
                                         <div class="col-md-8 area-set">
-                                            seed_jat
+                                            <?php echo $_viewOptions['user_name']; ?>
                                         </div>
                                     </div>
 
                                     <div class="form-group confirm-content">
                                         <label class="col-md-4 control-label">Email address</label>
                                         <div class="col-md-8 area-set">
-                                            jatjat@jat.com
+                                            <?php echo $_viewOptions['email']; ?>
                                         </div>
                                     </div>
 
@@ -42,7 +42,9 @@
                                     
                                       <div class="form-group confirm-content">
                                         <div class="col-md-4 control-label">photo</div>
-                                        <div class="text-center"><!-- <img src="../member_picture/<?php echo htmlspecialchars($_SESSION['join']['picture_path'],ENT_QUOTES, 'UTF-8'); ?>" width="100" height="100"> --></div>
+                                        <div class="text-center">
+                                          <img src="../member_picture/<?php echo $_viewOptions['user_picture']; ?>" width="100" height="100">
+                                        </div>
                                       </div>
 
                                 <div class="register-btn-confirm">

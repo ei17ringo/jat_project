@@ -1,117 +1,103 @@
 <?php
-    class UsersController {
+  // コントローラのクラスをインスタンス化
+  $controller = new UsersController();
 
-        // プロパティ (カプセル化)
-        private $db = '';
-        private $table_name = '';
-        private $action = '';
+  // アクション名によって、呼び出すメソッドを変える
+  switch ($action) {
+    case 'create';
+        $controller->create();
+        break;
+    case 'confirm':
+        $controller->confirm($post);
+        break;
+    case 'login':
+        $controller->login();
+        break;
+    case 'mypage';
+        $controller->mypage($id);
+        break;
+    case 'profle';
+        $controller->profile($id);
+        break;
+    case 'edit':
+        $controller->edit($id);
+        break;
+    case 'update':
+        $controller->update($id, $post);
+        break;
+    case 'delete':
+        $controller->delete($id);
+    default:
+        break;
+  }
 
-        // マジックメソッド
-        public function __construct ($db, $table_name, $action) {
-            $this->db = $db;
-            $this->table_name = $table_name;
-            $this->action = $action;
-        }
+  class UsersController {
 
-        public function index() {
-            $Blog = new Blog($this->table_name, $this->action);
+    function create() {
 
-            $sql = $Blog->find('all');
+      $action = 'create';
 
-            $blogs = mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-            return $blogs;
-        }
-
-        public function login() {
-            $User = new User($this->table_name, $this->action);
-
-            $sql = $User->find('all');
-
-            $blog = mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-
-        }
-
-        public function show($id) {
-            $Blog = new Blog($this->table_name, $this->action);
-
-            $sql = $Blog->findById($id);
-
-            $blog = mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-            return $blog;
-        }
-
-        public function create($POST) {
-            if (!empty($blog)) {
-                $User = new User($this->table_name, $this->action);
-                $sql = $User->create($blog);
-
-                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-
-                header("Location: index");
-            }
-        }
-
-        public function confirm($user) {
-            if (!empty($blog)) {
-                $User = new User($this->table_name, $this->action);
-                $sql = $User->create($user);
-
-                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-
-                header("Location: index");
-            }
-        }
-
-        public function mypage() {
-            if (!empty($user)) {
-                $User = new User($this->table_name, $this->action);
-                $sql = $User->create($user);
-
-                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-            }
-        }
-
-        public function profile() {
-            if (!empty($user)) {
-                $User = new User($this->table_name, $this->action);
-                $sql = $User->create($user);
-
-                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-            }
-        }
-
-        public function edit($id) {
-
-            if (empty($_POST)) {
-                $blog_record = $this->show($id);
-                $blog = mysqli_fetch_assoc($blog_record);
-
-                return $blog;
-
-            } else if (!empty($_POST)) {
-
-                $blog = $_POST;
-                $id = array('id' => $id);
-                $blog = array_merge($id, $blog);
-
-                $Blog = new Blog($this->table_name, $this->action);
-
-                $sql = $Blog->update($blog);
-
-                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-
-                header("Location: ../index");
-            }
-        }
-
-        public function delete($id) {
-            $Blog = new Blog($this->table_name, $this->action);
-
-            $sql = $Blog->destroy($id);
-
-            mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-
-            header("Location: ../index");
-        }
+      require('views/layouts/application.php');
     }
+
+    function confirm($post) {
+      // ⑦モデルを呼び出す
+      $user        = new User();
+      $viewOptions = $user->confirm($post);
+      $action      = 'confirm';
+
+      require('views/layouts/application.php');
+    }
+
+    function login() {
+      $user        = new User();
+      $action      = 'login';
+
+      require('views/layouts/application.php');
+    }
+
+    function mypage($id) {
+      $user        = new User();
+      $viewOptions = $user->mypage($id);
+      $action      = 'mypage';
+
+      require('views/layouts/application.php');
+    }
+
+      function profile($id) {
+      $user        = new User();
+      $viewOptions = $user->profile($id);
+      $action      = 'profile';
+
+      require('views/layouts/application.php');
+    }
+
+
+    function edit($id) {
+      $user        = new User();
+      $viewOptions = $user->edit($id);
+      $action      = 'edit';
+
+      require('views/layouts/application.php');
+    }
+
+    function update($post, $id) {
+      $user = new User();
+      $user->update($id, $post);
+
+      // indexへ遷移
+      header('Location: /seed_blog/blogs/index');
+      exit();
+    }
+
+    function delete($id) {
+      $user        = new User();
+      $viewOptions = $user->delete($id);
+      $action      = 'delete';
+
+      // indexへ遷移
+      header('Location: /seed_blog/blogs/index');
+      exit();
+    }
+  }
 ?>

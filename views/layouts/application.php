@@ -75,7 +75,7 @@
 
 
         <?php
-          include('views/'. $resource . '/' . $action .'.php');
+          include('views/user/' . $action .'.php');
         ?>
 
 
