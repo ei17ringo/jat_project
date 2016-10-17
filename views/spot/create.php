@@ -1,14 +1,20 @@
 <?php
     $SpotsController = new SpotsController($db, $table_name, $action);
-    $SpotsController->_new($_POST);
+    $error_message=$SpotsController->_new($_POST);
+
 ?>
+
 
 <div class="container">
     <div class="row">
+
+    <form method="post" action="">
+
         <div class="col-md-12" style="top:70px;">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
-                <form method="post" action="example.cgi">
+                
+
                     <div class="panel-heading">
 
                         <h4 class="panel-title">
@@ -22,25 +28,23 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <label for="spot_name">
-                                            ＊スポットの名称</label>
-                                        <input type="text" class="form-control" placeholder="例：清水寺" required />
+                                            ＊スポットの名称</label><br>
+                                        <input type="text" name="spot_name" size=40>
                                     </div>
                                     <div class="form-group">
-                                    <label for="adress">
-                                            ＊スポットの住所</label>
-                                        <textarea class="form-control" placeholder="住所を入力してください" rows="2" required></textarea>
+                                    <label for="adress">＊スポットの住所</label><br>
+                                    <textarea name="adress" ></textarea>
                                     </div>
                                 </div>
                             </div>
-                            
-                                
-                                    <div class="form-group">
+
+                                  <div class="form-group">
                                         <label for="tags">
                                             ＊タグ</label>
-                                        <!-- <input type="text" class="form-control" id="tags" placeholder="Tags" /> -->
+
                                         <div id="small"></div>
-                                    </div>
-                                   <script>
+                                  </div>
+        <script>
           $(function(){
             Tags.bootstrapVersion = "2";
             $("#small").tags({
@@ -51,31 +55,36 @@
             });
         </script>
 
-                            
+
                             </div>
 
-                                
-                                    <div class="well well-sm">
-                                        
-                                            <label for="image">
-                                            ＊画像ファイル</label>
-                                            <input type="file" name="pic">
-                                        
-                                    </div>
-                                
-                                
+                            <div class="well well-sm">
+                             <label for="image">
+                             ＊画像ファイル</label>
+                             <input type="file" name="pic">
+                            </div>
+
+
                         </div>
-                        </form>
+                        
                     </div>
                 </div>
 
              </div>
-            
-            <button type="button" class="btn btn-default btn-sm" style="margin-top:70px;">
+
+            <button type="submit" class="btn btn-default btn-sm" name="sousin" style="margin-top:70px;">
             <span class="glyphicon glyphicon-eye-open"></span>確認ページへ</button>
 
+</form>
 
-           
+<?php
+//ここに記述し、表示させる
+if (isset($error_message)&&(count($error_message)>0)) {
+    foreach ($error_message as $message){
+        echo $message;
+    }
+}
+?>
+
+           </div>
         </div>
-    </div>
-</div>
