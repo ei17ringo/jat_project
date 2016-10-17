@@ -1,7 +1,7 @@
-<?php
+<?php 
     $UsersController = new UsersController($db, $table_name, $action);
-    $UsersController->confirm($_POST);
-?>
+    $viewOptions = $UsersController->confirm($_POST);
+ ?>
 
 
     <a name="about"></a>
@@ -22,14 +22,14 @@
                                     <div class="form-group confirm-content">
                                         <label class="col-md-4 control-label">Username</label>
                                         <div class="col-md-8 area-set">
-                                            <?php echo $_viewOptions['user_name']; ?>
+                                            <?php echo $_SESSION['user']['user_name']; ?>
                                         </div>
                                     </div>
 
                                     <div class="form-group confirm-content">
                                         <label class="col-md-4 control-label">Email address</label>
                                         <div class="col-md-8 area-set">
-                                            <?php echo $_viewOptions['email']; ?>
+                                            <?php echo $_SESSION['user']['email']; ?>
                                         </div>
                                     </div>
 
@@ -43,7 +43,7 @@
                                       <div class="form-group confirm-content">
                                         <div class="col-md-4 control-label">photo</div>
                                         <div class="text-center">
-                                          <img src="../member_picture/<?php echo $_viewOptions['user_picture']; ?>" width="100" height="100">
+                                          <img src="../member_picture/<?php echo $_FILES['user_picture']; ?>" width="100" height="100">
                                         </div>
                                       </div>
 

@@ -23,6 +23,13 @@ h6 {
     font-weight: 700;
 }
 
+.error_message{
+    font-size: 15px;
+    color: red;
+    margin-left: 200px;
+    margin-top: 70px;
+}
+
 .photo-upload{
     position: relative;
 }
