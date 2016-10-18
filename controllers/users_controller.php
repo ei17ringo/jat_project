@@ -12,7 +12,7 @@
         $controller->create();
         break;
     case 'confirm':
-        $controller->confirm($_SESSION);
+        $controller->confirm();
         break;
     case 'login':
         $controller->login();
@@ -31,6 +31,10 @@
         break;
     case 'delete':
         $controller->delete($id);
+        break;
+    case 'logout':
+        $controller->logout($id);
+        break;
     default:
         break;
   }
@@ -124,17 +128,51 @@
     function confirm() {
       // ⑦モデルを呼び出す
       $user        = new User();
-      $viewOptions = $user->confirm($_SESSION);
+      // まだデータベースに保存しなくて良い
+      // $viewOptions = $user->confirm();
       $resource    = $this->resource;
       $action      = 'confirm';
 
       require('views/layouts/application.php');
     }
 
+    function save() {
+            // ⑦モデルを呼び出す
+      $user        = new User();
+      $viewOptions = $user->save();
+      $resource    = $this->resource;
+      $action      = 'save';
+
+      // indexへ遷移
+      header('Location: login');
+      exit();
+    }
+
     function login() {
+      $resource    = $this->resource;
       $action      = 'login';
 
       require('views/layouts/application.php');
+    }
+
+    function logout($id) {
+      $resource    = $this->resource;
+      $action      = 'logout';
+
+        $_SESSION = array();
+        if (ini_get("session.use_cookies")) {
+          $params = session_get_cookie_params();
+          setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+        }
+        session_destroy();
+
+
+        // Cookie情報も削除
+        setcookie('email', '', time() - 3600);
+        setcookie('password', '', time() - 3600);
+
+      header('Location: login');
+      exit();
     }
 
     function mypage($id) {
@@ -180,6 +218,8 @@
       header('Location: /seed_blog/blogs/index');
       exit();
     }
+
+
   }
 
 ?>

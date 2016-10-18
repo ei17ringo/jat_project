@@ -79,7 +79,8 @@
       return $result;
     }
 
-    function confirm($post) {
+    function save($post) {
+      var_dump($_SESSION);
       $sql = sprintf('INSERT INTO `users` SET `user_name`="%s", `email`="%s", `password`="%s", `user_picture`="%s", `created`=now()',
                
                 mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name']),
@@ -122,6 +123,7 @@
         );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
     }
+
 
   }
 

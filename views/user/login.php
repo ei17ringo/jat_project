@@ -1,5 +1,5 @@
 <?php
-  session_start();
+
 
   // Cookies挿入
 if (isset($_COOCKIE['user_name']) && $_COOKIE['user_name'] !='') {

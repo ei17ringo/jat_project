@@ -1,6 +1,6 @@
 <?php 
-    $UsersController = new UsersController($db, $table_name, $action);
-    
+
+
  ?>
 
 
@@ -22,14 +22,14 @@
                                     <div class="form-group confirm-content">
                                         <label class="col-md-4 control-label">Username</label>
                                         <div class="col-md-8 area-set">
-                                            <?php echo $_SESSION['user']['user_name']; ?>
+                                            <?php echo htmlspecialchars($_SESSION['user']['user_name'], ENT_QUOTES, 'UTF-8'); ?>
                                         </div>
                                     </div>
 
                                     <div class="form-group confirm-content">
                                         <label class="col-md-4 control-label">Email address</label>
                                         <div class="col-md-8 area-set">
-                                            <?php echo $_SESSION['user']['email']; ?>
+                                            <?php echo htmlspecialchars($_SESSION['user']['email'], ENT_QUOTES, 'UTF-8'); ?>
                                         </div>
                                     </div>
 
@@ -43,7 +43,7 @@
                                       <div class="form-group confirm-content">
                                         <div class="col-md-4 control-label">photo</div>
                                         <div class="text-center">
-                                          <img src="user_picture/<?php echo $_SESSION['user_picture']; ?>" width="100" height="100">
+                                          <img src="../user_picture/<?php echo htmlspecialchars($_SESSION['user']['user_picture'], ENT_QUOTES, 'UTF-8'); ?>" width="100" height="100">
                                         </div>
                                       </div>
 
