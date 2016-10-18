@@ -1,4 +1,5 @@
 <?php
+  
   class User {
     // プロパティ
     private $dbconnect = '';
@@ -90,8 +91,8 @@
             unset($_SESSION['user']);
 
       // login.phpへリダイレクト
-      header('Location: login.php');
-      exit();
+      // header('Location: login.php');
+      // exit();
 
     }
 

@@ -1,6 +1,6 @@
 <?php 
     $UsersController = new UsersController($db, $table_name, $action);
-    $viewOptions = $UsersController->confirm($_POST);
+    
  ?>
 
 
@@ -43,7 +43,7 @@
                                       <div class="form-group confirm-content">
                                         <div class="col-md-4 control-label">photo</div>
                                         <div class="text-center">
-                                          <img src="../member_picture/<?php echo $_FILES['user_picture']; ?>" width="100" height="100">
+                                          <img src="user_picture/<?php echo $_SESSION['user_picture']; ?>" width="100" height="100">
                                         </div>
                                       </div>
 

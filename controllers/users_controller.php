@@ -50,16 +50,16 @@
       if (!empty($sd)) {
         if ($sd['user_name'] !== "") {
           //データがセットされていたら各変数にPOSTのデータを格納
-          $_SESSION['user_name'] = htmlspecialchars($sd["user_name"],ENT_QUOTES);
-          $_SESSION['user_name'] = trim(mb_convert_kana($_SESSION['user_name'], "s", 'UTF-8'));
+          $_SESSION['user']['user_name'] = htmlspecialchars($sd["user_name"],ENT_QUOTES);
+          $_SESSION['user']['user_name'] = trim(mb_convert_kana($_SESSION['user']['user_name'], "s", 'UTF-8'));
         } else {
           $error_message[] = "* ユーザーネームを入力してください。<br>";
         }
 
 
         if ($sd['email'] !== "") {
-          $_SESSION['email'] = htmlspecialchars($sd["email"],ENT_QUOTES);
-          $_SESSION['email'] = trim(mb_convert_kana($_SESSION['email'], "s", 'UTF-8'));
+          $_SESSION['user']['email'] = htmlspecialchars($sd["email"],ENT_QUOTES);
+          $_SESSION['user']['email'] = trim(mb_convert_kana($_SESSION['user']['email'], "s", 'UTF-8'));
         } else {
           $error_message[] = "* メールアドレスを入力してください。<br>";
         }
@@ -71,8 +71,8 @@
           if  ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
             $error_message[] = "* パスワードは４文字以上16文字以下で入力してください。<br>";
           } else {
-            $_SESSION['password'] = htmlspecialchars($sd["password"],ENT_QUOTES);
-            $_SESSION['password'] = trim(mb_convert_kana($_SESSION['email'], "s", 'UTF-8'));
+            $_SESSION['user']['password'] = htmlspecialchars($sd["password"],ENT_QUOTES);
+            $_SESSION['user']['password'] = trim(mb_convert_kana($_SESSION['user']['password'], "s", 'UTF-8'));
           }
         }
 
@@ -94,12 +94,12 @@
       if (!count($error_message)){
         // 画像をアップロードする
         $user_picture = date('YmdHis') . $_FILES['user_picture']['name'];
-        move_uploaded_file($_FILES['user_picture']['tmp_name'], '../user_picture/' . $user_picture);
+        move_uploaded_file($_FILES['user_picture']['tmp_name'], 'user_picture/' . $user_picture);
         // セッションに値を保存
         $_SESSION['user']                 = $_POST;
         $_SESSION['user']['user_picture'] = $user_picture;
         //確認ページヘ
-        // header("Location:confirm");
+        header("Location:confirm");
         exit;
         } else {
         return $error_message;
@@ -121,7 +121,7 @@
       require('views/layouts/application.php');
     }
 
-    function confirm($post) {
+    function confirm() {
       // ⑦モデルを呼び出す
       $user        = new User();
       $viewOptions = $user->confirm($_SESSION);
