@@ -21,14 +21,22 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Username</label>
                                         <div class="col-md-8 area-set">
+                                            <?php if (isset($_POST['user_name'])): ?>
+                                                <input type="text" class="form-control" name="user_name" placeholder="JATくん" value="<?php echo htmlspecialchars($_POST['user_name'], ENT_QUOTES,'UTF-8'); ?>">
+                                            <?php else: ?>
                                                 <input type="text" class="form-control" name="user_name" placeholder="JATくん" value="">
+                                            <?php endif; ?>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Email address</label>
                                         <div class="col-md-8 area-set">
+                                            <?php if (isset($_POST['email'])): ?>
+                                                <input type="text" class="form-control" name="email" placeholder="例： seed@nex.com"  value="<?php echo htmlspecialchars($_POST['email'], ENT_QUOTES,'UTF-8'); ?>">
+                                            <?php else: ?>
                                                 <input type="text" class="form-control" name="email" placeholder="例： seed@nex.com"  value="">
+                                            <?php endif; ?>
                                         </div>
                                     </div>
 
@@ -36,6 +44,13 @@
                                         <label class="col-md-4 control-label">Password</label>
                                         <div class="col-md-8 area-set">
                                                 <input type="password" class="form-control" name="password" placeholder="半角英数字４文字以上16文字以下" value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Password(再入力)</label>
+                                        <div class="col-md-8 area-set">
+                                                <input type="password" class="form-control" name="password_check" placeholder="パスワードを再入力してください。" value="">
                                         </div>
                                     </div>
 

@@ -11,6 +11,20 @@
       $this->dbconnect = $db;
     }
 
+    function save() {
+      $sql = sprintf('INSERT INTO `users` SET `user_name`="%s", `email`="%s", `password`="%s", `user_picture`="%s", `created`=now()',
+               
+                mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name']),
+                mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['email']),
+                mysqli_real_escape_string($this->dbconnect, sha1($_SESSION['user']['password'])),
+                mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_picture'])
+            );
+            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+            unset($_SESSION['user']);
+    }
+
+
+
     function index() {
       // SQLの実行
       $sql     = 'SELECT * FROM `blogs` WHERE `delete_flag` = 0';
@@ -37,17 +51,7 @@
       return $result;
     }
 
-    function save() {
-      $sql = sprintf('INSERT INTO `users` SET `user_name`="%s", `email`="%s", `password`="%s", `user_picture`="%s", `created`=now()',
-               
-                mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name']),
-                mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['email']),
-                mysqli_real_escape_string($this->dbconnect, sha1($_SESSION['user']['password'])),
-                mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_picture'])
-            );
-            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-            unset($_SESSION['user']);
-    }
+
 
 
     function edit($id) {

@@ -43,7 +43,7 @@
                                       </div>
 
                                 <div class="register-btn-confirm">
-                                        <a href="index.php?action=rewrite">&laquo;&nbsp;書き直す</a> | 
+                                        <input type='submit' value = '戻る' onClick='history.back()' > | 
                                         <input type="submit" class="btn btn-lg btn-success" name="signup" value="登録する">
                                 </div>
                               </div>

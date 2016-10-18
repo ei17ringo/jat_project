@@ -72,11 +72,16 @@
         }
 
 
-        if ($sd['password'] == "") {
+        if (($sd['password'] == "") || ($sd['password_check'] == "")) {
           $error_message[] = "* パスワードを入力してください。<br>";
-        } else if ($sd['password'] !== "") {
-          if  ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
+
+        } else if (($sd['password'] !== "") && ($sd['password_check'] !== "")) {
+            if ($sd['password'] !== $sd['password_check']) {
+                $error_message[] = "* パスワードが一致しません。<br>";
+
+          } else if ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
             $error_message[] = "* パスワードは４文字以上16文字以下で入力してください。<br>";
+
           } else {
             $_SESSION['user']['password'] = htmlspecialchars($sd["password"],ENT_QUOTES);
             $_SESSION['user']['password'] = trim(mb_convert_kana($_SESSION['user']['password'], "s", 'UTF-8'));
@@ -124,7 +129,6 @@
       $resource = $this->resource;
       $action   = 'create';
 
-
       require('views/layouts/application.php');
     }
 
@@ -152,11 +156,53 @@
     }
 
     function login() {
-      $resource    = $this->resource;
-      $action      = 'login';
+      $resource = $this->resource;
+      $action   = 'login';
 
       require('views/layouts/application.php');
+
+      $error_message = array();
+      if (!empty($sd)) {
+        if ($sd['user_name'] !== "") {
+          //データがセットされていたら各変数にPOSTのデータを格納
+          $_SESSION['user']['user_name'] = htmlspecialchars($sd["user_name"],ENT_QUOTES);
+          $_SESSION['user']['user_name'] = trim(mb_convert_kana($_SESSION['user']['user_name'], "s", 'UTF-8'));
+        } else {
+          $error_message[] = "* ユーザーネームを入力してください。<br>";
+        }
+
+        if ($sd['password'] == "") {
+          $error_message[] = "* パスワードを入力してください。<br>";
+        } else if ($sd['password'] !== "") {
+          if  ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
+            $error_message[] = "* パスワードは４文字以上16文字以下で入力してください。<br>";
+          } else {
+            $_SESSION['user']['password'] = htmlspecialchars($sd["password"],ENT_QUOTES);
+            $_SESSION['user']['password'] = trim(mb_convert_kana($_SESSION['user']['password'], "s", 'UTF-8'));
+          }
+        }
+        if (!count($error_message)){
+          header("Location:mypage");
+          exit;
+        } else {
+          return $error_message;
+        }
+      }
+
+        // Cookies挿入
+        if (isset($_COOCKIE['user_name']) && $_COOKIE['user_name'] !=='') {
+          $_POST['user_name']    = $_COOKIE['user_name'];
+          $_POST['password'] = $_COOKIE['password'];
+          $_POST['save']     = 'on';
+        }
+
+              // cookieにログイン情報を記録する
+        if ($_POST['save'] == 'on') {
+          setcookie('user_name', $_POST['user_name'], time()+60*60*24*14);
+          setcookie('password', $_POST['password'], time()+60*60*24*14);
+        }
     }
+  
 
     function logout($id) {
       $resource    = $this->resource;
