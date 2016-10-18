@@ -60,8 +60,8 @@
                     $error_message[] = "<font color=\"red\">※スポットの名前を入力して下さい。</font><br>";
                 }
 
-                if ($sd["adress"]!=="") {
-                    $_SESSION['adress'] = htmlspecialchars($sd["adress"],ENT_QUOTES);
+                if ($sd["address"]!=="") {
+                    $_SESSION['address'] = htmlspecialchars($sd["address"],ENT_QUOTES);
                 }else{
                     $error_message[] = "<font color=\"red\">※住所を入力してください。</font><br>";
                 }
@@ -134,7 +134,7 @@
         $viewOptions= $spot->save();
        
        // トップページへ
-　　　　　header('Location: top');
+　　　　　header('Location: mypage');
          exit();
       }
 

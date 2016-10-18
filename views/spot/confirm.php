@@ -11,7 +11,7 @@
 <div class="container" style="margin-top:70px; margin-bottom:70px">
     <div class="row">
 
-  <form method="post" action="" enctype="multipart/form-data">
+  <form method="post" action="save" enctype="multipart/form-data">
 
         <div class="col-md-12">
             <div class="panel-group" id="accordion">
@@ -34,9 +34,9 @@
                                         <p><?php echo htmlspecialchars($_SESSION["spot_name"]);?></p>
                                     </div>
                                     <div class="form-group">
-                                    <label for="adress">
+                                    <label for="address">
                                             ＊スポットの住所</label>
-                                        <p><?php echo htmlspecialchars($_SESSION["adress"]);?></p>
+                                        <p><?php echo htmlspecialchars($_SESSION["address"]);?></p>
                                     </div>
                                 </div>
                             </div>

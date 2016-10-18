@@ -31,11 +31,11 @@
                                     <div class="form-group">
                                     <label for="spot_name">
                                             ＊スポットの名称</label><br>
-                                        <input type="text" name="spot_name" size=40>
+                                        <input type="text" name="spot_name" size=40 value="<?php if(!empty($_SESSION['spot_name'])){ echo $_SESSION['spot_name'];} ?> ">
                                     </div>
                                     <div class="form-group">
                                     <label for="adress">＊スポットの住所</label><br>
-                                    <textarea name="adress" ></textarea>
+                                    <textarea name="address"><?php if(!empty($_SESSION['adress'])){ echo $_SESSION['adress'];} ?></textarea>
                                     </div>
                                 </div>
                             </div>
