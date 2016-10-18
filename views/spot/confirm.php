@@ -1,4 +1,6 @@
 <?php
+// session_start();
+
     $SpotsController = new SpotsController($db, $table_name, $action);
     $SpotsController->_new($_POST);
 ?>
@@ -6,9 +8,12 @@
 
 
 
-<div class="container">
+<div class="container" style="margin-top:70px; margin-bottom:70px">
     <div class="row">
-        <div class="col-md-12" style="top:70px;">
+
+  <form method="post" action="">
+
+        <div class="col-md-12">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
 
@@ -26,12 +31,12 @@
                                     <div class="form-group">
                                     <label for="spot_name">
                                             ＊スポットの名称</label>
-                                        <p>清水寺</p>
+                                        <p><?php echo htmlspecialchars($_SESSION["spot_name"]);?></p>
                                     </div>
                                     <div class="form-group">
                                     <label for="adress">
                                             ＊スポットの住所</label>
-                                        <p>〒605-0862 京都府京都市東山区清水１丁目２９４</p>
+                                        <p><?php echo htmlspecialchars($_SESSION["adress"]);?></p>
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +62,13 @@
                             
                             </div>
 
-                                
+                                <div class="well well-sm">
+                             <label for="picture_1">
+                             ＊画像ファイル</label>
+                             <?php if (isset($error['picture_1']) && $error['picture_1']=='type'):?>
+            <?php endif;?>
+            
+                            </div>
                                     
                         </div>
 
@@ -67,6 +78,12 @@
              </div>
 
 
+<p><input type="submit" name="regist" value="投稿する"></p>
+<p><input type="button" value="戻る" name="return" onClick="history.back()"></p>
+</form>
+
+  </div>
 
 </div>
-</div>
+
+ 
