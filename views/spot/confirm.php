@@ -11,7 +11,7 @@
 <div class="container" style="margin-top:70px; margin-bottom:70px">
     <div class="row">
 
-  <form method="post" action="">
+  <form method="post" action="" enctype="multipart/form-data">
 
         <div class="col-md-12">
             <div class="panel-group" id="accordion">
@@ -65,8 +65,7 @@
                                 <div class="well well-sm">
                              <label for="picture_1">
                              ＊画像ファイル</label>
-                             <?php if (isset($error['picture_1']) && $error['picture_1']=='type'):?>
-            <?php endif;?>
+                             <img src="../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="100" height="100">
             
                             </div>
                                     

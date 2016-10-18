@@ -1,6 +1,8 @@
 <?php
   session_start();
 
+  // unset( $_SESSION["spot_name"] );
+
    // コントローラのクラスをインスタンス化
    $controller = new SpotsController();
 
@@ -20,6 +22,9 @@
         break;
      case 'confirm':
          $controller->confirm();
+      break;
+      case 'save':
+         $controller->save();
       break;
      case 'edit':
          $controller->edit($id);
@@ -77,12 +82,12 @@
                 //エラーが無い時
                 if (!count($error_message)){
 
-                  // //画像をアップロードする
-                  // $picture_1= date('YmdHis') . $_FILES['picture_1']['name'];
-                  //   move_uploaded_file($_FILES['picture_1']['tmp_name'], 'controllers/spot_picture/' . $picture_1);
-                  // //セッションに値を保存
-                  // $_SESSION['join']=$_POST;
-                  // $_SESSION['join']['picture_1']= $picture_1;
+                  //画像をアップロードする
+                  $picture_1= date('YmdHis') . $_FILES['picture_1']['name'];
+                    move_uploaded_file($_FILES['picture_1']['tmp_name'], 'spot_picture/' . $picture_1);
+                  //セッションに値を保存
+                  $_SESSION['spot']=$_POST;
+                  $_SESSION['spot']['picture_1']= $picture_1;
                   
 
                   //確認ページヘ
@@ -116,9 +121,21 @@
      }
 
      function confirm() {
-        $action = 'confirm';
+        $spot= new Spot();
+        // $viewOptions= $spot->confirm();
         $resource= $this->resource;
+        $action = 'confirm';
+
         require('views/layouts/application.php');
+      }
+
+      function save(){
+         $spot= new Spot();
+        $viewOptions= $spot->save();
+       
+       // トップページへ
+　　　　　header('Location: top');
+         exit();
       }
 
 
