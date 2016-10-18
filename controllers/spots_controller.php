@@ -1,5 +1,5 @@
 <?php
-   // require('models/spot.php');
+  session_start();
 
    // コントローラのクラスをインスタンス化
    $controller = new SpotsController();
@@ -19,7 +19,7 @@
           $controller->create();
         break;
      case 'confirm':
-         $controller->confirm($post);
+         $controller->confirm();
       break;
      case 'edit':
          $controller->edit($id);
@@ -38,6 +38,8 @@
     var $resource='';
     var $action='';
     var $error_message='';
+
+
      function _new($sd){
       $resource= $this->resource;
       $action= $this->action;
@@ -50,29 +52,50 @@
                         $_SESSION['spot_name'] = htmlspecialchars($sd["spot_name"],ENT_QUOTES);
             //各データがなかったらエラーメッセージを配列に格納
                 }else{
-                    $error_message[] = "スポットの名前を入力して下さい。<br>";
+                    $error_message[] = "<font color=\"red\">※スポットの名前を入力して下さい。</font><br>";
                 }
 
                 if ($sd["adress"]!=="") {
                     $_SESSION['adress'] = htmlspecialchars($sd["adress"],ENT_QUOTES);
                 }else{
-                    $error_message[] = "住所を入力してください。<br>";
+                    $error_message[] = "<font color=\"red\">※住所を入力してください。</font><br>";
                 }
                 $this->error_message=$error_message;
 
+
+
+                 //画像ファイルの拡張子チェック
+                 $fileName= $_FILES['picture_1']['name'];
+                  if (!empty($fileName)) {
+                   $ext= substr($fileName, -3);
+                   $ext= strtolower($ext);
+                  if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
+                   $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
+    }
+  }
+
                 //エラーが無い時
                 if (!count($error_message)){
-                //確認ページヘ
-                    header("Location:confirm.php");
+
+                  // //画像をアップロードする
+                  // $picture_1= date('YmdHis') . $_FILES['picture_1']['name'];
+                  //   move_uploaded_file($_FILES['picture_1']['tmp_name'], 'controllers/spot_picture/' . $picture_1);
+                  // //セッションに値を保存
+                  // $_SESSION['join']=$_POST;
+                  // $_SESSION['join']['picture_1']= $picture_1;
+                  
+
+                  //確認ページヘ
+                    header("Location:confirm");
                     exit;
                    }
                     else{
                       return $error_message;
-
                 }
             }
-        
      }
+
+
 
 
      function index() {
@@ -93,7 +116,8 @@
      }
 
      function confirm() {
-        $action = 'add';
+        $action = 'confirm';
+        $resource= $this->resource;
         require('views/layouts/application.php');
       }
 

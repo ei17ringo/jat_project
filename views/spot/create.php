@@ -1,4 +1,6 @@
 <?php
+// session_start();
+
     $SpotsController = new SpotsController($db, $table_name, $action);
     $error_message=$SpotsController->_new($_POST);
 
@@ -8,7 +10,7 @@
 <div class="container">
     <div class="row">
 
-    <form method="post" action="">
+    <form method="post" action="" method="post" enctype="multipart/form-data">
 
         <div class="col-md-12" style="top:70px;">
             <div class="panel-group" id="accordion">
@@ -61,7 +63,7 @@
                             <div class="well well-sm">
                              <label for="image">
                              ＊画像ファイル</label>
-                             <input type="file" name="pic">
+                             <input type="file" name="picture_1">
                             </div>
 
 
