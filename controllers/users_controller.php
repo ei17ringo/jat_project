@@ -4,7 +4,7 @@
   $controller = new UsersController();
 
   $controller->resource = $resource;
-  $controller->action = $action;
+  $controller->action   = $action;
 
   // アクション名によって、呼び出すメソッドを変える
   switch ($action) {
@@ -13,6 +13,9 @@
         break;
     case 'confirm':
         $controller->confirm();
+        break;
+    case 'save':
+        $controller->save($post);
         break;
     case 'login':
         $controller->login();

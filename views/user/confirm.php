@@ -1,8 +1,3 @@
-<?php 
-
-
- ?>
-
 
     <a name="about"></a>
       <div class="intro-header-confirm">
@@ -13,7 +8,7 @@
 
                       <div class="modal-dialog">
                           <div class="modal-content">
-                            <form method="post" action="/jat_project/user/login" class="form-horizontal" role="form">
+                            <form method="post" action="/jat_project/user/save" class="form-horizontal" role="form">
                             <input type="hidden" name="action" value="submit">
                               <div class="modal-header">
                                 <h1 class="text-center">登録内容確認</h1>
