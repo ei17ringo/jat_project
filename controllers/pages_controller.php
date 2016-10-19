@@ -1,48 +1,24 @@
 <?php
   session_start();
   // コントローラのクラスをインスタンス化
-  $controller = new UsersController();
+  $controller = new PagesController();
 
   $controller->resource = $resource;
   $controller->action   = $action;
 
   // アクション名によって、呼び出すメソッドを変える
   switch ($action) {
-    case 'create';
-        $controller->create();
+    case 'index';
+        $controller->index();
         break;
-    case 'confirm':
-        $controller->confirm();
-        break;
-    case 'save':
-        $controller->save($post);
-        break;
-    case 'login':
-        $controller->login();
-        break;
-    case 'mypage';
-        $controller->mypage();
-        break;
-    case 'profle';
-        $controller->profile();
-        break;
-    case 'edit':
-        $controller->edit($id);
-        break;
-    case 'update':
-        $controller->update($id, $post);
-        break;
-    case 'delete':
-        $controller->delete($id);
-        break;
-    case 'logout':
-        $controller->logout($id);
+    case 'contactus';
+        $controller->contactus();
         break;
     default:
         break;
   }
 
-  class UsersController {
+  class PagesController {
     var $resource      ='';
     var $action        ='';
     var $error_message ='';
@@ -50,7 +26,6 @@
       function _new($sd){
         $resource = $this->resource;
         $action   = $this->action;
-        // var_dump($resouce);
 
 
       if ($action == 'create') {
@@ -182,107 +157,20 @@
       // function _new($sd)閉じ
 
 
-    function create() {
+    function index() {
       $resource = $this->resource;
-      $action   = 'create';
+      $action   = 'index';
 
       require('views/layouts/application.php');
     }
 
-    function confirm() {
-      // ⑦モデルを呼び出す
-      $user        = new User();
-      // まだデータベースに保存しなくて良い
-      // $viewOptions = $user->confirm();
-      $resource    = $this->resource;
-      $action      = 'confirm';
-
-      require('views/layouts/application.php');
-    }
-
-    function save() {
-            // ⑦モデルを呼び出す
-      $user        = new User();
-      $viewOptions = $user->save();
-      $resource    = $this->resource;
-      $action      = 'save';
-
-      // indexへ遷移
-      header('Location: login');
-      exit();
-    }
-
-    function login() {
-      $resource    = $this->resource;
-      $action      = 'login';
-
-        require('views/layouts/application.php');
-      }
-
-
-
-    function logout($id) {
-      $resource    = $this->resource;
-      $action      = 'logout';
-
-        $_SESSION = array();
-        if (ini_get("session.use_cookies")) {
-          $params = session_get_cookie_params();
-          setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
-        }
-        session_destroy();
-
-
-        // Cookie情報も削除
-        setcookie('email', '', time() - 3600);
-        setcookie('password', '', time() - 3600);
-
-      header('Location: login');
-      exit();
-    }
-
-    function mypage() {
+    function contactus() {
       $resource = $this->resource;
-      $action   = 'mypage';
+      $action   = 'contactus';
 
       require('views/layouts/application.php');
     }
 
-      function profile($id) {
-      $user        = new User();
-      $viewOptions = $user->profile($id);
-      $action      = 'profile';
-
-      require('views/layouts/application.php');
-    }
-
-
-    function edit($id) {
-      $user        = new User();
-      $viewOptions = $user->edit($id);
-      $action      = 'edit';
-
-      require('views/layouts/application.php');
-    }
-
-    function update($post, $id) {
-      $user = new User();
-      $user->update($id, $post);
-
-      // indexへ遷移
-      header('Location: /seed_blog/blogs/index');
-      exit();
-    }
-
-    function delete($id) {
-      $user        = new User();
-      $viewOptions = $user->delete($id);
-      $action      = 'delete';
-
-      // indexへ遷移
-      header('Location: /seed_blog/blogs/index');
-      exit();
-    }
 
 
   }

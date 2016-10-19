@@ -1,8 +1,3 @@
-<?php
-    $UsersController = new UsersController($db, $table_name, $action);
-    $UsersController->mypage();
-?>
-
     <!-- Page Content -->
 
   <a  name="services"></a>

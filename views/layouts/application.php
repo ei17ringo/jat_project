@@ -21,6 +21,9 @@
     <link href="../webroot/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
+    <!-- ファビコン -->
+    <link rel="shortcut icon" href="../user_picture/favicon.ico" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -43,28 +46,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="#">Start Bootstrap</a>
+                <a class="navbar-brand topnav" href="../page/index">
+                    <img src="../user_picture/logo.png" height="50px" width="120px" title="Japan Arange Trip" alt="たびシェア">
+                </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#home">ホーム</a>
+                        <a href="../page/index">ホーム</a>
                     </li>
                     <li>
-                        <a href="#post-plan">旅路投稿</a>
+                        <a href="../plan/create">旅路投稿</a>
                     </li>
                     <li>
-                        <a href="#post-spot">スポット投稿</a>
+                        <a href="../spot/create">スポット投稿</a>
                     </li>
                     <li>
-                        <a href="#mypage">マイページ</a>
+                        <a href="../user/mypage">マイページ</a>
                     </li>
                     <li>
-                        <a href="#contact">お問い合わせ</a>
+                        <a href="../page/contactus">お問い合わせ</a>
                     </li>
                     <li>
-                        <a href="#logout">ログアウト</a>
+                        <a href="../user/logout">ログアウト</a>
                     </li>
                 </ul>
             </div>
@@ -83,15 +88,17 @@
         <div class="container">
           <div>
             <ul class="list-inline banner-social-buttons">
-              <li>
+<!--               <li>
                 <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-              </li>
+              </li> -->
               <li>
-                <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                <a href="../page/index">
+                    <img src="../user_picture/logo.png" height="70px" width="170px" title="Japan Arange Trip" alt="たびシェア">
+                </a>
               </li>
-              <li>
+<!--               <li>
                 <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
-              </li>
+              </li> -->
             </ul>
           </div>
 
