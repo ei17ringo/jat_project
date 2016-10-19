@@ -73,7 +73,28 @@ function update($id,$post){
 }
 
 
+function duplicate(){
+  // スポット重複チェック
+  $error=array();
+    $sql=sprintf('SELECT COUNT(*) AS cnt FROM `spots` WHERE`spot_name`="%s"',
+      mysqli_real_escape_string($this->dbconnect, $_SESSION['spot']['spot_name'])
+      );
+    //SQL実行
+    $record= mysqli_query($this->dbconnect, $sql)or die(mysqli_error($this->dbconnect));
+    //連想配列としてSQL実行結果を受け取る
+    $table= mysqli_fetch_assoc($record);
+    if($table['cnt']>0){
+      //同じエラーが1件以上あったらエラー
+      $error['spot_name']= 'duplicate';
+    }
+     return $error;
+}
+
+
+
 function save() {
+// 投稿をDBに登録
+  if(empty($error)){
      $sql = sprintf('INSERT INTO `spots` SET `spot_name`="%s", `address`="%s", `picture_1`="%s", `picture_2`="%s",`created`=now()',
               
                mysqli_real_escape_string($this->dbconnect, $_SESSION['spot']['spot_name']),
@@ -85,14 +106,10 @@ function save() {
            unset($_SESSION['spot']);
 
      // mypageへリダイレクト
-     // header('Location: mypage');
-     //  exit();
-
-   }
-
-
-
-
+     header('Location: mypage');
+      exit();
+      }
+        }
 
 
 

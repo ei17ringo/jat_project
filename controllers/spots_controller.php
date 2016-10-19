@@ -49,19 +49,21 @@
       $resource= $this->resource;
       $action= $this->action;
 
-                     //ボタンが押されたら//
+if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
+} 
+                    //ボタンが押されたら//
             $error_message = array(); //<--ここ$error_messageを定義
             if(!empty($sd)){
                 if ($sd["spot_name"] !== "") {
                 //データがセットされていたら各変数にPOSTのデータを格納
-                        $_SESSION['spot_name'] = htmlspecialchars($sd["spot_name"],ENT_QUOTES);
+                        $_SESSION['spot']['spot_name'] = htmlspecialchars($sd["spot_name"],ENT_QUOTES);
             //各データがなかったらエラーメッセージを配列に格納
                 }else{
                     $error_message[] = "<font color=\"red\">※スポットの名前を入力して下さい。</font><br>";
                 }
 
                 if ($sd["address"]!=="") {
-                    $_SESSION['address'] = htmlspecialchars($sd["address"],ENT_QUOTES);
+                    $_SESSION['spot']['address'] = htmlspecialchars($sd["address"],ENT_QUOTES);
                 }else{
                     $error_message[] = "<font color=\"red\">※住所を入力してください。</font><br>";
                 }
@@ -74,10 +76,11 @@
                   if (!empty($fileName)) {
                    $ext= substr($fileName, -3);
                    $ext= strtolower($ext);
-                  if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
-                   $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
-    }
-  }
+
+                    if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
+                     $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
+                      }
+                    }
 
                 //エラーが無い時
                 if (!count($error_message)){
@@ -86,19 +89,50 @@
                   $picture_1= date('YmdHis') . $_FILES['picture_1']['name'];
                     move_uploaded_file($_FILES['picture_1']['tmp_name'], 'spot_picture/' . $picture_1);
                   //セッションに値を保存
-                  $_SESSION['spot']=$_POST;
+                  // $_SESSION['spot']=$_POST;
                   $_SESSION['spot']['picture_1']= $picture_1;
-                  
 
+
+
+                   //画像ファイルの拡張子チェック
+                 $fileName= $_FILES['picture_2']['name'];
+                  if (!empty($fileName)) {
+                   $ext= substr($fileName, -3);
+                   $ext= strtolower($ext);
+                  if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
+                   $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
+                      }
+                    }
+                  }
+                //エラーが無い時
+                if (!count($error_message)){
+
+                  //画像をアップロードする
+                  $picture_2= date('YmdHis') . $_FILES['picture_2']['name'];
+                    move_uploaded_file($_FILES['picture_2']['tmp_name'], 'spot_picture/' . $picture_2);
+                  //セッションに値を保存
+                  // $_SESSION['spot']=$_POST;
+                  $_SESSION['spot']['picture_2']= $picture_2;
+                   }
+               }
+
+
+     if(isset($_SESSION['spot']['duplicate'])&&($_SESSION['spot']['duplicate']==true)){
+      $error_message['duplicate']="指定されたスポットは既に登録されています。";
+     }
+      unset($_SESSION['spot']['duplicate']);
+
+      //エラーが無い時
+                if (!count($error_message)){
                   //確認ページヘ
                     header("Location:confirm");
                     exit;
                    }
                     else{
                       return $error_message;
-                }
-            }
-     }
+                    }
+
+   }
 
 
 
@@ -122,6 +156,14 @@
 
      function confirm() {
         $spot= new Spot();
+        $viewOptions= $spot->duplicate();
+var_dump($viewOptions);
+
+        if (isset($viewOptions['spot_name'])&& ($viewOptions['spot_name']=='duplicate')){
+          $_SESSION['spot']['duplicate']=true;
+          // header("Location:create");
+          //           exit;
+        }
         // $viewOptions= $spot->confirm();
         $resource= $this->resource;
         $action = 'confirm';
@@ -134,9 +176,14 @@
         $viewOptions= $spot->save();
        
        // トップページへ
-　　　　　header('Location: mypage');
-         exit();
+// 　　　　　header('Location: mypage');
+//          exit();
       }
+
+
+     
+
+
 
 
      function create() {
@@ -180,5 +227,5 @@
        exit();
      }
 
-    }
+      }
   ?>

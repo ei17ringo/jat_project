@@ -2,7 +2,14 @@
 // session_start();
 
     $SpotsController = new SpotsController($db, $table_name, $action);
-    $error_message=$SpotsController->_new($_POST);
+
+    $error_message=array();
+    var_dump($_GET);
+    var_dump($_POST);
+     //初期表示はエラーチェックをしない
+    
+        $error_message=$SpotsController->_new($_POST);
+    
 
 ?>
 
@@ -31,11 +38,11 @@
                                     <div class="form-group">
                                     <label for="spot_name">
                                             ＊スポットの名称</label><br>
-                                        <input type="text" name="spot_name" size=40 value="<?php if(!empty($_SESSION['spot_name'])){ echo $_SESSION['spot_name'];} ?> ">
+                                        <input type="text" name="spot_name" size=40 value="<?php if(!empty($_SESSION['spot']['spot_name'])){ echo $_SESSION['spot']['spot_name'];} ?> ">
                                     </div>
                                     <div class="form-group">
                                     <label for="adress">＊スポットの住所</label><br>
-                                    <textarea name="address"><?php if(!empty($_SESSION['adress'])){ echo $_SESSION['adress'];} ?></textarea>
+                                    <textarea name="address"><?php if(!empty($_SESSION['spot']['adress'])){ echo $_SESSION['spot']['adress'];} ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -66,6 +73,13 @@
                              <input type="file" name="picture_1">
                             </div>
 
+                            <div class="well well-sm">
+                             <label for="image">
+                             ＊画像ファイル</label>
+                             <input type="file" name="picture_2">
+                            </div>
+
+
 
                         </div>
                         
@@ -86,6 +100,7 @@ if (isset($error_message)&&(count($error_message)>0)) {
         echo $message;
     }
 }
+
 ?>
 
            </div>

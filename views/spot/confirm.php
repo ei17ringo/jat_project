@@ -66,10 +66,17 @@
                              <label for="picture_1">
                              ＊画像ファイル</label>
                              <img src="../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="100" height="100">
+
+                             </div>
+
+                              <div class="well well-sm">
+                             <label for="picture_2">
+                             ＊画像ファイル</label>
+                             <img src="../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="100" height="100">
             
                             </div>
                                     
-                        </div>
+                     
 
                     </div>
                 </div>
@@ -80,6 +87,7 @@
 <p><input type="submit" name="regist" value="投稿する"></p>
 <p><input type="button" value="戻る" name="return" onClick="history.back()"></p>
 </form>
+
 
   </div>
 
