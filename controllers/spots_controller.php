@@ -14,8 +14,8 @@
      case 'index':
          $controller->index();
          break;
-     case 'show':
-         $controller->show($id);
+     case 'detail':
+         $controller->detail($id);
          break;
       case 'create':
           $controller->create();
@@ -146,12 +146,13 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
        require('views/layout/application.php');
      }
 
-     function show($id) {
+     function detail($id) {
        $spot = new Spot();
-       $viewOptions = $spot->show($id);
-       $action = 'show';
+       $resource= $this->resource;
+       $viewOptions= $spot->detail($id);
+       $action = 'detail';
 
-       require('views/layout/application.php');
+       require('views/layouts/application.php');
      }
 
      function confirm() {
@@ -161,8 +162,8 @@ var_dump($viewOptions);
 
         if (isset($viewOptions['spot_name'])&& ($viewOptions['spot_name']=='duplicate')){
           $_SESSION['spot']['duplicate']=true;
-          // header("Location:create");
-          //           exit;
+          header("Location:create");
+                    exit;
         }
         // $viewOptions= $spot->confirm();
         $resource= $this->resource;
@@ -179,11 +180,6 @@ var_dump($viewOptions);
 // 　　　　　header('Location: mypage');
 //          exit();
       }
-
-
-     
-
-
 
 
      function create() {

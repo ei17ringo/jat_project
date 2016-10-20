@@ -4,8 +4,7 @@
     $SpotsController = new SpotsController($db, $table_name, $action);
 
     $error_message=array();
-    var_dump($_GET);
-    var_dump($_POST);
+
      //初期表示はエラーチェックをしない
     
         $error_message=$SpotsController->_new($_POST);

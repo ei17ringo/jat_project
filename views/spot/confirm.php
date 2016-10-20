@@ -31,12 +31,12 @@
                                     <div class="form-group">
                                     <label for="spot_name">
                                             ＊スポットの名称</label>
-                                        <p><?php echo htmlspecialchars($_SESSION["spot_name"]);?></p>
+                                        <p><?php echo htmlspecialchars($_SESSION['spot']["spot_name"]);?></p>
                                     </div>
                                     <div class="form-group">
                                     <label for="address">
                                             ＊スポットの住所</label>
-                                        <p><?php echo htmlspecialchars($_SESSION["address"]);?></p>
+                                        <p><?php echo htmlspecialchars($_SESSION['spot']["address"]);?></p>
                                     </div>
                                 </div>
                             </div>
