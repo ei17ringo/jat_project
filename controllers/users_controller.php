@@ -21,7 +21,7 @@
         $controller->login();
         break;
     case 'mypage';
-        $controller->mypage();
+        $controller->mypage($id);
         break;
     case 'profle';
         $controller->profile();
@@ -179,7 +179,6 @@
                 if ($_POST['save'] == 'on') {
                   setcookie('user_name', $_SESSION['user']['user_name'], time()+60*60*24*14);
                   setcookie('password', $_SESSION['user']['password'], time()+60*60*24*14);
-                
               }
 
                 header("Location:../page/index");
@@ -258,9 +257,22 @@
       exit();
     }
 
-    function mypage() {
+    function mypage($id) {
       $resource = $this->resource;
       $action   = 'mypage';
+
+      // ログイン中の条件
+      // １、セッションにidが入っていること
+      // ２、最後の行動から１時間以内であること
+      if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+        // ログインしている
+        // セッションの時間を更新
+        $_SESSION['time'] = time();
+
+      } else {
+        // ログインしていない
+        header('Location: login');
+      }
 
       require('views/layouts/application.php');
     }

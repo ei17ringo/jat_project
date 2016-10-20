@@ -1,5 +1,5 @@
 <?php
-  
+
   class User {
     // プロパティ
     private $dbconnect = '';
@@ -13,7 +13,7 @@
 
     function save() {
       $sql = sprintf('INSERT INTO `users` SET `user_name`="%s", `email`="%s", `password`="%s", `user_picture`="%s", `created`=now()',
-               
+
                 mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name']),
                 mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['email']),
                 mysqli_real_escape_string($this->dbconnect, sha1($_SESSION['user']['password'])),
@@ -32,6 +32,11 @@
     // SQLの実行と変数に格納
       $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       return $record;
+    }
+
+
+    function mypage($id) {
+
     }
 
     function index() {
