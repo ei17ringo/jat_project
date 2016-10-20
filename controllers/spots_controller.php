@@ -196,9 +196,10 @@ var_dump($viewOptions);
      function edit($id) {
        $spot = new Spot();
        $viewOptions = $spot->edit($id);
+       $resource= $this->resource;
        $action = 'edit';
 
-       require('views/layout/application.php');
+       require('views/layouts/application.php');
      }
 
      function update($id, $post) {
