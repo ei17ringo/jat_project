@@ -148,8 +148,8 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
 
      function detail($id) {
        $spot = new Spot();
-       $resource= $this->resource;
        $viewOptions= $spot->detail($id);
+       $resource= $this->resource;
        $action = 'detail';
 
        require('views/layouts/application.php');

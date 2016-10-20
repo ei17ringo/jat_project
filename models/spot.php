@@ -28,10 +28,7 @@ class Spot{
 
   function detail($id){
     $sql=sprintf('SELECT * FROM `spots` WHERE `id`=%d',
-      mysqli_real_escape_string($this->dbconnect, $_SESSION['spot']['spot_name']),
-      mysqli_real_escape_string($this->dbconnect, $_SESSION['spot']['address']),
-      mysqli_real_escape_string($this->dbconnect, $_SESSION['spot']['picture_1']),
-      mysqli_real_escape_string($this->dbconnect, $_SESSION['spot']['picture_2'])
+      mysqli_real_escape_string($this->dbconnect, $id)
       );
     $results=mysqli_query($this->dbconnect,$sql)or die(mysqli_error($this->dbconnect));
 
