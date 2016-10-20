@@ -1,79 +1,227 @@
 <?php
-    class SpotsController {
+  session_start();
 
-        // プロパティ (カプセル化)
-        private $db = '';
-        private $table_name = '';
-        private $action = '';
+  // unset( $_SESSION["spot_name"] );
 
-        // マジックメソッド
-        public function __construct ($db, $table_name, $action) {
-            $this->db = $db;
-            $this->table_name = $table_name;
-            $this->action = $action;
-        }
+   // コントローラのクラスをインスタンス化
+   $controller = new SpotsController();
 
-        public function index() {
-            $Blog = new Blog($this->table_name, $this->action);
+   $controller->resource = $resource;
+   $controller->action = $action;
 
-            $sql = $Blog->find('all');
-
-            $blogs = mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-            return $blogs;
-        }
-
-        public function show($id) {
-            $Blog = new Blog($this->table_name, $this->action);
-
-            $sql = $Blog->findById($id);
-
-            $blog = mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-            return $blog;
-        }
-
-        public function _new($blog) {
-            if (!empty($blog)) {
-                $Blog = new Blog($this->table_name, $this->action);
-                $sql = $Blog->create($blog);
-
-                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-
-                header("Location: index");
-            }
-        }
-
-        public function edit($id) {
-
-            if (empty($_POST)) {
-                $blog_record = $this->show($id);
-                $blog = mysqli_fetch_assoc($blog_record);
-
-                return $blog;
-
-            } else if (!empty($_POST)) {
-
-                $blog = $_POST;
-                $id = array('id' => $id);
-                $blog = array_merge($id, $blog);
-
-                $Blog = new Blog($this->table_name, $this->action);
-
-                $sql = $Blog->update($blog);
-
-                mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-
-                header("Location: ../index");
-            }
-        }
-
-        public function delete($id) {
-            $Blog = new Blog($this->table_name, $this->action);
-
-            $sql = $Blog->destroy($id);
-
-            mysqli_query($this->db, $sql) or die(mysqli_error($this->db));
-
-            header("Location: ../index");
-        }
+   // アクション名によって、呼び出すメソッドを変える
+   switch ($action) {
+     case 'index':
+         $controller->index();
+         break;
+     case 'detail':
+         $controller->detail($id);
+         break;
+      case 'create':
+          $controller->create();
+        break;
+     case 'confirm':
+         $controller->confirm();
+      break;
+      case 'save':
+         $controller->save();
+      break;
+     case 'edit':
+         $controller->edit($id);
+       break;
+     case 'update':
+         $controller->update($id, $post);
+       break;
+       case 'delete':
+         $controller->delete($id);
+       break;
+      default:
+          break;
     }
-?>
+
+   class SpotsController {
+    var $resource='';
+    var $action='';
+    var $error_message='';
+
+
+     function _new($sd){
+      $resource= $this->resource;
+      $action= $this->action;
+
+if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
+} 
+                    //ボタンが押されたら//
+            $error_message = array(); //<--ここ$error_messageを定義
+            if(!empty($sd)){
+                if ($sd["spot_name"] !== "") {
+                //データがセットされていたら各変数にPOSTのデータを格納
+                        $_SESSION['spot']['spot_name'] = htmlspecialchars($sd["spot_name"],ENT_QUOTES);
+            //各データがなかったらエラーメッセージを配列に格納
+                }else{
+                    $error_message[] = "<font color=\"red\">※スポットの名前を入力して下さい。</font><br>";
+                }
+
+                if ($sd["address"]!=="") {
+                    $_SESSION['spot']['address'] = htmlspecialchars($sd["address"],ENT_QUOTES);
+                }else{
+                    $error_message[] = "<font color=\"red\">※住所を入力してください。</font><br>";
+                }
+                $this->error_message=$error_message;
+
+
+
+                 //画像ファイルの拡張子チェック
+                 $fileName= $_FILES['picture_1']['name'];
+                  if (!empty($fileName)) {
+                   $ext= substr($fileName, -3);
+                   $ext= strtolower($ext);
+
+                    if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
+                     $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
+                      }
+                    }
+
+                //エラーが無い時
+                if (!count($error_message)){
+
+                  //画像をアップロードする
+                  $picture_1= date('YmdHis') . $_FILES['picture_1']['name'];
+                    move_uploaded_file($_FILES['picture_1']['tmp_name'], 'spot_picture/' . $picture_1);
+                  //セッションに値を保存
+                  // $_SESSION['spot']=$_POST;
+                  $_SESSION['spot']['picture_1']= $picture_1;
+
+
+
+                   //画像ファイルの拡張子チェック
+                 $fileName= $_FILES['picture_2']['name'];
+                  if (!empty($fileName)) {
+                   $ext= substr($fileName, -3);
+                   $ext= strtolower($ext);
+                  if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
+                   $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
+                      }
+                    }
+                  }
+                //エラーが無い時
+                if (!count($error_message)){
+
+                  //画像をアップロードする
+                  $picture_2= date('YmdHis') . $_FILES['picture_2']['name'];
+                    move_uploaded_file($_FILES['picture_2']['tmp_name'], 'spot_picture/' . $picture_2);
+                  //セッションに値を保存
+                  // $_SESSION['spot']=$_POST;
+                  $_SESSION['spot']['picture_2']= $picture_2;
+                   }
+               }
+
+
+     if(isset($_SESSION['spot']['duplicate'])&&($_SESSION['spot']['duplicate']==true)){
+      $error_message['duplicate']="指定されたスポットは既に登録されています。";
+     }
+      unset($_SESSION['spot']['duplicate']);
+
+      //エラーが無い時
+                if (!count($error_message)){
+                  //確認ページヘ
+                    header("Location:confirm");
+                    exit;
+                   }
+                    else{
+                      return $error_message;
+                    }
+
+   }
+
+
+
+
+     function index() {
+       // モデルを呼び出す
+       $spot = new Spot();
+       $viewOptions = $spot->index();
+       $action = 'index';
+
+       require('views/layout/application.php');
+     }
+
+     function detail($id) {
+       $spot = new Spot();
+       $resource= $this->resource;
+       $viewOptions= $spot->detail($id);
+       $action = 'detail';
+
+       require('views/layouts/application.php');
+     }
+
+     function confirm() {
+        $spot= new Spot();
+        $viewOptions= $spot->duplicate();
+var_dump($viewOptions);
+
+        if (isset($viewOptions['spot_name'])&& ($viewOptions['spot_name']=='duplicate')){
+          $_SESSION['spot']['duplicate']=true;
+          header("Location:create");
+                    exit;
+        }
+        // $viewOptions= $spot->confirm();
+        $resource= $this->resource;
+        $action = 'confirm';
+
+        require('views/layouts/application.php');
+      }
+
+      function save(){
+         $spot= new Spot();
+        $viewOptions= $spot->save();
+       
+       // トップページへ
+// 　　　　　header('Location: mypage');
+//          exit();
+      }
+
+
+     function create() {
+      $action = 'create';
+      $resource= $this->resource;
+
+
+            var_dump($this->error_message);
+            require('views/layouts/application.php');
+
+        }
+
+
+     function edit($id) {
+       $spot = new Spot();
+       $viewOptions = $spot->edit($id);
+       $action = 'edit';
+
+       require('views/layout/application.php');
+     }
+
+     function update($id, $post) {
+       $spot = new Spot();
+       $spot->update($id, $post);
+
+
+       // indexへ遷移
+       header('Location: /seed_spot/spots/index');
+       exit();
+     }
+
+
+     function delete($id){
+      $spot= new Spot();
+       $viewOptions= $spot -> delete($id);
+       $action='delete';
+
+
+       // indexへ遷移
+       header('Location: /seed_spot/spots/index');
+       exit();
+     }
+
+      }
+  ?>
