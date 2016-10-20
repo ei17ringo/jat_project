@@ -35,18 +35,16 @@
                                       <?php else: ?>
                                         <input type="password" name="password" class="form-control input-lg" placeholder="Password">
                                       <?php endif; ?>
-                                    </div>
-
-                                    <?php if(isset($error_message)&&(count($error_message)>0)): ?>
-                                      <div class="error_message">
+                                      <?php if (isset($error_message)&&(count($error_message)>0)): ?>
+                                        <div class="error_message_login">
                                         <!-- エラーメッセージ -->
-                                        <?php
-                                            foreach ($error_message as $message){
-                                              echo $message;
+                                          <?php foreach ($error_message as $message){
+                                            echo $message;
                                             }
-                                        ?>
-                                      </div>
-                                    <?php endif; ?>
+                                          ?>
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>
 
                                     <div class="form-group">
                                       <div class="checkbox-cokkie">

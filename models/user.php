@@ -26,11 +26,12 @@
 
     function login() {
       $sql = sprintf('SELECT * FROM `users` WHERE `user_name` = "%s" AND password="%s"',
-        mysqli_real_escape_string($this->dbconnect, $_POST['user_name']),
-        mysqli_real_escape_string($this->dbconnect, sha1($_POST['password']))
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name']),
+        mysqli_real_escape_string($this->dbconnect, sha1($_SESSION['user']['password']))
         );
     // SQLの実行と変数に格納
       $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      return $record;
     }
 
     function index() {

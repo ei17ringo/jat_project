@@ -50,133 +50,145 @@
       function _new($sd){
         $resource = $this->resource;
         $action   = $this->action;
-        // var_dump($resouce);
 
 
-      if ($action == 'create') {
-          // 確認ボタン押下
-          // エラーメッセージ格納
-          $error_message = array();
-        if (!empty($sd)) {
-            if ($sd['user_name'] !== "") {
-              //データがセットされていたら各変数にPOSTのデータを格納
-              $_SESSION['user']['user_name'] = htmlspecialchars($sd["user_name"],ENT_QUOTES);
-              $_SESSION['user']['user_name'] = trim(mb_convert_kana($_SESSION['user']['user_name'], "s", 'UTF-8'));
-            } else {
-              $error_message[] = "* ユーザーネームを入力してください。<br>";
-            }
-
-
-            if ($sd['email'] !== "") {
-              $_SESSION['user']['email'] = htmlspecialchars($sd["email"],ENT_QUOTES);
-              $_SESSION['user']['email'] = trim(mb_convert_kana($_SESSION['user']['email'], "s", 'UTF-8'));
-            } else {
-              $error_message[] = "* メールアドレスを入力してください。<br>";
-            }
-
-
-            if (($sd['password'] == "") || ($sd['password_check'] == "")) {
-              $error_message[] = "* パスワードを入力してください。<br>";
-
-            } else if (($sd['password'] !== "") && ($sd['password_check'] !== "")) {
-                if ($sd['password'] !== $sd['password_check']) {
-                    $error_message[] = "* パスワードが一致しません。<br>";
-
-              } else if ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
-                $error_message[] = "* パスワードは４文字以上16文字以下で入力してください。<br>";
-
-              } else {
-                $_SESSION['user']['password'] = htmlspecialchars($sd["password"],ENT_QUOTES);
-                $_SESSION['user']['password'] = trim(mb_convert_kana($_SESSION['user']['password'], "s", 'UTF-8'));
-              }
-            }
-
-
-            if ($_FILES['user_picture'] == "") {
-              $error_message[] = "* 恐れ入りますが、画像を改めて指定してください。<br>";
-            } else if ($_FILES['user_picture'] !== "") {
-              $fileName = $_FILES['user_picture']['name'];
-              if (!empty($fileName)) {
-                $ext = substr($fileName, -3);
-                $ext = strtolower($ext);
-              if ($ext != 'jpg' && $ext != 'gif' && $ext != 'png') {
-                $error_message[] = "* 「.gif」、「.jpg」、「.png」の画像を指定してください。<br>";
-                } 
-              }
-            }
-
-
-          if (!count($error_message)){
-            // 画像をアップロードする
-            $user_picture = date('YmdHis') . $_FILES['user_picture']['name'];
-            move_uploaded_file($_FILES['user_picture']['tmp_name'], 'user_picture/' . $user_picture);
-            // セッションに値を保存
-            $_SESSION['user']                 = $_POST;
-            $_SESSION['user']['user_picture'] = $user_picture;
-            //確認ページヘ
-            header("Location:confirm");
-            exit;
-            } else {
-            return $error_message;
-            }
-          }
-          // if (!empty($sd)) 閉じ
-
-          // //書き直し
-          // if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
-          //   // $_GET['action] == 'rewrite'　でも良い]
-          //   $_POST            = $_SESSION['user'];
-          //   $error['rewrite'] = true;
-        }
-        // if ($action == 'create')閉じ
-
-      if ($action == 'login') {
-          // 確認ボタン押下
-          // エラーメッセージ格納
-          $error_message = array();
+        if ($action == 'create') {
+            // 確認ボタン押下
+            // エラーメッセージ格納
+            $error_message = array();
           if (!empty($sd)) {
-
-            if ($sd['user_name'] !== "") {
-              //データがセットされていたら各変数にPOSTのデータを格納
-              $_SESSION['user']['user_name'] = htmlspecialchars($sd["user_name"],ENT_QUOTES);
-              $_SESSION['user']['user_name'] = trim(mb_convert_kana($_SESSION['user']['user_name'], "s", 'UTF-8'));
-            } else {
-              $error_message[] = "* ユーザーネームを入力してください。<br>";
-            }
-
-
-            if ($sd['password'] !== ""){
-              if ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
-                $error_message[] = "* パスワードは４文字以上16文字以下で入力してください。<br>";
+              if ($sd['user_name'] !== "") {
+                //データがセットされていたら各変数にPOSTのデータを格納
+                $_SESSION['user']['user_name'] = htmlspecialchars($sd["user_name"],ENT_QUOTES);
+                $_SESSION['user']['user_name'] = trim(mb_convert_kana($_SESSION['user']['user_name'], "s", 'UTF-8'));
               } else {
-                $_SESSION['user']['password'] = htmlspecialchars($sd["password"],ENT_QUOTES);
-                $_SESSION['user']['password'] = trim(mb_convert_kana($_SESSION['user']['password'], "s", 'UTF-8'));
-                $_SESSION['user']['password'] = sha1($_SESSION['user']['password']);
+                $error_message[] = "* ユーザーネームを入力してください。<br>";
               }
-            } else {
-              $error_message[] = "* パスワードを入力してください。<br>";
-            }
+
+
+              if ($sd['email'] !== "") {
+                $_SESSION['user']['email'] = htmlspecialchars($sd["email"],ENT_QUOTES);
+                $_SESSION['user']['email'] = trim(mb_convert_kana($_SESSION['user']['email'], "s", 'UTF-8'));
+              } else {
+                $error_message[] = "* メールアドレスを入力してください。<br>";
+              }
+
+
+              if (($sd['password'] == "") || ($sd['password_check'] == "")) {
+                $error_message[] = "* パスワードを入力してください。<br>";
+
+              } else if (($sd['password'] !== "") && ($sd['password_check'] !== "")) {
+                  if ($sd['password'] !== $sd['password_check']) {
+                      $error_message[] = "* パスワードが一致しません。<br>";
+
+                } else if ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
+                  $error_message[] = "* パスワードは４文字以上16文字以下で入力してください。<br>";
+
+                } else {
+                  $_SESSION['user']['password'] = htmlspecialchars($sd["password"],ENT_QUOTES);
+                  $_SESSION['user']['password'] = trim(mb_convert_kana($_SESSION['user']['password'], "s", 'UTF-8'));
+                }
+              }
+
+
+              if ($_FILES['user_picture'] == "") {
+                $error_message[] = "* 恐れ入りますが、画像を改めて指定してください。<br>";
+              } else if ($_FILES['user_picture'] !== "") {
+                $fileName = $_FILES['user_picture']['name'];
+                if (!empty($fileName)) {
+                  $ext = substr($fileName, -3);
+                  $ext = strtolower($ext);
+                if ($ext != 'jpg' && $ext != 'gif' && $ext != 'png') {
+                  $error_message[] = "* 「.gif」、「.jpg」、「.png」の画像を指定してください。<br>";
+                  } 
+                }
+              }
 
 
             if (!count($error_message)){
-            $viewOptions = $user->login();
+              // 画像をアップロードする
+              $user_picture = date('YmdHis') . $_FILES['user_picture']['name'];
+              move_uploaded_file($_FILES['user_picture']['tmp_name'], 'user_picture/' . $user_picture);
+              // セッションに値を保存
+              $_SESSION['user']                 = $_POST;
+              $_SESSION['user']['user_picture'] = $user_picture;
+              //確認ページヘ
+              header("Location:confirm");
+              exit;
+              } else {
+              return $error_message;
+              }
+            }
+            // if (!empty($sd)) 閉じ
 
-            if ($table = mysqli_fetch_assoc($record)) {
-              // ログイン成功
-              $_SESSION['id']   = $table['id'];
-              $_SESSION['time'] = time();
+            // //書き直し
+            // if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'rewrite') {
+            //   // $_GET['action] == 'rewrite'　でも良い]
+            //   $_POST            = $_SESSION['user'];
+            //   $error['rewrite'] = true;
+          }
+          // if ($action == 'create')閉じ
 
-                // cookieにログイン情報を記録する
-              if ($_POST['save'] == 'on') {
-                setcookie('user_name', $sd['user']['user_name'], time()+60*60*24*14);
-                setcookie('password', $sd['user']['password'], time()+60*60*24*14);
+        if ($action == 'login') {
+            // Cookies挿入
+          if (isset($_COOCKIE['email']) && $_COOKIE['email'] !='') {
+            $_POST['email']    = $_COOKIE['email'];
+            $_POST['password'] = $_COOKIE['password'];
+            $_POST['save']     = 'on';
+          } else if (isset($sd['save'])) {
+            $_POST['save'] = $sd['save'];
+          } else {
+            $_POST['save'] = 'off';
+          }
+            // 確認ボタン押下
+            // エラーメッセージ格納
+            $error_message = array();
+          if (!empty($sd)) {
+              if ($sd['user_name'] !== "") {
+                //データがセットされていたら各変数にPOSTのデータを格納
+                $_SESSION['user']['user_name'] = htmlspecialchars($sd["user_name"],ENT_QUOTES);
+                $_SESSION['user']['user_name'] = trim(mb_convert_kana($_SESSION['user']['user_name'], "s", 'UTF-8'));
+              } else {
+                $error_message[] = "* ユーザーネームを入力してください。<br>";
               }
 
-                header("Location:../index");
+
+              if ($sd['password'] !== ""){
+                if ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
+                  $error_message[] = "* パスワードは４文字以上16文字以下で入力してください。<br>";
+                } else {
+                  $_SESSION['user']['password'] = htmlspecialchars($sd["password"],ENT_QUOTES);
+                  $_SESSION['user']['password'] = trim(mb_convert_kana($_SESSION['user']['password'], "s", 'UTF-8'));
+                }
+              } else {
+                $error_message[] = "* パスワードを入力してください。<br>";
+              }
+
+            if (!count($error_message)){
+              $user        = new User();
+              $record = $user->login();
+
+              if ($table = mysqli_fetch_assoc($record)) {
+                // ログイン成功
+                $_SESSION['login']['id']           = $table['id'];
+                $_SESSION['login']['user_name']    = $table['user_name'];
+                $_SESSION['login']['user_picture'] = $table['user_picture'];
+                $_SESSION['time']                  = time();
+
+                  // cookieにログイン情報を記録する
+                if ($_POST['save'] == 'on') {
+                  setcookie('user_name', $_SESSION['user']['user_name'], time()+60*60*24*14);
+                  setcookie('password', $_SESSION['user']['password'], time()+60*60*24*14);
+                
+              }
+
+                header("Location:../page/index");
                 exit;
               } else {
                 return $error_message;
               }
+            } else {
+              return $error_message;
             }
             // if (!count($error_message))閉じ
           }
@@ -239,7 +251,7 @@
 
 
         // Cookie情報も削除
-        setcookie('email', '', time() - 3600);
+        setcookie('user_name', '', time() - 3600);
         setcookie('password', '', time() - 3600);
 
       header('Location: login');
