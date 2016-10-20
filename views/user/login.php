@@ -1,5 +1,7 @@
 <?php 
     $UsersController = new UsersController($db, $table_name, $action);
+    $UsersController->action   = $action;
+    $UsersController->resource = $resource;
     $error_message = $UsersController->_new($_POST);
 ?>
 

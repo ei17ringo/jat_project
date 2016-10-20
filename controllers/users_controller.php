@@ -145,11 +145,16 @@
             }
 
 
-            if ($sd['email'] !== "") {
-              $_SESSION['user']['email'] = htmlspecialchars($sd["email"],ENT_QUOTES);
-              $_SESSION['user']['email'] = trim(mb_convert_kana($_SESSION['user']['email'], "s", 'UTF-8'));
+            if ($sd['password'] !== ""){
+              if ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
+                $error_message[] = "* パスワードは４文字以上16文字以下で入力してください。<br>";
+              } else {
+                $_SESSION['user']['password'] = htmlspecialchars($sd["password"],ENT_QUOTES);
+                $_SESSION['user']['password'] = trim(mb_convert_kana($_SESSION['user']['password'], "s", 'UTF-8'));
+                $_SESSION['user']['password'] = sha1($_SESSION['user']['password']);
+              }
             } else {
-              $error_message[] = "* メールアドレスを入力してください。<br>";
+              $error_message[] = "* パスワードを入力してください。<br>";
             }
 
 
@@ -163,8 +168,8 @@
 
                 // cookieにログイン情報を記録する
               if ($_POST['save'] == 'on') {
-                setcookie('user_name', $_POST['user']['user_name'], time()+60*60*24*14);
-                setcookie('password', $_POST['user']['password'], time()+60*60*24*14);
+                setcookie('user_name', $sd['user']['user_name'], time()+60*60*24*14);
+                setcookie('password', $sd['user']['password'], time()+60*60*24*14);
               }
 
                 header("Location:../index");
