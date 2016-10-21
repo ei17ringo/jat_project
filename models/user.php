@@ -35,7 +35,7 @@
     }
 
 
-    function mypage($id) {
+    function mypage() {
 
     }
 

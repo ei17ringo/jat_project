@@ -21,9 +21,9 @@
         $controller->login();
         break;
     case 'mypage';
-        $controller->mypage($id);
+        $controller->mypage();
         break;
-    case 'profle';
+    case 'profile';
         $controller->profile();
         break;
     case 'edit':
@@ -231,9 +231,14 @@
     function login() {
       $resource    = $this->resource;
       $action      = 'login';
+      $this->_loginCheck();
 
-        require('views/layouts/application.php');
+      if ($_SESSION['loginCheck'] == 'true') {
+        header('Location: ../page/index');
+        exit();
       }
+        require('views/layouts/application.php');
+    }
 
 
     function _loginCheck() {
@@ -243,7 +248,6 @@
         $_SESSION['loginCheck'] = 'false';
       }
     }
-
 
 
     function logout($id) {
@@ -266,9 +270,13 @@
       exit();
     }
 
-    function mypage($id) {
-      $resource = $this->resource;
-      $action   = 'mypage';
+
+    function mypage() {
+      // $user        = new User();
+      // $viewOptions = $user->mypage();
+      $resource    = $this->resource;
+      $action      = 'mypage';
+      
       $this->_loginCheck();
 
       if ($_SESSION['loginCheck'] == 'false') {
@@ -276,12 +284,16 @@
         exit();
       }
 
+
+
       require('views/layouts/application.php');
     }
 
-      function profile($id) {
-      $user        = new User();
-      $viewOptions = $user->profile($id);
+
+      function profile() {
+      // $user        = new User();
+      // $viewOptions = $user->profile($id);
+      $resource    = $this->resource;
       $action      = 'profile';
 
       require('views/layouts/application.php');
