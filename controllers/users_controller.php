@@ -177,13 +177,13 @@
 
                   // cookieにログイン情報を記録する
                 if ($_POST['save'] == 'on') {
-                  setcookie('user_name', $_SESSION['user']['user_name'], time()+60*60*24*14);
-                  setcookie('password', $_SESSION['user']['password'], time()+60*60*24*14);
+                  $_SESSION['save'] = 'on';
               }
 
                 header("Location:../page/index");
                 exit;
               } else {
+                $error_message[] = "* ユーザーネームまたはパスワードが間違っています。<br>";
                 return $error_message;
               }
             } else {
