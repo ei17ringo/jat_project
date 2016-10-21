@@ -1,3 +1,10 @@
+<?php 
+    $UsersController = new UsersController($db, $table_name, $action);
+    $UsersController->action   = $action;
+    $UsersController->resource = $resource;
+    $UsersController->_loginCheck();
+ ?>
+
 <!DOCTYPE html>
 <html lang="jp">
 
@@ -56,21 +63,30 @@
                     <li>
                         <a href="../page/index">ホーム</a>
                     </li>
-                    <li>
-                        <a href="../plan/create">旅路投稿</a>
-                    </li>
-                    <li>
-                        <a href="../spot/create">スポット投稿</a>
-                    </li>
-                    <li>
-                        <a href="../user/mypage">マイページ</a>
-                    </li>
-                    <li>
-                        <a href="../page/contactus">お問い合わせ</a>
-                    </li>
-                    <li>
-                        <a href="../user/logout">ログアウト</a>
-                    </li>
+                    <?php if ($_SESSION['loginCheck'] == 'true'): ?>
+                        <li>
+                            <a href="../plan/create">旅路投稿</a>
+                        </li>
+                        <li>
+                            <a href="../spot/create">スポット投稿</a>
+                        </li>
+                        <li>
+                            <a href="../user/mypage">マイページ</a>
+                        </li>
+                    <?php endif; ?>
+                        <li>
+                            <a href="../page/contactus">お問い合わせ</a>
+                        </li>
+                    <?php if ($_SESSION['loginCheck'] == 'true'): ?>
+                        <li>
+                            <a href="../user/logout">ログアウト</a>
+                        </li>
+                    <?php elseif ($_SESSION['loginCheck'] == 'false'): ?>
+                        <li>
+                            <a href="../user/login">ログイン</a>
+                        </li>
+                    <?php endif; ?>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

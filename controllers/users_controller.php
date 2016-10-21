@@ -236,6 +236,15 @@
       }
 
 
+    function _loginCheck() {
+      if (isset($_SESSION['login']['id'])) {
+        $_SESSION['loginCheck'] = 'true';
+      } else if (empty($_SESSION['login']['id'])) {
+        $_SESSION['loginCheck'] = 'false';
+      }
+    }
+
+
 
     function logout($id) {
       $resource    = $this->resource;
@@ -260,18 +269,11 @@
     function mypage($id) {
       $resource = $this->resource;
       $action   = 'mypage';
+      $this->_loginCheck();
 
-      // ログイン中の条件
-      // １、セッションにidが入っていること
-      // ２、最後の行動から１時間以内であること
-      if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
-        // ログインしている
-        // セッションの時間を更新
-        $_SESSION['time'] = time();
-
-      } else {
-        // ログインしていない
-        header('Location: login');
+      if ($_SESSION['loginCheck'] == 'false') {
+        header('Location: ../user/login');
+        exit();
       }
 
       require('views/layouts/application.php');

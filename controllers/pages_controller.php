@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  require('./controllers/users_controller.php'); // controller呼び出す
   // コントローラのクラスをインスタンス化
   $controller = new PagesController();
 
@@ -26,17 +26,24 @@
       function _new($sd){
         $resource = $this->resource;
         $action   = $this->action;
-
       }
       // function _new($sd)閉じ
 
 
     function index() {
-      $resource = $this->resource;
-      $action   = 'index';
+      $resource        = $this->resource;
+      $action          = 'index';
+      $UsersController = new UsersController();
+      $UsersController -> _loginCheck();
+
+      if ($_SESSION['loginCheck'] == 'false') {
+        header('Location: ../user/login');
+        exit();
+      }
 
       require('views/layouts/application.php');
     }
+
 
     function contactus() {
       $resource = $this->resource;
@@ -44,9 +51,6 @@
 
       require('views/layouts/application.php');
     }
-
-
-
   }
 
 ?>
