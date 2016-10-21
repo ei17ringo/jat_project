@@ -23,7 +23,7 @@
 
                         <h4 class="panel-title">
                             <span class="glyphicon glyphicon-file">
-                            </span>新規スポット登録
+                            </span>スポット編集
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
