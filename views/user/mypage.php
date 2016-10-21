@@ -1,6 +1,8 @@
-<?php
+<?php 
     $UsersController = new UsersController($db, $table_name, $action);
-    $UsersController->mypage();
+    $UsersController->action   = $action;
+    $UsersController->resource = $resource;
+    $error_message = $UsersController->_new($_POST);
 ?>
 
     <!-- Page Content -->
@@ -11,9 +13,9 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-2 mypage-profile">
-              <img alt="user-icon" src="img/user/avatar_user_1.jpg" />
+              <img alt="user-icon" src="../user_picture/<?php echo htmlspecialchars($_SESSION['login']['user_picture'], ENT_QUOTES, 'UTF-8'); ?>" />
               <h4>
-                <a href="">ユーザーネーム</a>
+                <a href=""><?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?></a>
               </h4>
               <div class="favorite-number">
                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯

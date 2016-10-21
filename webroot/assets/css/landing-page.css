@@ -30,6 +30,11 @@ h6 {
     margin-top: 70px;
 }
 
+.error_message_login{
+    font-size: 15px;
+    color: red;
+}
+
 .photo-upload{
     position: relative;
 }
