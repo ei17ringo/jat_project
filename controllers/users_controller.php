@@ -272,12 +272,13 @@
 
 
     function mypage() {
-      // $user        = new User();
+      $user        = new User();
       // $viewOptions = $user->mypage();
       $resource    = $this->resource;
       $action      = 'mypage';
-      
+      $myView = $user->mypage();
       $this->_loginCheck();
+
 
       if ($_SESSION['loginCheck'] == 'false') {
         header('Location: ../user/login');
