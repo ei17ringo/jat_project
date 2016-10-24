@@ -2,6 +2,7 @@
     $UsersController = new UsersController($db, $table_name, $action);
     $UsersController->action   = $action;
     $UsersController->resource = $resource;
+    $UsersController->id       = $id;
     $error_message = $UsersController->_new($_POST);
 ?>
 
@@ -19,7 +20,16 @@
                 <a href="">ユーザーネーム</a>
               </h4>
               <div class="favorite-number">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
+                <?php if ((isset($likeStatus)) && ($likeStatus == "UNLIKE")): ?>
+                  <form method="post" action="/jat_project/user/like">
+                    <button type='submit' name='user_like' value='send'>UNLIKE：◯◯</button>
+                  </form>
+                <?php else: ?>
+                  <form method="post" action="/jat_project/user/unlike">
+                    <button type='submit' name='like' value='send'>LIKE：◯◯</button>
+                  </form>
+                <?php endif; ?>
+                
               </div>
             </div>
             <div class="col-md-8 mypage-main">

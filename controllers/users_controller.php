@@ -5,6 +5,7 @@
 
   $controller->resource = $resource;
   $controller->action   = $action;
+  $controller->id       = $id;
 
   // アクション名によって、呼び出すメソッドを変える
   switch ($action) {
@@ -24,7 +25,13 @@
         $controller->mypage();
         break;
     case 'profile';
-        $controller->profile();
+        $controller->profile($id);
+        break;
+    case 'like';
+        $controller->like($id);
+        break;
+    case 'unlike';
+        $controller->unlike($id);
         break;
     case 'edit':
         $controller->edit($id);
@@ -283,19 +290,36 @@
       if ($_SESSION['loginCheck'] == 'false') {
         header('Location: ../user/login');
         exit();
+
       }
+      require('views/layouts/application.php');
+    }
 
 
+    function profile($id) {
+      $user        = new User();
+      $viewOptions = $user->likeStatus($id);
+      $resource    = $this->resource;
+      $action      = 'profile';
+
+    }
+
+
+    function like($id) {
+      $user        = new User();
+      $viewOptions = $user->like();
+      $resource    = $this->resource;
+      $action      = 'like';
 
       require('views/layouts/application.php');
     }
 
 
-      function profile() {
-      // $user        = new User();
-      // $viewOptions = $user->profile($id);
+    function unlike($id) {
+      $user        = new User();
+      $viewOptions = $user->unlike();
       $resource    = $this->resource;
-      $action      = 'profile';
+      $action      = 'unlike';
 
       require('views/layouts/application.php');
     }

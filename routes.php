@@ -6,7 +6,7 @@
 
   // ２，パラメータの分解
   $resource = $params[0];
-  $action  = $params[1];
+  $action   = $params[1];
     // $idはオプションを取得するものであるが、オプションは存在するかわからないため、$id = 0;
   $id = 0;
   if (isset($params[2])) {

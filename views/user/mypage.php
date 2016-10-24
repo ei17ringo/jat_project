@@ -214,7 +214,7 @@
                 </div>
                 <div class="favorite-user-name-area">
                   <p>
-                    <a href="">ユーザーネーム</a>
+                    <a href="profile/97">テストネーム</a>
                   </p>
                 </div>
               </div>
