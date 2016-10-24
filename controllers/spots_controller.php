@@ -238,9 +238,7 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
          $spot= new Spot();
         $viewOptions= $spot->save();
        
-       // トップページへ
-　　　　　header('Location: mypage');
-         exit();
+       
       }
 
 
@@ -268,9 +266,7 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
        $spot = new Spot();
        $spot->update($id);
 
-       // リダイレクト
-     header("Location:../detail/$id");
-      exit();
+      
      }
 
 

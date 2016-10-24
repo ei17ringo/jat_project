@@ -7,7 +7,6 @@ if(isset($id)){
     $path_adjust_string= '../';
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="jp">
 

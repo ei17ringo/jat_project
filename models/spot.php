@@ -97,6 +97,9 @@ function save() {
            unset($_SESSION['spot']);
 
       }
+      // トップページへ
+　　　　　header('Location:mypage');
+         exit();
         }
 
 function update($id){
@@ -112,7 +115,9 @@ function update($id){
     unset($_SESSION['spot']);
 
 
-      
+       // リダイレクト
+     header("Location:../detail/$id");
+      exit();
   }
 
 

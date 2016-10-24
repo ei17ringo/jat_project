@@ -70,11 +70,11 @@
                                 <div class="well well-sm">
                              <label for="picture_1">
                              ＊画像ファイル</label>
-                             <!-- <?php //if($action=='create'):?> -->
+                             <!-- <?php //if(!empty($_SESSION['spot']['picture_1'])):?> -->
                              <img src="../../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
-                           <!-- <?php //else: ?>
-                             <img src="../../spot_picture/<?php //echo htmlspecialchars($_SESSION['spot']['new_picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
-                           <?php //endif; ?> -->
+                           <!-- <?php //else:?> -->
+                             <!-- <img src="../../spot_picture/<?php //echo $viewOptions['picture_1']; ?>" width="208" height="129"> -->
+                           <!-- <?php //endif; ?> -->
 
                              </div>
 
