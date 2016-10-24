@@ -66,7 +66,7 @@
                                         <!-- エラーメッセージ -->
                                                 <?php
                                                     if (isset($error_message)&&(count($error_message)>0)) {
-                                                        foreach ($error_message as $message){
+                                                        foreach ($error_message as $message) {
                                                             echo $message;
                                                         }
                                                     }

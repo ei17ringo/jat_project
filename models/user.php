@@ -11,6 +11,25 @@
       $this->dbconnect = $db;
     }
 
+
+    function duplicate() {
+    // スポット重複チェック
+      $error = array();
+      $sql   = sprintf('SELECT COUNT(*) AS cnt FROM `users` WHERE`user_name` = "%s"',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name'])
+      );
+    //SQL実行
+      $record = mysqli_query($this->dbconnect, $sql)or die(mysqli_error($this->dbconnect));
+    //連想配列としてSQL実行結果を受け取る
+      $table = mysqli_fetch_assoc($record);
+        if($table['cnt']>0){
+        //同じエラーが1件以上あったらエラー
+        $error_message['user_name'] = 'duplicate';
+        }
+      return $error_message;
+    }
+
+
     function save() {
       $sql = sprintf('INSERT INTO `users` SET `user_name`="%s", `email`="%s", `password`="%s", `user_picture`="%s", `created`=now()',
 

@@ -2,7 +2,6 @@
     $UsersController = new UsersController($db, $table_name, $action);
     $UsersController->action   = $action;
     $UsersController->resource = $resource;
-    $UsersController->id       = $id;
     $UsersController->_loginCheck();
 
     $path_adjust_string= '';
