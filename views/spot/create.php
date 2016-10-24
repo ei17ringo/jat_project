@@ -2,13 +2,12 @@
 // session_start();
 
     $SpotsController = new SpotsController($db, $table_name, $action);
-
     $error_message=array();
 
      //初期表示はエラーチェックをしない
-    
+
         $error_message=$SpotsController->_new($_POST);
-    
+
 
 ?>
 

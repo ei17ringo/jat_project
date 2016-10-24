@@ -148,8 +148,8 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
 
      function detail($id) {
        $spot = new Spot();
-       $resource= $this->resource;
        $viewOptions= $spot->detail($id);
+       $resource= $this->resource;
        $action = 'detail';
 
        require('views/layouts/application.php');
@@ -158,7 +158,7 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
      function confirm() {
         $spot= new Spot();
         $viewOptions= $spot->duplicate();
-var_dump($viewOptions);
+// var_dump($viewOptions);
 
         if (isset($viewOptions['spot_name'])&& ($viewOptions['spot_name']=='duplicate')){
           $_SESSION['spot']['duplicate']=true;
@@ -187,7 +187,7 @@ var_dump($viewOptions);
       $resource= $this->resource;
 
 
-            var_dump($this->error_message);
+            // var_dump($this->error_message);
             require('views/layouts/application.php');
 
         }
@@ -196,9 +196,10 @@ var_dump($viewOptions);
      function edit($id) {
        $spot = new Spot();
        $viewOptions = $spot->edit($id);
+       $resource= $this->resource;
        $action = 'edit';
 
-       require('views/layout/application.php');
+       require('views/layouts/application.php');
      }
 
      function update($id, $post) {

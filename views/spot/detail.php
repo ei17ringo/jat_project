@@ -1,3 +1,12 @@
+<?php
+// session_start();
+
+    $SpotsController = new SpotsController($db, $table_name, $action);
+    $SpotsController->_new($_POST);
+?>
+
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="top:70px;">
@@ -18,12 +27,12 @@
                                     <div class="form-group">
                                     <label for="spot_name">
                                             ＊スポットの名称</label>
-                                        <p>清水寺</p>
+                                        <p><?php echo $viewOptions['spot_name']; ?></p>
                                     </div>
                                     <div class="form-group">
                                     <label for="adress">
                                             ＊スポットの住所</label>
-                                        <p>〒605-0862 京都府京都市東山区清水１丁目２９４</p>
+                                        <p><?php echo $viewOptions['address']; ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -35,7 +44,7 @@
                                         <p>京都、デート、紅葉、桜</p>
                                         
                                     </div>
-                                   <script>
+                                   <!-- <script>
           $(function(){
             Tags.bootstrapVersion = "2";
             $("#small").tags({
@@ -44,7 +53,7 @@
               tagData: ["京都", "デート"]
             });
             });
-        </script>
+        </script> -->
 
                             
                             </div>
@@ -61,8 +70,11 @@
 
            <div id="mainContents" class="clearfix">
             <h1>Pictures</h1>
-            <p><a href="index/img/img_l1.jpg" rel="example1" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb1.jpg"  alt="画像の紹介テキストが入ります。" /></a>title1</p>
-            <p><a href="index/img/img_l2.jpg" rel="example2" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb2.jpg" alt="画像の紹介テキストが入ります。" /></a>title2</p>
+            <p><a href="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>" width="208" height="129">
+            </a></p>
+
+            <p><a href="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>" width="208" height="129">
+            </a></p>
             <p><a href="index/img/img_l3.jpg" rel="example3" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb3.jpg" alt="画像の紹介テキストが入ります。" /></a>title3</p>
             <p><a href="index/img/img_l4.jpg" rel="example4" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb4.jpg" alt="画像の紹介テキストが入ります。" /></a>title4</p>
             <p><a href="index/img/img_l5.jpg" rel="example5" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb5.jpg" alt="画像の紹介テキストが入ります。" /></a>title5</p>
@@ -71,46 +83,7 @@
             <p><a href="index/img/img_l8.jpg" rel="example8"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb8.jpg" alt="画像の紹介テキストが入ります。" /></a>title8</p>
 
             
-            <p><a href="index/img/img_l1.jpg" rel="example1" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb1.jpg"  alt="画像の紹介テキストが入ります。" /></a>title1</p>
-            <p><a href="index/img/img_l2.jpg" rel="example2" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb2.jpg" alt="画像の紹介テキストが入ります。" /></a>title2</p>
-            <p><a href="index/img/img_l3.jpg" rel="example3" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb3.jpg" alt="画像の紹介テキストが入ります。" /></a>title3</p>
-            <p><a href="index/img/img_l4.jpg" rel="example4" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb4.jpg" alt="画像の紹介テキストが入ります。" /></a>title4</p>
-            <p><a href="index/img/img_l5.jpg" rel="example5" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb5.jpg" alt="画像の紹介テキストが入ります。" /></a>title5</p>
-            <p><a href="index/img/img_l6.jpg" rel="example6" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb6.jpg" alt="画像の紹介テキストが入ります。" /></a>title6</p>
-            <p><a href="index/img/img_l7.jpg" rel="example7"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb7.jpg" alt="画像の紹介テキストが入ります。" /></a>title7</p>
-            <p><a href="index/img/img_l8.jpg" rel="example8"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb8.jpg" alt="画像の紹介テキストが入ります。" /></a>title8</p>
-            <p><a href="index/img/img_l1.jpg" rel="example1" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb1.jpg"  alt="画像の紹介テキストが入ります。" /></a>title1</p>
-            <p><a href="index/img/img_l2.jpg" rel="example2" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb2.jpg" alt="画像の紹介テキストが入ります。" /></a>title2</p>
-            <p><a href="index/img/img_l3.jpg" rel="example3" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb3.jpg" alt="画像の紹介テキストが入ります。" /></a>title3</p>
-            <p><a href="index/img/img_l4.jpg" rel="example4" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb4.jpg" alt="画像の紹介テキストが入ります。" /></a>title4</p>
-            <p><a href="index/img/img_l5.jpg" rel="example5" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb5.jpg" alt="画像の紹介テキストが入ります。" /></a>title5</p>
-            <p><a href="index/img/img_l6.jpg" rel="example6" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb6.jpg" alt="画像の紹介テキストが入ります。" /></a>title6</p>
-            <p><a href="index/img/img_l7.jpg" rel="example7"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb7.jpg" alt="画像の紹介テキストが入ります。" /></a>title7</p>
-            <p><a href="index/img/img_l8.jpg" rel="example8"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb8.jpg" alt="画像の紹介テキストが入ります。" /></a>title8</p>
-            <p><a href="index/img/img_l1.jpg" rel="example1" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb1.jpg"  alt="画像の紹介テキストが入ります。" /></a>title1</p>
-            <p><a href="index/img/img_l2.jpg" rel="example2" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb2.jpg" alt="画像の紹介テキストが入ります。" /></a>title2</p>
-            <p><a href="index/img/img_l3.jpg" rel="example3" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb3.jpg" alt="画像の紹介テキストが入ります。" /></a>title3</p>
-            <p><a href="index/img/img_l4.jpg" rel="example4" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb4.jpg" alt="画像の紹介テキストが入ります。" /></a>title4</p>
-            <p><a href="index/img/img_l5.jpg" rel="example5" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb5.jpg" alt="画像の紹介テキストが入ります。" /></a>title5</p>
-            <p><a href="index/img/img_l6.jpg" rel="example6" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb6.jpg" alt="画像の紹介テキストが入ります。" /></a>title6</p>
-            <p><a href="index/img/img_l7.jpg" rel="example7"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb7.jpg" alt="画像の紹介テキストが入ります。" /></a>title7</p>
-            <p><a href="index/img/img_l8.jpg" rel="example8"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb8.jpg" alt="画像の紹介テキストが入ります。" /></a>title8</p>
-            <p><a href="index/img/img_l1.jpg" rel="example1" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb1.jpg"  alt="画像の紹介テキストが入ります。" /></a>title1</p>
-            <p><a href="index/img/img_l2.jpg" rel="example2" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb2.jpg" alt="画像の紹介テキストが入ります。" /></a>title2</p>
-            <p><a href="index/img/img_l3.jpg" rel="example3" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb3.jpg" alt="画像の紹介テキストが入ります。" /></a>title3</p>
-            <p><a href="index/img/img_l4.jpg" rel="example4" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb4.jpg" alt="画像の紹介テキストが入ります。" /></a>title4</p>
-            <p><a href="index/img/img_l5.jpg" rel="example5" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb5.jpg" alt="画像の紹介テキストが入ります。" /></a>title5</p>
-            <p><a href="index/img/img_l6.jpg" rel="example6" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb6.jpg" alt="画像の紹介テキストが入ります。" /></a>title6</p>
-            <p><a href="index/img/img_l7.jpg" rel="example7"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb7.jpg" alt="画像の紹介テキストが入ります。" /></a>title7</p>
-            <p><a href="index/img/img_l8.jpg" rel="example8"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb8.jpg" alt="画像の紹介テキストが入ります。" /></a>title8</p>
-            <p><a href="index/img/img_l1.jpg" rel="example1" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb1.jpg"  alt="画像の紹介テキストが入ります。" /></a>title1</p>
-            <p><a href="index/img/img_l2.jpg" rel="example2" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb2.jpg" alt="画像の紹介テキストが入ります。" /></a>title2</p>
-            <p><a href="index/img/img_l3.jpg" rel="example3" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb3.jpg" alt="画像の紹介テキストが入ります。" /></a>title3</p>
-            <p><a href="index/img/img_l4.jpg" rel="example4" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb4.jpg" alt="画像の紹介テキストが入ります。" /></a>title4</p>
-            <p><a href="index/img/img_l5.jpg" rel="example5" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb5.jpg" alt="画像の紹介テキストが入ります。" /></a>title5</p>
-            <p><a href="index/img/img_l6.jpg" rel="example6" title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb6.jpg" alt="画像の紹介テキストが入ります。" /></a>title6</p>
-            <p><a href="index/img/img_l7.jpg" rel="example7"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb7.jpg" alt="画像の紹介テキストが入ります。" /></a>title7</p>
-            <p><a href="index/img/img_l8.jpg" rel="example8"  title="画像の紹介テキストが入ります。"><img src="index/img/img_thumb8.jpg" alt="画像の紹介テキストが入ります。" /></a>title8</p>
+            
         </div>
 
 
