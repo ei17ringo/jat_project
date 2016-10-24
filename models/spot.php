@@ -56,15 +56,6 @@ function edit($id){
     }
 
 
-function update($id,$post){
-  $sql=sprintf('UPDATE `spots` SET `title`="%s",`body`="%s" WHERE `id`=%d',
-    mysqli_real_escape_string($this->dbconnect,$post['title']),
-    mysqli_real_escape_string($this->dbconnect,$post['body']),
-    mysqli_real_escape_string($this->dbconnect,$id)
-      );
-    mysqli_query($this->dbconnect,$sql)or die(mysqli_error($this->dbconnect));
-  }
-
   function delete($id){
   $sql=sprintf('UPDATE `spots` SET `delete_flag`=1 WHERE `id`=%d',
   mysqli_real_escape_string($this->dbconnect,$id)
@@ -105,11 +96,25 @@ function save() {
            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
            unset($_SESSION['spot']);
 
-     // mypageへリダイレクト
-     header('Location: mypage');
-      exit();
       }
         }
+
+function update($id){
+
+  $sql=sprintf('UPDATE `spots` SET `spot_name`="%s",`address`="%s",`picture_1`="%s", `picture_2`="%s",`created`=now() WHERE `id`=%d',
+    mysqli_real_escape_string($this->dbconnect,$_SESSION['spot']['spot_name']),
+    mysqli_real_escape_string($this->dbconnect,$_SESSION['spot']['address']),
+    mysqli_real_escape_string($this->dbconnect,$_SESSION['spot']['picture_1']),
+    mysqli_real_escape_string($this->dbconnect, $_SESSION['spot']['picture_2']),
+    mysqli_real_escape_string($this->dbconnect,$id)
+      );
+    mysqli_query($this->dbconnect,$sql)or die(mysqli_error($this->dbconnect));
+    unset($_SESSION['spot']);
+
+
+      
+  }
+
 
 }
 ?>

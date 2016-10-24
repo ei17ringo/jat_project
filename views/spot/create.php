@@ -2,6 +2,8 @@
 // session_start();
 
     $SpotsController = new SpotsController($db, $table_name, $action);
+    $SpotsController->action=$action;
+    $SpotsController->resource=$resource;
     $error_message=array();
 
      //初期表示はエラーチェックをしない

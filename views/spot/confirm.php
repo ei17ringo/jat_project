@@ -10,8 +10,13 @@
 
 <div class="container" style="margin-top:70px; margin-bottom:70px">
     <div class="row">
+<?php if($id==null):?>
+<form method="post" action="save" enctype="multipart/form-data">
+  <?php else :?>
+    <form method="post" action="../update/<?php echo $id;?>" enctype="multipart/form-data">
+  <?php endif ;?>
 
-  <form method="post" action="save" enctype="multipart/form-data">
+ 
 
         <div class="col-md-12">
             <div class="panel-group" id="accordion">
@@ -65,14 +70,22 @@
                                 <div class="well well-sm">
                              <label for="picture_1">
                              ＊画像ファイル</label>
-                             <img src="../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                             <!-- <?php //if($action=='create'):?> -->
+                             <img src="../../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                           <!-- <?php //else: ?>
+                             <img src="../../spot_picture/<?php //echo htmlspecialchars($_SESSION['spot']['new_picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                           <?php //endif; ?> -->
 
                              </div>
 
                               <div class="well well-sm">
                              <label for="picture_2">
                              ＊画像ファイル</label>
-                             <img src="../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                             <!-- <?php //if($action=='create'):?> -->
+                             <img src="../../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                             <!-- <?php //else: ?>
+                             <img src="../../spot_picture/<?php //echo htmlspecialchars($_SESSION['spot']['new_picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                           <?php //endif; ?> -->
             
                             </div>
                                     
@@ -92,5 +105,3 @@
   </div>
 
 </div>
-
- 

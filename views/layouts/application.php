@@ -5,11 +5,7 @@ if(isset($id)){
 //idがある場合、階層を一つあげる
     $path_adjust_string= '../';
 }
-
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="jp">
 
@@ -45,13 +41,7 @@ if(isset($id)){
 
 
 <!-- 写真 -->
-<meta name="keywords" content="キーワード" />
-<meta name="description" content="サイトの説明" />
-<meta http-equiv="Content-Language" content="ja" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="imagetoolbar" content="no" />
-  <link href="../<?php echo $path_adjust_string;?>webroot/share/css/set/import.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../<?php echo $path_adjust_string;?>webroot/share/css/set/import.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../<?php echo $path_adjust_string;?>webroot/index/css/index.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../<?php echo $path_adjust_string;?>webroot/index/css/colorbox.css" rel="stylesheet" type="text/css" media="all" />
 <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
@@ -64,36 +54,6 @@ if(isset($id)){
 <script src="../<?php echo $path_adjust_string;?>webroot/share/js/m5LazyDisplay.js"></script>
 <script src="../<?php echo $path_adjust_string;?>webroot/share/js/jquery-opacity-rollover.js"></script>
 <script type="text/javascript" src="../<?php echo $path_adjust_string;?>webroot/share/js/default.js"></script>
-
-<script>
-    var $pgj= $.noConflict(true);
-
-    (function($){
-    $(document).ready(function(){
-        $("#mainContents p a").colorbox();
-    });
-    })($pgj);
-</script>
-
-<script>
-    (function($) {
-    $(function() {
-
-     $('img').opOver(1.0,0.4);
-
-    });
-    })($pgj);
-</script>
-<script type="text/javascript">
-        (function($){
-            $("img").m5LazyDisplay();
-        })($pgj);
-</script>
-
-
-
-
-
 
 
 
@@ -170,8 +130,37 @@ if(isset($id)){
         </div>
     </footer>
 
+
+    <script>
+    var $pgj= $.noConflict(true);
+
+    (function($){
+    $(document).ready(function(){
+        $("#mainContents p a").colorbox();
+    });
+    })($pgj);
+</script>
+
+<script>
+    (function($) {
+    $(function() {
+
+     $('img').opOver(1.0,0.4);
+
+    });
+    })($pgj);
+</script>
+<script type="text/javascript">
+        (function($){
+            $("img").m5LazyDisplay();
+        })($pgj);
+</script>
+
+
+
+
     <!-- jQuery -->
-   <script src="../<?php //echo $path_adjust_string;?>webroot/assets/js/jquery.js"></script>
+   <script src="../<?php echo $path_adjust_string;?>webroot/assets/js/jquery.js"></script>
 
     
 
