@@ -90,10 +90,10 @@
       $table = mysqli_fetch_assoc($record);
 
       $likeStatus = '';
-      if ($table >= 1) {
-        // 同じメールアドレスが１件以上あったらエラー
+      if ($table['cnt'] >= 1) {
+        //１件以上あったらエラー
         $likeStatus = 'UNLIKE';
-      } else if ($table == 0) {
+      } else if ($table['cnt'] == 0) {
         $likeStatus = 'LIKE';
       }
       return $likeStatus;
@@ -107,6 +107,7 @@
         mysqli_real_escape_string($this->dbconnect, $id)
       );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      // var_dump($sql);
     }
 
 

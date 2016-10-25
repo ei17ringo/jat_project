@@ -317,26 +317,30 @@
       $resource    = $this->resource;
       $action      = 'profile';
 
+      require('views/layouts/application.php');
     }
 
 
     function like($id) {
       $user        = new User();
-      $viewOptions = $user->like();
+      $viewOptions = $user->like($id);
       $resource    = $this->resource;
       $action      = 'like';
 
-      require('views/layouts/application.php');
+
+      header("Location: ../profile/$id");
+      exit();
     }
 
 
     function unlike($id) {
       $user        = new User();
-      $viewOptions = $user->unlike();
+      $viewOptions = $user->unlike($id);
       $resource    = $this->resource;
       $action      = 'unlike';
 
-      require('views/layouts/application.php');
+      header("Location: ../profile/$id");
+      exit();
     }
 
 
