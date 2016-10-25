@@ -55,10 +55,9 @@
                             <div class="well well-sm">
                              <label for="image">
                              ＊画像ファイル</label>
-                             <p><input type="checkbox" name="delete_picture_1" value="$row">削除する</p>
+                             <p><input type="checkbox" name="delete_picture_1" value="1">削除する</p>
                              <p><img src="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>" width="208" height="129"></p>
-                             <input type = "hidden" name="old_picture_1" value="<?php echo $viewOptions['picture_1']; ?>" >
-                             <input type="file" name="picture_1" value="<?php echo $viewOptions['picture_1']; ?>">
+                             <input type="file" name="picture_1">
                              
                             </div>
 
@@ -67,8 +66,7 @@
                              ＊画像ファイル</label>
                              <p><input type="checkbox" name="delete_picture_2" value="$row">削除する</p>
                              <p><img src="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>" width="208" height="129"></p>
-                             <input type = "hidden" name="old_picture_2" value="<?php echo $viewOptions['picture_2']; ?>" >
-                             <input type="file" name="picture_2" value="<?php echo $viewOptions['picture_2']; ?>">
+                             <input type="file" name="picture_2">
                             </div>
 
 

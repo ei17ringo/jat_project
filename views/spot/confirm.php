@@ -70,23 +70,29 @@
                                 <div class="well well-sm">
                              <label for="picture_1">
                              ＊画像ファイル</label>
-                             <!-- <?php //if(!empty($_SESSION['spot']['picture_1'])):?> -->
-                             <img src="../../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
-                           <!-- <?php //else:?> -->
-                             <!-- <img src="../../spot_picture/<?php //echo $viewOptions['picture_1']; ?>" width="208" height="129"> -->
-                           <!-- <?php //endif; ?> -->
+                             <?php if(!empty($_SESSION['spot']['delete_picture_1'])): ?>
+                            <img src="../../webroot/assets/img/no_image.png" width="208" height="129">
+                             <?php elseif(!empty($_SESSION['spot']['picture_1'])):?>
+                             <img src="../<?php echo $path_adjust_string;?>spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                           <?php elseif($action='edit'&&(!isset($_SESSION['spot']['picture_1']))):?>
+                             <img src="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>" width="208" height="129">
+                           <?php endif; ?>
 
                              </div>
 
                               <div class="well well-sm">
                              <label for="picture_2">
                              ＊画像ファイル</label>
-                             <!-- <?php //if($action=='create'):?> -->
-                             <img src="../../spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
-                             <!-- <?php //else: ?>
-                             <img src="../../spot_picture/<?php //echo htmlspecialchars($_SESSION['spot']['new_picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
-                           <?php //endif; ?> -->
-            
+                             <?php if(!empty($_SESSION['spot']['delete_picture_2'])): ?>
+                            <img src="../../webroot/assets/img/no_image.png" width="208" height="129">
+                             <?php elseif(!empty($_SESSION['spot']['picture_2'])):?>
+                             <img src="../<?php echo $path_adjust_string;?>spot_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                             <?php elseif($action='edit'&&(!isset($_SESSION['spot']['picture_2']) || empty($_SESSION['spot']['picture_2']))):?>
+                             <img src="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>" width="208" height="129">
+                           <?php endif; ?>
+            <?php var_dump($_SESSION['spot']['picture_2']); ?>
+            <?php var_dump($action); ?>
+
                             </div>
                                     
                      

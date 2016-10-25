@@ -93,6 +93,10 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
                   //セッションに値を保存
                   // $_SESSION['spot']=$_POST;
                   $_SESSION['spot']['picture_1']= $picture_1;
+                  $_SESSION['spot']['delete_picture_1']= $sd['delete_picture_1'];
+                  if($_SESSION['spot']['delete_picture_1']=='1' or $_FILES['picture_1']['name']==null){
+                    $_SESSION['spot']['picture_1']='';
+                  }
                   }
 
 
@@ -115,56 +119,11 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
                   //セッションに値を保存
                   // $_SESSION['spot']=$_POST;
                   $_SESSION['spot']['picture_2']= $picture_2;
+                  $_SESSION['spot']['delete_picture_2']= $sd['delete_picture_2'];
+                  if($_SESSION['spot']['delete_picture_2']=='1' or $_FILES['picture_2']['name']==null){
+                    $_SESSION['spot']['picture_2']='';
+                  }
                    }
-
-// ///更新時
-//                  }else{
-//                   //画像ファイルの拡張子チェック
-//                  $fileName= $_FILES['new_picture_1']['name'];
-//                   if (!empty($fileName)) {
-//                    $ext= substr($fileName, -3);
-//                    $ext= strtolower($ext);
-
-//                     if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
-//                      $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
-//                       }
-//                     }
-
-//                 //エラーが無い時
-//                 if (!count($error_message)){
-//                   //画像をアップロードする
-//                   $new_picture_1= date('YmdHis') . $_FILES['new_picture_1']['name'];
-//                     move_uploaded_file($_FILES['new_picture_1']['tmp_name'], 'spot_picture/' . $new_picture_1);
-//                   //セッションに値を保存
-//                   // $_SESSION['spot']=$_POST;
-//                   $_SESSION['spot']['new_picture_1']= $new_picture_1;
-//                   }
-
-
-//                    //画像ファイルの拡張子チェック
-//                  $fileName= $_FILES['new_picture_2']['name'];
-//                   if (!empty($fileName)) {
-//                    $ext= substr($fileName, -3);
-//                    $ext= strtolower($ext);
-//                   if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
-//                    $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
-//                       }
-//                     }
-                  
-//                 //エラーが無い時
-//                 if (!count($error_message)){
-
-//                   //画像をアップロードする
-//                   $new_picture_2= date('YmdHis') . $_FILES['new_picture_2']['name'];
-//                     move_uploaded_file($_FILES['new_picture_2']['tmp_name'], 'spot_picture/' . $new_picture_2);
-//                   //セッションに値を保存
-//                   // $_SESSION['spot']=$_POST;
-//                   $_SESSION['spot']['new_picture_2']= $new_picture_2;
-//                    }
-
-                  // }
-                 
-
 
 
                }
@@ -183,9 +142,11 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
                 if (!count($error_message)){
                   //確認ページヘ
                   if($action=='edit'){
-                    header("Location:../confirm/$id");
+                    // header("Location:../confirm/$id");
+                    echo '<script> location.replace("../confirm/'.$id.'");</script>';
                   }else{
-                    header("Location:confirm");
+                    // header("Location:confirm");
+                    echo '<script> location.replace("confirm");</script>';
                   }
                     exit;
                    }
@@ -220,6 +181,8 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
         $spot= new Spot();
         if ($id==null){
           $viewOptions= $spot->duplicate();
+        }else{
+          $viewOptions= $spot->edit($id);
         }
 
         if (isset($viewOptions['spot_name'])&& ($viewOptions['spot_name']=='duplicate')){
@@ -238,7 +201,9 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
          $spot= new Spot();
         $viewOptions= $spot->save();
        
-       
+        // トップページへ
+　　　　　header('Location:mypage');
+         exit();
       }
 
 

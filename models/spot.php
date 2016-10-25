@@ -97,9 +97,9 @@ function save() {
            unset($_SESSION['spot']);
 
       }
-      // トップページへ
-　　　　　header('Location:mypage');
-         exit();
+//       // トップページへ
+// 　　　　　header('Location:mypage');
+//          exit();
         }
 
 function update($id){
