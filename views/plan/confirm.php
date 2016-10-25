@@ -10,15 +10,23 @@
   <div class="page-header">
     
         <p>プラン名<br>
-    <h1>京都紅葉デート</h1>
+    <h1><?php echo htmlspecialchars($_SESSION['plan']["title"]);?></h1>
 
 
 
-    <p>＊訪問した月を選択してください。（複数選択可）<br>
-    10月</p>
+    <p>＊訪問した月<br>
+    <?php
+if (isset($_SESSION['plan']['visit_month'])) && (empty($_SESSION['plan']['month'])){
+  foreach ($_SESSION['plan']['visit_month'] as $months) {
+    echo $months."月<br/>";
+   }
+  }else{
+    echo "未入力";
+  }
+  ?></p>
 
 <p>＊訪問日を選択してください。<br>
-土日・祝祭日
+<?php echo htmlspecialchars($_SESSION['plan']["visit_day_type"]);?>
 </p>
 
 </div>
@@ -39,39 +47,34 @@
             <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <h2>清水寺</h2></p>
+    <h2><?php echo htmlspecialchars($_SESSION['plan']["spot_name"]);?></h2></p>
 
-<p>京都</p>
+<p><?php echo htmlspecialchars($_SESSION['plan']["area_name"]);?></p>
 
 <p>＊混雑具合<br>
- めちゃ混み
+ <?php echo htmlspecialchars($_SESSION['plan']["crowded"]);?>
 </p>
 
-<p>＊滞在時間</p>
-<div style="display:inline-flex">
-<p>1</p>時間
-<p>30</p>分
-</div>
+<p>＊滞在時間<br>
+<?php echo htmlspecialchars($_SESSION['plan']["stay_time"]);?>
+</p>
 
 <p>＊費用<br>
 <div style="display:inline-flex">
-<P>2000円</P>（目安）</p>
+<P><?php echo htmlspecialchars($_SESSION['plan']["fee"]);?></P>円（目安）</p>
 </div>
 
 
 <p>＊メモ<br>
-<p>京都デートの定番スポット！
-カップルで存分に楽しめると思います。
-二人分の参拝料とお守りを購入してだいたい2000円くらいでした。
-歩きやすい靴でいくことをお勧めします(°▽°)</p>
+<p><?php echo htmlspecialchars($_SESSION['plan']["comment"]);?></p>
 </p>
 
 <!-- <div style="display:inline-flex"> -->
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['plan']['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
             </div>
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['spot']['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
             </div>
 <!-- </div> -->
 

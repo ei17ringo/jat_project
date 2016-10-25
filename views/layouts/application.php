@@ -2,7 +2,7 @@
 
 $path_adjust_string= '';
 
-if(isset($id)){
+if(isset($id)&&($id != null)){
 //idがある場合、階層を一つあげる
     $path_adjust_string= '../';
 }
@@ -33,7 +33,7 @@ if(isset($id)){
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- ファビコン -->
-    <link rel="shortcut icon" href="../user_picture/favicon.ico" />
+    <link rel="shortcut icon" href="../<?php echo $path_adjust_string;?>user_picture/favicon.ico" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,6 +60,11 @@ if(isset($id)){
 <script src="../<?php echo $path_adjust_string;?>webroot/share/js/m5LazyDisplay.js"></script>
 <script src="../<?php echo $path_adjust_string;?>webroot/share/js/jquery-opacity-rollover.js"></script>
 <script type="text/javascript" src="../<?php echo $path_adjust_string;?>webroot/share/js/default.js"></script>
+
+
+
+
+
 
 
 
@@ -166,7 +171,41 @@ if(isset($id)){
         })($pgj);
 </script>
 
+<!-- 新規プラン作成////////////////////////////////// -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="../<?php echo $path_adjust_string;?>webroot/assets/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<!-- コンテンツ -->
+<link rel="stylesheet" type="text/css" href="../<?php echo $path_adjust_string;?>webroot/assets/css/plan_create.css">
+
+<!-- スタイルシートの読み込み -->
+    <link href="../<?php echo $path_adjust_string;?>webroot/jquery-ui-1.12.1.custom/accordion-faq.css" rel="stylesheet">
+
+<!-- <! JavaScriptの読み込み -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<script src="../<?php echo $path_adjust_string;?>webroot/jquery-ui-1.12.1.custom/accordion.js"></script>
+
+<script>
+   var $plangj= $.noConflict(true);
+   (function($) {
+  $( function() {
+    $( "ul.droptrue" ).sortable({
+      connectWith: "ul"
+    });
+ 
+    $( "ul.dropfalse" ).sortable({
+      connectWith: "ul",
+      dropOnEmpty: false
+    });
+ 
+    $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
+  } );
+  })($plangj);
+  </script>
+<!-- ////////////////////////////////////////////// -->
 
 
     <!-- jQuery -->

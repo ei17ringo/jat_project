@@ -1,37 +1,40 @@
 <?php
-    $PlansController = new BlogsController($db, $table_name, $action);
-    $PlansController->_new($_POST);
+    $PlansController = new PlansController($db, $table_name, $action);
+    $PlansController->action=$action;
+    $PlansController->resource=$resource;
+    $error_message=array();
+
+    //初期表示はエラーチェックをしない
+    $error_message=$PlansController->_new($_POST);
 ?>
 
-<body>
-
 <!-- Page header -->
-<form method="post" action="example.cgi">
-  <div class="page-header">
+<form method="post" action="" method="post" enctype="multipart/form-data">
+  <div class="page-header" style="margin-top:70px;">
     
         <p>プラン名<br>
-    <input type="text" name="plan_name" size="60"></p>
+    <input type="text" name="title" size="60"></p>
 
 
 
     <p>＊訪問した月を選択してください。（複数選択可）<br>
-<input type="checkbox" name="q2" value="その1"> 1月
-<input type="checkbox" name="q2" value="その2"> 2月
-<input type="checkbox" name="q2" value="その3"> 3月
-<input type="checkbox" name="q2" value="その4"> 4月
-<input type="checkbox" name="q2" value="その5"> 5月
-<input type="checkbox" name="q2" value="その1"> 6月
-<input type="checkbox" name="q2" value="その2"> 7月
-<input type="checkbox" name="q2" value="その3"> 8月
-<input type="checkbox" name="q2" value="その4"> 9月
-<input type="checkbox" name="q2" value="その5"> 10月
-<input type="checkbox" name="q2" value="その1"> 11月
-<input type="checkbox" name="q2" value="その2"> 12月
+<input type="checkbox" name="visit_month[]" value="1"> 1月
+<input type="checkbox" name="visit_month[]" value="2"> 2月
+<input type="checkbox" name="visit_month[]" value="3"> 3月
+<input type="checkbox" name="visit_month[]" value="4"> 4月
+<input type="checkbox" name="visit_month[]" value="5"> 5月
+<input type="checkbox" name="visit_month[]" value="6"> 6月
+<input type="checkbox" name="visit_month[]" value="7"> 7月
+<input type="checkbox" name="visit_month[]" value="8"> 8月
+<input type="checkbox" name="visit_month[]" value="9"> 9月
+<input type="checkbox" name="visit_month[]" value="10"> 10月
+<input type="checkbox" name="visit_month[]" value="11"> 11月
+<input type="checkbox" name="visit_month[]" value="12"> 12月
 </p>
 
 <p>＊訪問日を選択してください。<br>
-<input type="radio" name="crowded" value="平日" checked> 平日
-<input type="radio" name="crowded" value="土日・祝祭日"> 土日・祝祭日
+<input type="radio" name="visit_day_type" value="平日" checked> 平日
+<input type="radio" name="visit_day_type" value="土日・祝祭日"> 土日・祝祭日
 
 </p>
 
@@ -39,10 +42,6 @@
 </div>
 
     <!-- /Page header -->
-
-
-
-
 
 
 <ul id="sortable1" class="droptrue">
@@ -59,9 +58,9 @@
             <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <input type="text" name="suppot_name" size="40"></p>
+    <input type="text" name="supot_name" size="40"></p>
 
-<p><select name="prefecture">
+<p><select name="area_name">
 <option value="">都道府県の選択</option>
 
 <option value="北海道">北海道</option>
@@ -132,23 +131,22 @@
 <input type="radio" name="crowded" value="ガラガラ"> ガラガラ
 </p>
 
-<p>＊滞在時間</p>
-<div style="display:inline-flex">
-<input type="text" name="hour" size="4">時間
-<input type="text" name="minute" size="4">分
+<p>＊滞在時間<br>
+<input type="text" name="stay_time" placeholder="例:1時間30分" size="4"></p>
+
 </div>
 
 <p>＊費用<br>
-<input type="text" name="suppot_name" size="6">円（目安）</p>
+<input type="text" name="fee" size="6">円（目安）</p>
 
 
 <p>＊メモ<br>
-<textarea name="example1" cols="50" rows="5"></textarea></p>
+<textarea name="comment" cols="50" rows="5"></textarea></p>
 
 <p>画像ファイル①</p>
-<input type="file" name="pic">
+<input type="file" name="picture_1">
 <p>画像ファイル②</p>
-<input type="file" name="pic">
+<input type="file" name="picture_2">
 
 </div>
             <!-- /Body -->
@@ -845,5 +843,3 @@
 <p><input type="submit" value="確認画面へ"></p>
  
 
-
-</body>
