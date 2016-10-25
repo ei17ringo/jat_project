@@ -298,15 +298,17 @@
       // $viewOptions = $user->mypage();
       $resource    = $this->resource;
       $action      = 'mypage';
-      $myView = $user->mypage();
+      $viewOptions = $user->mypage();
       $this->_loginCheck();
 
 
       if ($_SESSION['loginCheck'] == 'false') {
         header('Location: ../user/login');
         exit();
-
       }
+
+      $favUserList = $user->favUserList();
+
       require('views/layouts/application.php');
     }
 

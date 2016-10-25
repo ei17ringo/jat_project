@@ -66,6 +66,21 @@
       return $results; 
     }
 
+
+    function favUserList() {
+      $sql = sprintf('SELECT * FROM `users` u, `user_like` ul WHERE u.`id` = ul.`favorite_user_id` AND `user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+      );
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+
+      $rtn = array();
+      while ($table = mysqli_fetch_assoc($record)) {
+        $rtn[] = $table;
+      }
+      return $rtn;
+    }
+
+
     function profile($id) {
 
     }

@@ -208,36 +208,20 @@
               <h4>
                 お気に入りユーザー
               </h4>
+              <?php if (isset($favUserList)): ?> 
+              <?php foreach ($favUserList as $userList): ?>
               <div class="favorite-user-list">
                 <div class="favorite-user-picture">
-                  <img alt="user-icon" class="favorite-user-picture" src="img/user/avatar_user_1.jpg" />
+                  <img alt="user-icon" class="favorite-user-picture" src="../user_picture/<?php echo htmlspecialchars($userList['user_picture'], ENT_QUOTES, 'UTF-8'); ?>" />
                 </div>
                 <div class="favorite-user-name-area">
                   <p>
-                    <a href="profile/97">テストネーム</a>
+                    <a href="profile/97"><?php echo $userList['user_name']?></a>
                   </p>
                 </div>
               </div>
-              <div class="favorite-user-list">
-                <div class="favorite-user-picture">
-                  <img alt="user-icon" class="favorite-user-picture" src="img/user/avatar_user_2.jpg" />
-                </div>
-                <div class="favorite-user-name-area">
-                  <p>
-                    <a href="" class="">ユーザーネーム</a>
-                  </p>
-                </div>
-              </div>
-              <div class="favorite-user-list">
-                <div class="favorite-user-picture">
-                  <img alt="user-icon" class="favorite-user-picture" src="img/user/avatar_user_3.jpg" />
-                </div>
-                <div class="favorite-user-name-area">
-                  <p>
-                    <a href="">ユーザーネーム</a>
-                  </p>
-                </div>
-              </div>
+              <?php endforeach; ?>
+              <?php endif; ?>
             </div>
           </div>
         </div>
