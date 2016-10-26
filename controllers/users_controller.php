@@ -316,6 +316,7 @@
     function profile($id) {
       $user        = new User();
       $viewOptions = $user->likeStatus($id);
+      $viewInfo    = $user->profile($id);
       $resource    = $this->resource;
       $action      = 'profile';
 

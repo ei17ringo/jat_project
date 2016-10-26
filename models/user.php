@@ -13,7 +13,7 @@
 
 
     function duplicate() {
-    // スポット重複チェック
+    // 重複チェック
       $error = array();
       $sql   = sprintf('SELECT COUNT(*) AS cnt FROM `users` WHERE`user_name` = "%s"',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name'])
@@ -82,8 +82,15 @@
 
 
     function profile($id) {
+      $sql     = sprintf('SELECT * FROM `users` WHERE `id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+      );
+      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $result  = mysqli_fetch_assoc($results);
 
+      return $result;
     }
+
 
     function show($id) {
       $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
@@ -122,7 +129,6 @@
         mysqli_real_escape_string($this->dbconnect, $id)
       );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-      // var_dump($sql);
     }
 
 
