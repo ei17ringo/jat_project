@@ -13,7 +13,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-2 mypage-profile">
-              <img alt="user-icon" src="../user_picture/<?php echo htmlspecialchars($_SESSION['login']['user_picture'], ENT_QUOTES, 'UTF-8'); ?>" width="150" height="150" />
+              <img alt="user-icon" src="../user_picture/<?php echo htmlspecialchars($_SESSION['login']['user_picture'], ENT_QUOTES, 'UTF-8'); ?>" width="140" height="140" />
               <h4>
                 <a href=""><?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?></a>
               </h4>
@@ -208,36 +208,20 @@
               <h4>
                 お気に入りユーザー
               </h4>
+              <?php if (isset($favUserList)): ?> 
+              <?php foreach ($favUserList as $userList): ?>
               <div class="favorite-user-list">
                 <div class="favorite-user-picture">
-                  <img alt="user-icon" class="favorite-user-picture" src="img/user/avatar_user_1.jpg" />
+                  <img alt="user-icon" class="favorite-user-picture" src="../user_picture/<?php echo htmlspecialchars($userList['user_picture'], ENT_QUOTES, 'UTF-8'); ?>" />
                 </div>
                 <div class="favorite-user-name-area">
                   <p>
-                    <a href="profile/97">テストネーム</a>
+                    <a href="profile/<?php echo $userList['favorite_user_id']?>"><?php echo $userList['user_name']?></a>
                   </p>
                 </div>
               </div>
-              <div class="favorite-user-list">
-                <div class="favorite-user-picture">
-                  <img alt="user-icon" class="favorite-user-picture" src="img/user/avatar_user_2.jpg" />
-                </div>
-                <div class="favorite-user-name-area">
-                  <p>
-                    <a href="" class="">ユーザーネーム</a>
-                  </p>
-                </div>
-              </div>
-              <div class="favorite-user-list">
-                <div class="favorite-user-picture">
-                  <img alt="user-icon" class="favorite-user-picture" src="img/user/avatar_user_3.jpg" />
-                </div>
-                <div class="favorite-user-name-area">
-                  <p>
-                    <a href="">ユーザーネーム</a>
-                  </p>
-                </div>
-              </div>
+              <?php endforeach; ?>
+              <?php endif; ?>
             </div>
           </div>
         </div>
