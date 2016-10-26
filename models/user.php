@@ -1,5 +1,4 @@
 <?php
-
   class User {
     // プロパティ
     private $dbconnect = '';
@@ -32,7 +31,6 @@
 
     function save() {
       $sql = sprintf('INSERT INTO `users` SET `user_name`="%s", `email`="%s", `password`="%s", `user_picture`="%s", `created`=now()',
-
                 mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name']),
                 mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['email']),
                 mysqli_real_escape_string($this->dbconnect, sha1($_SESSION['user']['password'])),
@@ -72,7 +70,6 @@
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
       );
       $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-
       $rtn = array();
       while ($table = mysqli_fetch_assoc($record)) {
         $rtn[] = $table;
@@ -87,7 +84,6 @@
       );
       $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $result  = mysqli_fetch_assoc($results);
-
       return $result;
     }
 
@@ -110,7 +106,6 @@
       $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       // 連想配列としてSQLの実行結果を受け取る(keyと値)
       $table = mysqli_fetch_assoc($record);
-
       $likeStatus = '';
       if ($table['cnt'] >= 1) {
         //１件以上あったらエラー
@@ -124,7 +119,6 @@
 
     function like($id) {
       $sql = sprintf('INSERT INTO `user_like`(`user_id`, `favorite_user_id`) VALUES ( %d, %d)',
-
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
         mysqli_real_escape_string($this->dbconnect, $id)
       );
@@ -134,7 +128,6 @@
 
     function unlike($id) {
       $sql = sprintf('DELETE FROM `user_like` WHERE `user_id` = %d AND `favorite_user_id`= %d',
-
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
         mysqli_real_escape_string($this->dbconnect, $id)
       );
@@ -148,9 +141,9 @@
         );
       $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $result  = mysqli_fetch_assoc($results);
-
       return $result;
     }
+
 
     function update($post, $id) {
       $sql = sprintf('UPDATE `blogs` SET `title`= "%s",`body`= "%s" WHERE `id` = %d',
@@ -161,14 +154,12 @@
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
     }
 
+    
     function delete($id) {
       $sql = sprintf('UPDATE `blogs` SET `delete_flag`= 1 WHERE `id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)
         );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
     }
-
-
   }
-
 ?>

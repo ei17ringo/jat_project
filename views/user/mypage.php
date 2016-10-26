@@ -4,7 +4,7 @@
     $UsersController->resource = $resource;
     $error_message = $UsersController->_new($_POST);
 ?>
-
+ 
     <!-- Page Content -->
 
   <a  name="services"></a>
