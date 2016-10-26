@@ -6,15 +6,6 @@
 
     $UsersController->_loginCheck();
 
-    // $PagesController = new PagesController($db, $table_name, $action);
-    // $PagesController->action   = $action;
-    // $PagesController->resource = $resource;
-
-    // $SpotsController = new SpotsController($db, $table_name, $action);
-    // $SpotsController->action   = $action;
-    // $SpotsController->resource = $resource;
-
-
     $path_adjust_string= '';
 
 

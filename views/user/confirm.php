@@ -1,5 +1,5 @@
 <?php
-    $UsersController = new SpotsController($db, $table_name, $action);
+    $UsersController = new UsersController($db, $table_name, $action);
     $UsersController->_new($_POST);
 ?>
 
