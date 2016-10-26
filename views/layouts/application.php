@@ -1,13 +1,19 @@
 <?php
+    $UsersController = new UsersController($db, $table_name, $action);
+    $UsersController->action   = $action;
+    $UsersController->resource = $resource;
+    $UsersController->id       = $id;
+    $UsersController->_loginCheck();
 
-$path_adjust_string= '';
+    $path_adjust_string= '';
 
-if(isset($id)){
-//idがある場合、階層を一つあげる
-    $path_adjust_string= '../';
-}
+    if(isset($id)){
+    //idがある場合、階層を一つあげる
+        $path_adjust_string= '../';
+    }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="jp">
@@ -23,19 +29,17 @@ if(isset($id)){
     <title>JAT - Japan Arange Trip</title>
 
     <!-- Bootstrap Core CSS -->
-
-    <link href="../<?php echo $path_adjust_string;?>webroot/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../<?php $path_adjust_string; ?>webroot/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../<?php echo $path_adjust_string;?>webroot/assets/css/landing-page.css" rel="stylesheet">
+    <link href="../<?php $path_adjust_string; ?>webroot/assets/css/landing-page.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../<?php echo $path_adjust_string;?>webroot/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <link href="../<?php $path_adjust_string; ?>webroot/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- ファビコン -->
-    <link rel="shortcut icon" href="../user_picture/favicon.ico" />
+    <link rel="shortcut icon" href="../<?php $path_adjust_string; ?>user_picture/favicon.ico" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,63 +47,6 @@ if(isset($id)){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-
-
-
-
-<!-- 写真 -->
-<meta name="keywords" content="キーワード" />
-<meta name="description" content="サイトの説明" />
-<meta http-equiv="Content-Language" content="ja" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="imagetoolbar" content="no" />
-  <link href="../<?php echo $path_adjust_string;?>webroot/share/css/set/import.css" rel="stylesheet" type="text/css" media="all" />
-<link href="../<?php echo $path_adjust_string;?>webroot/index/css/index.css" rel="stylesheet" type="text/css" media="all" />
-<link href="../<?php echo $path_adjust_string;?>webroot/index/css/colorbox.css" rel="stylesheet" type="text/css" media="all" />
-<link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-<link href="favicon.ico" rel="icon" type="image/vnd.microsoft.icon" />
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script src="../<?php echo $path_adjust_string;?>webroot/share/js/jquery.colorbox.js"></script>
-<script src="../<?php echo $path_adjust_string;?>webroot/share/js/m5LazyDisplay.js"></script>
-<script src="../<?php echo $path_adjust_string;?>webroot/share/js/jquery-opacity-rollover.js"></script>
-<script type="text/javascript" src="../<?php echo $path_adjust_string;?>webroot/share/js/default.js"></script>
-
-<script>
-    var $pgj= $.noConflict(true);
-
-    (function($){
-    $(document).ready(function(){
-        $("#mainContents p a").colorbox();
-    });
-    })($pgj);
-</script>
-
-<script>
-    (function($) {
-    $(function() {
-
-     $('img').opOver(1.0,0.4);
-
-    });
-    })($pgj);
-</script>
-<script type="text/javascript">
-        (function($){
-            $("img").m5LazyDisplay();
-        })($pgj);
-</script>
-
-
-
-
-
-
-
 
 </head>
 
@@ -116,7 +63,7 @@ if(isset($id)){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="../page/index">
+                <a class="navbar-brand topnav" href="../<?php $path_adjust_string; ?>page/index">
                     <img src="../user_picture/logo.png" height="50px" width="120px" title="Japan Arange Trip" alt="たびシェア">
                 </a>
             </div>
@@ -126,21 +73,30 @@ if(isset($id)){
                     <li>
                         <a href="../page/index">ホーム</a>
                     </li>
-                    <li>
-                        <a href="../plan/create">旅路投稿</a>
-                    </li>
-                    <li>
-                        <a href="../spot/create">スポット投稿</a>
-                    </li>
-                    <li>
-                        <a href="../user/mypage">マイページ</a>
-                    </li>
-                    <li>
-                        <a href="../page/contactus">お問い合わせ</a>
-                    </li>
-                    <li>
-                        <a href="../user/logout">ログアウト</a>
-                    </li>
+                    <?php if ($_SESSION['loginCheck'] == 'true'): ?>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>plan/create">旅路投稿</a>
+                        </li>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>spot/create">スポット投稿</a>
+                        </li>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>user/mypage">マイページ</a>
+                        </li>
+                    <?php endif; ?>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>page/contactus">お問い合わせ</a>
+                        </li>
+                    <?php if ($_SESSION['loginCheck'] == 'true'): ?>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>user/logout">ログアウト</a>
+                        </li>
+                    <?php elseif ($_SESSION['loginCheck'] == 'false'): ?>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>user/login">ログイン</a>
+                        </li>
+                    <?php endif; ?>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -179,9 +135,10 @@ if(isset($id)){
     </footer>
 
     <!-- jQuery -->
-   <script src="../<?php echo $path_adjust_string;?>webroot/assets/js/jquery.js"></script>
+    <script src="../<?php $path_adjust_string; ?>webroot/assets/js/jquery.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
-    <script src="../<?php echo $path_adjust_string;?>webroot/assets/js/bootstrap.min.js"></script>
+    <script src="../<?php $path_adjust_string; ?>webroot/assets/js/bootstrap.min.js"></script>
 
 </body>
 
