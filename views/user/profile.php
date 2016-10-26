@@ -15,18 +15,18 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-2 mypage-profile">
-              <img alt="user-icon" src="img/user/avatar_user_1.jpg" />
+              <img alt="user-icon" src="<?php echo $path_adjust_string; ?>../user_picture/<?php echo $viewInfo['user_picture']; ?>" width="140" height="140">
               <h4>
-                <a href="">ユーザーネーム</a>
+                <a><?php echo $viewInfo['user_name']; ?></a>
               </h4>
               <div class="favorite-number">
-                <?php if ((isset($likeStatus)) && ($likeStatus == "UNLIKE")): ?>
-                  <form method="post" action="/jat_project/user/like">
-                    <button type='submit' name='user_like' value='send'>UNLIKE：◯◯</button>
+                <?php if ((isset($viewOptions)) && ($viewOptions == "LIKE")): ?>
+                  <form method="post" action="/jat_project/user/like/<?php echo $id ?>">
+                    <button type='submit' name='user_like' value='send'>LIKE：◯◯</button>
                   </form>
                 <?php else: ?>
-                  <form method="post" action="/jat_project/user/unlike">
-                    <button type='submit' name='like' value='send'>LIKE：◯◯</button>
+                  <form method="post" action="/jat_project/user/unlike/<?php echo $id ?>">
+                    <button type='submit' name='like' value='send'>UNLIKE：◯◯</button>
                   </form>
                 <?php endif; ?>
                 
@@ -35,7 +35,7 @@
             <div class="col-md-8 mypage-main">
               <ul class="nav nav-tabs">
                 <li class="posted-plan">
-                  <a href="#">「◯◯さん」が投稿した旅路</a>
+                  <a href="#">「<?php echo $viewInfo['user_name']; ?>さん」が投稿した旅路</a>
                 </li>
               </ul>
 

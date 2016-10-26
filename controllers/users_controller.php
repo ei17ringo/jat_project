@@ -111,6 +111,12 @@
                 }
               }
 
+              if (isset($_SESSION['user']['duplicate']) && ($_SESSION['user']['duplicate'] == true)) {
+                $error_message[] = "* 指定されたユーザーネームは既に登録されています。";
+                return $error_message;
+              }
+                
+
 
             if (!count($error_message)){
               // 画像をアップロードする
@@ -125,7 +131,10 @@
               } else {
               return $error_message;
               }
-            }
+
+              unset($_SESSION['user']['duplicate']);
+          }
+
             // if (!empty($sd)) 閉じ
 
             // //書き直し
@@ -133,7 +142,7 @@
             //   // $_GET['action] == 'rewrite'　でも良い]
             //   $_POST            = $_SESSION['user'];
             //   $error['rewrite'] = true;
-          }
+        }
           // if ($action == 'create')閉じ
 
         if ($action == 'login') {
@@ -160,7 +169,7 @@
               }
 
 
-              if ($sd['password'] !== ""){
+              if ($sd['password'] !== "") {
                 if ((strlen($sd['password']) < 4) || (strlen($sd['password']) > 16)) {
                   $error_message[] = "* パスワードは４文字以上16文字以下で入力してください。<br>";
                 } else {
@@ -171,7 +180,7 @@
                 $error_message[] = "* パスワードを入力してください。<br>";
               }
 
-            if (!count($error_message)){
+            if (!count($error_message)) {
               $user        = new User();
               $record = $user->login();
 
@@ -215,7 +224,13 @@
     function confirm() {
       // ⑦モデルを呼び出す
       $user        = new User();
+      $viewOptions = $user->duplicate();
       // まだデータベースに保存しなくて良い
+      if (isset($viewOptions['user_name']) && ($viewOptions['user_name'] == 'duplicate')) {
+        $_SESSION['user']['duplicate'] = true;
+        header("Location: create");
+        exit;
+      }
       // $viewOptions = $user->confirm();
       $resource    = $this->resource;
       $action      = 'confirm';
@@ -283,15 +298,17 @@
       // $viewOptions = $user->mypage();
       $resource    = $this->resource;
       $action      = 'mypage';
-      $myView = $user->mypage();
+      $viewOptions = $user->mypage();
       $this->_loginCheck();
 
 
       if ($_SESSION['loginCheck'] == 'false') {
         header('Location: ../user/login');
         exit();
-
       }
+
+      $favUserList = $user->favUserList();
+
       require('views/layouts/application.php');
     }
 
@@ -299,29 +316,34 @@
     function profile($id) {
       $user        = new User();
       $viewOptions = $user->likeStatus($id);
+      $viewInfo    = $user->profile($id);
       $resource    = $this->resource;
       $action      = 'profile';
 
+      require('views/layouts/application.php');
     }
 
 
     function like($id) {
       $user        = new User();
-      $viewOptions = $user->like();
+      $viewOptions = $user->like($id);
       $resource    = $this->resource;
       $action      = 'like';
 
-      require('views/layouts/application.php');
+
+      header("Location: ../profile/$id");
+      exit();
     }
 
 
     function unlike($id) {
       $user        = new User();
-      $viewOptions = $user->unlike();
+      $viewOptions = $user->unlike($id);
       $resource    = $this->resource;
       $action      = 'unlike';
 
-      require('views/layouts/application.php');
+      header("Location: ../profile/$id");
+      exit();
     }
 
 

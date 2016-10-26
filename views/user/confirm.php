@@ -1,3 +1,8 @@
+<?php
+    $UsersController = new SpotsController($db, $table_name, $action);
+    $UsersController->_new($_POST);
+?>
+
 
     <a name="about"></a>
       <div class="intro-header-confirm">

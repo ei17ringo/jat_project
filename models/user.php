@@ -11,6 +11,25 @@
       $this->dbconnect = $db;
     }
 
+
+    function duplicate() {
+    // 重複チェック
+      $error = array();
+      $sql   = sprintf('SELECT COUNT(*) AS cnt FROM `users` WHERE`user_name` = "%s"',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name'])
+      );
+    //SQL実行
+      $record = mysqli_query($this->dbconnect, $sql)or die(mysqli_error($this->dbconnect));
+    //連想配列としてSQL実行結果を受け取る
+      $table = mysqli_fetch_assoc($record);
+        if($table['cnt']>0){
+        //同じエラーが1件以上あったらエラー
+        $error_message['user_name'] = 'duplicate';
+        }
+      return $error_message;
+    }
+
+
     function save() {
       $sql = sprintf('INSERT INTO `users` SET `user_name`="%s", `email`="%s", `password`="%s", `user_picture`="%s", `created`=now()',
 
@@ -47,9 +66,31 @@
       return $results; 
     }
 
-    function profile($id) {
 
+    function favUserList() {
+      $sql = sprintf('SELECT * FROM `users` u, `user_like` ul WHERE u.`id` = ul.`favorite_user_id` AND `user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+      );
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+
+      $rtn = array();
+      while ($table = mysqli_fetch_assoc($record)) {
+        $rtn[] = $table;
+      }
+      return $rtn;
     }
+
+
+    function profile($id) {
+      $sql     = sprintf('SELECT * FROM `users` WHERE `id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+      );
+      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $result  = mysqli_fetch_assoc($results);
+
+      return $result;
+    }
+
 
     function show($id) {
       $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
@@ -71,10 +112,10 @@
       $table = mysqli_fetch_assoc($record);
 
       $likeStatus = '';
-      if ($table >= 1) {
-        // 同じメールアドレスが１件以上あったらエラー
+      if ($table['cnt'] >= 1) {
+        //１件以上あったらエラー
         $likeStatus = 'UNLIKE';
-      } else if ($table == 0) {
+      } else if ($table['cnt'] == 0) {
         $likeStatus = 'LIKE';
       }
       return $likeStatus;
