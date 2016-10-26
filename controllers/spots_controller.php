@@ -1,7 +1,8 @@
 <?php
-  session_start();
+  require('./controllers/users_controller.php');
 
-  // unset( $_SESSION["spot_name"] );
+
+
 
    // コントローラのクラスをインスタンス化
    $controller = new SpotsController();
@@ -50,6 +51,14 @@
       $resource= $this->resource;
       $action= $this->action;
       $id=$this->id;
+
+      $UsersController = new UsersController();
+     $UsersController -> _loginCheck();
+
+     if ($_SESSION['loginCheck'] == 'false') {
+       header('Location: ../user/login');
+       exit();
+     }
 
 if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
 } 
@@ -210,6 +219,14 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
      function create() {
       $action = 'create';
       $resource= $this->resource;
+
+      $UsersController = new UsersController();
+     $UsersController -> _loginCheck();
+
+     if ($_SESSION['loginCheck'] == 'false') {
+       header('Location: ../user/login');
+       exit();
+     }
 
 
             // var_dump($this->error_message);

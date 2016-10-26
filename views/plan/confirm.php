@@ -1,13 +1,13 @@
 <?php
     $PlansController = new PlansController($db, $table_name, $action);
-    $plans = $PlansController->index();
+
 ?>
 
 <body>
 
 <!-- Page header -->
 
-  <div class="page-header">
+  <div class="page-header" style="margin-top:70px;">
     
         <p>プラン名<br>
     <h1><?php echo htmlspecialchars($_SESSION['plan']["title"]);?></h1>
@@ -16,8 +16,8 @@
 
     <p>＊訪問した月<br>
     <?php
-if (isset($_SESSION['plan']['visit_month'])) && (empty($_SESSION['plan']['month'])){
-  foreach ($_SESSION['plan']['visit_month'] as $months) {
+if (isset($_SESSION['plan']['visit_month[]']) && (!empty($_SESSION['plan']['month[]']))){
+  foreach ($_SESSION['plan']['visit_month[]'] as $months) {
     echo $months."月<br/>";
    }
   }else{
@@ -25,8 +25,12 @@ if (isset($_SESSION['plan']['visit_month'])) && (empty($_SESSION['plan']['month'
   }
   ?></p>
 
-<p>＊訪問日を選択してください。<br>
-<?php echo htmlspecialchars($_SESSION['plan']["visit_day_type"]);?>
+<p>＊訪問日<br>
+<?php if ($_SESSION['plan']['visit_day_type']=='平日'){
+ echo "平日";
+}else{
+  echo "土日・祝祭日";
+}?>
 </p>
 
 </div>

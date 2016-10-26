@@ -50,6 +50,7 @@
       $action= $this->action;
       $id=$this->id;
 
+if(empty($sd)){return;
 } 
                     //ボタンが押されたら//
             $error_message = array(); //<--ここ$error_messageを定義
@@ -114,9 +115,9 @@
                 if (!count($error_message)){
                   //確認ページヘ
                   if($action=='edit'){
-                    header("Location:../confirm/$id");
-                  }else{
-                    header("Location:confirm");
+                    echo '<script> location.replace("../confirm/'.$id.'");</script>';
+                    }else{
+                    echo '<script> location.replace("confirm");</script>';
                   }
                     exit;
                    }
@@ -147,18 +148,9 @@
        require('views/layouts/application.php');
      }
 
-     function confirm($id=null) {
+     function confirm($id=null){
         $plan= new Plan();
-        if ($id==null){
-          $viewOptions= $plan->duplicate();
-        }
 
-        if (isset($viewOptions['plan_name'])&& ($viewOptions['plan_name']=='duplicate')){
-          $_SESSION['plan']['duplicate']=true;
-          header("Location:create");
-                    exit;
-        }
-        // $viewOptions= $plan->confirm();
         $resource= $this->resource;
         $action = 'confirm';
 

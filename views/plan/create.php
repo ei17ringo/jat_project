@@ -9,7 +9,7 @@
 ?>
 
 <!-- Page header -->
-<form method="post" action="" method="post" enctype="multipart/form-data">
+<form method="post" action="" enctype="multipart/form-data">
   <div class="page-header" style="margin-top:70px;">
     
         <p>プラン名<br>
@@ -839,7 +839,6 @@
  
 <br style="clear:both">
 
-</form>
 <p><input type="submit" value="確認画面へ"></p>
- 
+</form>
 
