@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  require('./controllers/users_controller.php');
 
 
    // コントローラのクラスをインスタンス化
