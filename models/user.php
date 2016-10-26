@@ -9,6 +9,8 @@
       // DB接続設定の値をプロパティに代入
       $this->dbconnect = $db;
     }
+
+
     function duplicate() {
     // 重複チェック
       $error = array();
@@ -25,6 +27,8 @@
         }
       return $error_message;
     }
+
+
     function save() {
       $sql = sprintf('INSERT INTO `users` SET `user_name`="%s", `email`="%s", `password`="%s", `user_picture`="%s", `created`=now()',
                 mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name']),
@@ -35,6 +39,8 @@
             mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
             unset($_SESSION['user']);
     }
+
+
     function login() {
       $sql = sprintf('SELECT * FROM `users` WHERE `user_name` = "%s" AND password="%s"',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['user']['user_name']),
@@ -44,6 +50,8 @@
       $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       return $record;
     }
+
+
     function mypage() {
       // SQLの実行
       $sql     = 'SELECT * FROM `users` WHERE `id` = "%d"';
@@ -55,6 +63,8 @@
       // 取得結果を返すresultsに入らない
       return $results; 
     }
+
+
     function favUserList() {
       $sql = sprintf('SELECT * FROM `users` u, `user_like` ul WHERE u.`id` = ul.`favorite_user_id` AND `user_id` = %d',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
@@ -66,6 +76,8 @@
       }
       return $rtn;
     }
+
+
     function profile($id) {
       $sql     = sprintf('SELECT * FROM `users` WHERE `id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)
@@ -74,6 +86,8 @@
       $result  = mysqli_fetch_assoc($results);
       return $result;
     }
+
+
     function show($id) {
       $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)
@@ -81,6 +95,8 @@
       $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $result  = mysqli_fetch_assoc($results);
     }
+
+
     function likeStatus($id) {
       $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `user_id` = %d AND `favorite_user_id`= %d',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
@@ -99,6 +115,8 @@
       }
       return $likeStatus;
     }
+
+
     function like($id) {
       $sql = sprintf('INSERT INTO `user_like`(`user_id`, `favorite_user_id`) VALUES ( %d, %d)',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
@@ -106,6 +124,8 @@
       );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
     }
+
+
     function unlike($id) {
       $sql = sprintf('DELETE FROM `user_like` WHERE `user_id` = %d AND `favorite_user_id`= %d',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
@@ -113,6 +133,8 @@
       );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
     }
+
+
     function edit($id) {
       $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)
@@ -121,6 +143,8 @@
       $result  = mysqli_fetch_assoc($results);
       return $result;
     }
+
+
     function update($post, $id) {
       $sql = sprintf('UPDATE `blogs` SET `title`= "%s",`body`= "%s" WHERE `id` = %d',
         mysqli_real_escape_string($this->dbconnect, $post['title']),
@@ -129,6 +153,8 @@
         );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
     }
+
+    
     function delete($id) {
       $sql = sprintf('UPDATE `blogs` SET `delete_flag`= 1 WHERE `id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)

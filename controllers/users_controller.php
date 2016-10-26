@@ -46,6 +46,8 @@
     default:
         break;
   }
+
+
   class UsersController {
     var $resource      ='';
     var $action        ='';
@@ -184,11 +186,15 @@
         // if ($action == 'login')閉じ
       }
       // function _new($sd)閉じ
+
+
     function create() {
       $resource = $this->resource;
       $action   = 'create';
       require('views/layouts/application.php');
     }
+
+
     function confirm() {
       // ⑦モデルを呼び出す
       $user        = new User();
@@ -204,6 +210,8 @@
       $action      = 'confirm';
       require('views/layouts/application.php');
     }
+
+
     function save() {
             // ⑦モデルを呼び出す
       $user        = new User();
@@ -214,6 +222,8 @@
       header('Location: login');
       exit();
     }
+
+
     function login() {
       $resource    = $this->resource;
       $action      = 'login';
@@ -224,6 +234,8 @@
       }
         require('views/layouts/application.php');
     }
+
+
     function _loginCheck() {
       if (isset($_SESSION['login']['id'])) {
         $_SESSION['loginCheck'] = 'true';
@@ -231,6 +243,8 @@
         $_SESSION['loginCheck'] = 'false';
       }
     }
+
+
     function logout($id) {
       $resource    = $this->resource;
       $action      = 'logout';
@@ -246,6 +260,8 @@
       header('Location: login');
       exit();
     }
+
+
     function mypage() {
       $user        = new User();
       // $viewOptions = $user->mypage();
@@ -260,6 +276,8 @@
       $favUserList = $user->favUserList();
       require('views/layouts/application.php');
     }
+
+
     function profile($id) {
       $user        = new User();
       $viewOptions = $user->likeStatus($id);
@@ -268,6 +286,8 @@
       $action      = 'profile';
       require('views/layouts/application.php');
     }
+
+
     function like($id) {
       $user        = new User();
       $viewOptions = $user->like($id);
@@ -276,6 +296,8 @@
       header("Location: ../profile/$id");
       exit();
     }
+
+
     function unlike($id) {
       $user        = new User();
       $viewOptions = $user->unlike($id);
@@ -284,12 +306,16 @@
       header("Location: ../profile/$id");
       exit();
     }
+
+
     function edit($id) {
       $user        = new User();
       $viewOptions = $user->edit($id);
       $action      = 'edit';
       require('views/layouts/application.php');
     }
+
+
     function update($post, $id) {
       $user = new User();
       $user->update($id, $post);
@@ -297,6 +323,8 @@
       header('Location: /seed_blog/blogs/index');
       exit();
     }
+
+    
     function delete($id) {
       $user        = new User();
       $viewOptions = $user->delete($id);
