@@ -220,13 +220,6 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
       $action = 'create';
       $resource= $this->resource;
 
-      $UsersController = new UsersController();
-     $UsersController -> _loginCheck();
-
-     if ($_SESSION['loginCheck'] == 'false') {
-       header('Location: ../user/login');
-       exit();
-     }
 
 
             // var_dump($this->error_message);

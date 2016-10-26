@@ -35,20 +35,20 @@
     }
 
 
-    function mypage($id) {
-
+    function mypage() {
+      // SQLの実行
+      $sql     = 'SELECT * FROM `users` WHERE `id` = "%d"';
+      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      // $rtn     = array();
+      // while ($result = mysqli_fetch_assoc($results)) {
+      //   $rtn[] = $result;
+      // }
+      // 取得結果を返すresultsに入らない
+      return $results; 
     }
 
-    function index() {
-      // SQLの実行
-      $sql     = 'SELECT * FROM `blogs` WHERE `delete_flag` = 0';
-      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-      $rtn     = array();
-      while ($result = mysqli_fetch_assoc($results)) {
-        $rtn[] = $result;
-      }
-      // 取得結果を返す
-      return $rtn;
+    function profile($id) {
+
     }
 
     function show($id) {
@@ -57,11 +57,48 @@
         );
       $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $result  = mysqli_fetch_assoc($results);
-
-      return $result;
     }
 
 
+    function likeStatus($id) {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `user_id` = %d AND `favorite_user_id`= %d',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
+        mysqli_real_escape_string($this->dbconnect, $id)
+            );
+      // SQL実行(失敗したらエラーを表示)
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      // 連想配列としてSQLの実行結果を受け取る(keyと値)
+      $table = mysqli_fetch_assoc($record);
+
+      $likeStatus = '';
+      if ($table >= 1) {
+        // 同じメールアドレスが１件以上あったらエラー
+        $likeStatus = 'UNLIKE';
+      } else if ($table == 0) {
+        $likeStatus = 'LIKE';
+      }
+      return $likeStatus;
+    }
+
+
+    function like($id) {
+      $sql = sprintf('INSERT INTO `user_like`(`user_id`, `favorite_user_id`) VALUES ( %d, %d)',
+
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
+        mysqli_real_escape_string($this->dbconnect, $id)
+      );
+      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+    }
+
+
+    function unlike($id) {
+      $sql = sprintf('DELETE FROM `user_like` WHERE `user_id` = %d AND `favorite_user_id`= %d',
+
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
+        mysqli_real_escape_string($this->dbconnect, $id)
+      );
+      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+    }
 
 
     function edit($id) {

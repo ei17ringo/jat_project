@@ -5,6 +5,7 @@
 
   $controller->resource = $resource;
   $controller->action   = $action;
+  $controller->id       = $id;
 
   // アクション名によって、呼び出すメソッドを変える
   switch ($action) {
@@ -21,10 +22,16 @@
         $controller->login();
         break;
     case 'mypage';
-        $controller->mypage($id);
+        $controller->mypage();
         break;
-    case 'profle';
-        $controller->profile();
+    case 'profile';
+        $controller->profile($id);
+        break;
+    case 'like';
+        $controller->like($id);
+        break;
+    case 'unlike';
+        $controller->unlike($id);
         break;
     case 'edit':
         $controller->edit($id);
@@ -231,10 +238,23 @@
     function login() {
       $resource    = $this->resource;
       $action      = 'login';
+      $this->_loginCheck();
 
-        require('views/layouts/application.php');
+      if ($_SESSION['loginCheck'] == 'true') {
+        header('Location: ../page/index');
+        exit();
       }
+        require('views/layouts/application.php');
+    }
 
+
+    function _loginCheck() {
+      if (isset($_SESSION['login']['id'])) {
+        $_SESSION['loginCheck'] = 'true';
+      } else if (empty($_SESSION['login']['id'])) {
+        $_SESSION['loginCheck'] = 'false';
+      }
+    }
 
 
     function logout($id) {
@@ -257,30 +277,49 @@
       exit();
     }
 
-    function mypage($id) {
-      $resource = $this->resource;
-      $action   = 'mypage';
 
-      // ログイン中の条件
-      // １、セッションにidが入っていること
-      // ２、最後の行動から１時間以内であること
-      if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
-        // ログインしている
-        // セッションの時間を更新
-        $_SESSION['time'] = time();
+    function mypage() {
+      $user        = new User();
+      // $viewOptions = $user->mypage();
+      $resource    = $this->resource;
+      $action      = 'mypage';
+      $myView = $user->mypage();
+      $this->_loginCheck();
 
-      } else {
-        // ログインしていない
-        header('Location: login');
+
+      if ($_SESSION['loginCheck'] == 'false') {
+        header('Location: ../user/login');
+        exit();
+
       }
+      require('views/layouts/application.php');
+    }
+
+
+    function profile($id) {
+      $user        = new User();
+      $viewOptions = $user->likeStatus($id);
+      $resource    = $this->resource;
+      $action      = 'profile';
+
+    }
+
+
+    function like($id) {
+      $user        = new User();
+      $viewOptions = $user->like();
+      $resource    = $this->resource;
+      $action      = 'like';
 
       require('views/layouts/application.php');
     }
 
-      function profile($id) {
+
+    function unlike($id) {
       $user        = new User();
-      $viewOptions = $user->profile($id);
-      $action      = 'profile';
+      $viewOptions = $user->unlike();
+      $resource    = $this->resource;
+      $action      = 'unlike';
 
       require('views/layouts/application.php');
     }

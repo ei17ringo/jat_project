@@ -1,12 +1,20 @@
 <?php
+    $UsersController = new UsersController($db, $table_name, $action);
+    $UsersController->action   = $action;
+    $UsersController->resource = $resource;
 
-$path_adjust_string= '';
+    $UsersController->_loginCheck();
 
-if(isset($id)&&($id != null)){
-//idがある場合、階層を一つあげる
-    $path_adjust_string= '../';
-}
+    $path_adjust_string= '';
+
+
+    if(isset($id)){
+    //idがある場合、階層を一つあげる
+        $path_adjust_string= '../';
+    }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="jp">
 
@@ -21,19 +29,18 @@ if(isset($id)&&($id != null)){
     <title>JAT - Japan Arange Trip</title>
 
     <!-- Bootstrap Core CSS -->
-
-    <link href="../<?php echo $path_adjust_string;?>webroot/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../<?php echo $path_adjust_string; ?>webroot/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../<?php echo $path_adjust_string;?>webroot/assets/css/landing-page.css" rel="stylesheet">
+    <link href="../<?php echo $path_adjust_string; ?>webroot/assets/css/landing-page.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../<?php echo $path_adjust_string;?>webroot/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <link href="../<?php echo $path_adjust_string; ?>webroot/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- ファビコン -->
     <link rel="shortcut icon" href="../<?php echo $path_adjust_string;?>user_picture/favicon.ico" />
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,7 +48,6 @@ if(isset($id)&&($id != null)){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 
 
 
@@ -63,11 +69,6 @@ if(isset($id)&&($id != null)){
 
 
 
-
-
-
-
-
 </head>
 
 <body>
@@ -83,7 +84,7 @@ if(isset($id)&&($id != null)){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="../page/index">
+                <a class="navbar-brand topnav" href="../<?php $path_adjust_string; ?>page/index">
                     <img src="../user_picture/logo.png" height="50px" width="120px" title="Japan Arange Trip" alt="たびシェア">
                 </a>
             </div>
@@ -93,21 +94,30 @@ if(isset($id)&&($id != null)){
                     <li>
                         <a href="../page/index">ホーム</a>
                     </li>
-                    <li>
-                        <a href="../plan/create">旅路投稿</a>
-                    </li>
-                    <li>
-                        <a href="../spot/create">スポット投稿</a>
-                    </li>
-                    <li>
-                        <a href="../user/mypage">マイページ</a>
-                    </li>
-                    <li>
-                        <a href="../page/contactus">お問い合わせ</a>
-                    </li>
-                    <li>
-                        <a href="../user/logout">ログアウト</a>
-                    </li>
+                    <?php if ($_SESSION['loginCheck'] == 'true'): ?>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>plan/create">旅路投稿</a>
+                        </li>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>spot/create">スポット投稿</a>
+                        </li>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>user/mypage">マイページ</a>
+                        </li>
+                    <?php endif; ?>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>page/contactus">お問い合わせ</a>
+                        </li>
+                    <?php if ($_SESSION['loginCheck'] == 'true'): ?>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>user/logout">ログアウト</a>
+                        </li>
+                    <?php elseif ($_SESSION['loginCheck'] == 'false'): ?>
+                        <li>
+                            <a href="../<?php $path_adjust_string; ?>user/login">ログイン</a>
+                        </li>
+                    <?php endif; ?>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -209,10 +219,12 @@ if(isset($id)&&($id != null)){
 
 
     <!-- jQuery -->
+
    <script src="../<?php echo $path_adjust_string;?>webroot/assets/js/jquery.js"></script>
 
+
     <!-- Bootstrap Core JavaScript -->
-    <script src="../<?php echo $path_adjust_string;?>webroot/assets/js/bootstrap.min.js"></script>
+    <script src="../<?php $path_adjust_string; ?>webroot/assets/js/bootstrap.min.js"></script>
 
 </body>
 
