@@ -6,45 +6,47 @@
   $controller->action   = $action;
   $controller->id       = $id;
   // アクション名によって、呼び出すメソッドを変える
-  switch ($action) {
-    case 'create';
-        $controller->create();
-        break;
-    case 'confirm':
-        $controller->confirm();
-        break;
-    case 'save':
-        $controller->save($post);
-        break;
-    case 'login':
-        $controller->login();
-        break;
-    case 'mypage';
-        $controller->mypage();
-        break;
-    case 'profile';
-        $controller->profile($id);
-        break;
-    case 'like';
-        $controller->like($id);
-        break;
-    case 'unlike';
-        $controller->unlike($id);
-        break;
-    case 'edit':
-        $controller->edit($id);
-        break;
-    case 'update':
-        $controller->update($id, $post);
-        break;
-    case 'delete':
-        $controller->delete($id);
-        break;
-    case 'logout':
-        $controller->logout($id);
-        break;
-    default:
-        break;
+  if ($resource == "user") {
+    switch ($action) {
+      case 'create';
+          $controller->create();
+          break;
+      case 'confirm':
+          $controller->confirm();
+          break;
+      case 'save':
+          $controller->save($post);
+          break;
+      case 'login':
+          $controller->login();
+          break;
+      case 'mypage';
+          $controller->mypage();
+          break;
+      case 'profile';
+          $controller->profile($id);
+          break;
+      case 'like';
+          $controller->like($id);
+          break;
+      case 'unlike';
+          $controller->unlike($id);
+          break;
+      case 'edit':
+          $controller->edit($id);
+          break;
+      case 'update':
+          $controller->update($id, $post);
+          break;
+      case 'delete':
+          $controller->delete($id);
+          break;
+      case 'logout':
+          $controller->logout($id);
+          break;
+      default:
+          break;
+    }
   }
 
 
@@ -324,7 +326,7 @@
       exit();
     }
 
-    
+
     function delete($id) {
       $user        = new User();
       $viewOptions = $user->delete($id);
