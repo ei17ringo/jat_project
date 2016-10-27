@@ -32,6 +32,9 @@
       case 'unlike';
           $controller->unlike($id);
           break;
+      case 'paging':
+          $controller->mypostpaging($id);
+          break;
       case 'edit':
           $controller->edit($id);
           break;
@@ -276,6 +279,33 @@
         exit();
       }
       $favUserList = $user->favUserList();
+
+      $maxPage     = $user->mypostpaging();
+
+                  // ページングの設置
+      $page = '';
+      // GETパラメーターで渡されるページ番号を取得
+      if (isset($_REQUEST['page'])) {
+        $page = $_REQUEST['page'];
+      }
+      // pageパラメーターがない場合は、ページ番号を１にする
+      if ($page == '') {
+        $page = 1;
+      }
+
+      // max関数：()内に指定した複数のデータから、一番大きい値を返す。
+      // ①表示する正しいページの数値(Min)を設定
+      $page = max($page, 1);
+
+      // ③表示する正しいページ数の数値(Max)を設定
+      $page = min($page, $maxPage);
+      // $_SESSION['page'] = min($page, $maxPage);
+
+        // ④ページに表示する変数だけ取得
+        $start = ($page - 1) * 5;
+        // $_SESSION['start'] = max(0, $start);
+
+
       require('views/layouts/application.php');
     }
 
@@ -308,6 +338,19 @@
       header("Location: ../profile/$id");
       exit();
     }
+
+
+    function mypostpaging($id) {
+      $user        = new User();
+      $viewInfo    = $user->paging($id);
+      $resource    = $this->resource;
+      $action      = 'paging';
+
+
+
+
+    }
+
 
 
     function edit($id) {

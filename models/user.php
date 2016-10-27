@@ -88,6 +88,32 @@
     }
 
 
+    function mypostpaging() {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plans` WHERE `user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+      );
+      $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $table     = mysqli_fetch_assoc($recordSet);
+      // ceil()関数：切り上げする関数
+      $maxPage   = ceil($table['cnt'] / 5);
+
+      return $maxPage;
+    }
+
+
+    function favpostpaging() {
+      // ②必要なページ数を計算する
+      $sql = 'SELECT COUNT(*) AS cnt FROM `plans`';
+      $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $table     = mysqli_fetch_assoc($recordSet);
+      // ceil()関数：切り上げする関数
+      $maxPage   = ceil($table['cnt'] / 5);
+
+      return $maxPage;
+
+    }
+
+
     function show($id) {
       $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)
