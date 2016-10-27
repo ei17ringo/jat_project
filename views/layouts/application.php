@@ -7,9 +7,7 @@
     $UsersController->_loginCheck();
 
     $path_adjust_string= '';
-
-
-    if(isset($id)){
+    if(isset($id)&& !empty($id)){
     //idがある場合、階層を一つあげる
         $path_adjust_string= '../';
     }

@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
 
-    <form method="post" action="" method="post" enctype="multipart/form-data">
+    <form method="post" action="" enctype="multipart/form-data">
 
         <div class="col-md-12" style="top:70px;">
             <div class="panel-group" id="accordion">

@@ -58,7 +58,7 @@
             <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <input type="text" name="supot_name" size="40"></p>
+    <input type="text" name="spot_name" size="40"></p>
 
 <p><select name="area_name">
 <option value="">都道府県の選択</option>
@@ -118,7 +118,6 @@
 <option value="大分県">大分県</option>
 <option value="宮崎県">宮崎県</option>
 <option value="鹿児島県">鹿児島県</option>
-
 <option value="沖縄県">沖縄県</option>
 
 </select></p>
@@ -126,13 +125,13 @@
 <p>＊混雑具合<br>
 <input type="radio" name="crowded" value="めちゃ混み"> めちゃ混み
 <input type="radio" name="crowded" value="混んでいる"> 混んでいる
-<input type="radio" name="crowded" value="普通"　checked > 普通
+<input type="radio" name="crowded" value="普通" checked > 普通
 <input type="radio" name="crowded" value="空いている"> 空いている
 <input type="radio" name="crowded" value="ガラガラ"> ガラガラ
 </p>
 
 <p>＊滞在時間<br>
-<input type="text" name="stay_time" placeholder="例:1時間30分" size="4"></p>
+<input type="text" name="stay_time" placeholder="例:1時間30分" size="10"></p>
 
 </div>
 

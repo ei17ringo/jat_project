@@ -50,19 +50,44 @@
       $action= $this->action;
       $id=$this->id;
 
-if(empty($sd)){return;
+if(empty($sd)){
+  return;
 } 
                     //ボタンが押されたら//
             $error_message = array(); //<--ここ$error_messageを定義
             if(!empty($sd)){
                 if ($sd["title"] !== "") {
+
                 //データがセットされていたら各変数にPOSTのデータを格納
                         $_SESSION['plan']['title'] = htmlspecialchars($sd["title"],ENT_QUOTES);
             //各データがなかったらエラーメッセージを配列に格納
                 }else{
                     $error_message[] = "<font color=\"red\">※タイトルを入力して下さい。</font><br>";
                 }
+
+                if ($sd["spot_name"]!=="") {
+                    $_SESSION['plan']['spot_name'] = htmlspecialchars($sd["spot_nzme"],ENT_QUOTES);
+                }else{
+                    $error_message[] = "<font color=\"red\">※スポット名を入力してください。</font><br>";
+                }
                 $this->error_message=$error_message;
+
+                $_SESSION['plan']['visit_month']=$sd['visit_month'];
+
+                $_SESSION['plan']['visit_day_type']=$sd['visit_day_type'];
+
+                $_SESSION['plan']['spot_name']=$sd['spot_name'];
+
+                $_SESSION['plan']['area_name']=$sd['area_name'];
+
+                $_SESSION['plan']['crowded']=$sd['crowded'];
+
+                $_SESSION['plan']['stay_time']=$sd['stay_time'];
+
+                $_SESSION['plan']['fee']=$sd['fee'];
+
+                $_SESSION['plan']['comment']=$sd['comment'];
+
 
 
                  //画像ファイルの拡張子チェック
