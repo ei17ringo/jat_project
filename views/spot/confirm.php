@@ -102,9 +102,10 @@
 
              </div>
 
-
+<div class="row">
 <p><input type="submit" name="regist" value="投稿する"></p>
 <p><input type="button" value="戻る" name="return" onClick="history.back()"></p>
+</div>
 </form>
 
 

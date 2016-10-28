@@ -70,12 +70,13 @@ function edit($id){
 function save() {
 // 投稿をDBに登録
   if(empty($error)){
-     $sql = sprintf('INSERT INTO `plans` SET `plan_name`="%s", `address`="%s", `picture_1`="%s", `picture_2`="%s",`created`=now()',
+     $sql = sprintf('INSERT INTO `plans` SET `user_id`="%d", `title`="%s", `visit_year`="%s", `visit_month`="%s", `visit_type_name`="%s",`created`=now()',
               
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['plan_name']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['address']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['picture_1']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['picture_2'])
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['title']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['visit_year']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['visit_month']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['visit_type_name'])
            );
            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
            unset($_SESSION['plan']);
@@ -85,6 +86,31 @@ function save() {
 // 　　　　　header('Location:mypage');
 //          exit();
         }
+
+
+function plan_spots_save($plan_id) {
+// 投稿をDBに登録
+  if(empty($error)){
+     $sql = sprintf('INSERT INTO `plan_spots` SET `spot_name`="%s", `area_name`="%s", `crowded`="%s", `stay_time`="%s", `fee`="%s", `comment`="%s", `picture_1`="%s", `picture_2`="%s",`created`=now()',
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['spot_name']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['area_name']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['cowded']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['stay_time']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['fee']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['comment']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['picture_1']),
+               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['picture_2'])
+           );
+           mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+           $last_id = mysqli_insert_id($this->dbconnect);
+           unset($_SESSION['plan']);
+           return $last_id;
+
+      }
+
+}
+
+
 
 function update($id){
 

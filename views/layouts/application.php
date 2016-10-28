@@ -213,6 +213,40 @@
   } );
   })($plangj);
   </script>
+
+
+
+<!-- ボタンを押して追加・削除 -->
+<script>
+var $plangj2= $.noConflict(true);
+
+    (function($){
+$(document).ready(function () {
+  'use strict';
+  $('.repeater').repeater({
+    show: function () {
+      $(this).slideDown();
+    },
+    hide: function (deleteElement) {
+      if(confirm('削除してもいーですかー？')) {
+        $(this).slideUp(deleteElement);
+      }
+    }
+  });
+});
+})($plangj2);
+
+
+</script>
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="../<?php echo $path_adjust_string;?>webroot/jquery.repeater-master/jquery.repeater.js"></script>
+<!-- ボタンを押して追加・削除 -->
+
+
+
+
+
 <!-- ////////////////////////////////////////////// -->
 
 

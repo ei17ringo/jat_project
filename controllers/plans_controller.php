@@ -66,15 +66,17 @@ if(empty($sd)){
                 }
 
                 if ($sd["spot_name"]!=="") {
-                    $_SESSION['plan']['spot_name'] = htmlspecialchars($sd["spot_nzme"],ENT_QUOTES);
+                    $_SESSION['plan']['spot_number'] = htmlspecialchars($sd["spot_number"],ENT_QUOTES);
                 }else{
                     $error_message[] = "<font color=\"red\">※スポット名を入力してください。</font><br>";
                 }
                 $this->error_message=$error_message;
 
+                $_SESSION['plan']['visit_year']=$sd['visit_year'];
+
                 $_SESSION['plan']['visit_month']=$sd['visit_month'];
 
-                $_SESSION['plan']['visit_day_type']=$sd['visit_day_type'];
+                $_SESSION['plan']['visit_type_name']=$sd['visit_type_name'];
 
                 $_SESSION['plan']['spot_name']=$sd['spot_name'];
 

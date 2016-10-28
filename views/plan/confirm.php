@@ -3,39 +3,39 @@
 
 ?>
 
-<body>
 
 <!-- Page header -->
 
   <div class="page-header" style="margin-top:70px;">
-    
-        <p>プラン名<br>
-    <h1><?php echo htmlspecialchars($_SESSION['plan']['title']);?></h1>
+  <form method="post" action="save" enctype="multipart/form-data">
+  <p>プラン名<br>
+    <h1><?php echo htmlspecialchars($_SESSION['plan']['title']);?></h1></p>
 
+<p>訪問した年<br>
+ <?php echo htmlspecialchars($_SESSION['plan']['visit_year']);?></p>
 
-
-    <p>＊訪問した月<br>
+  <p>＊訪問した月<br>
     <?php
-if (isset($_SESSION['plan']['visit_month'])){
-  foreach ($_SESSION['plan']['visit_month'] as $months) {
-    echo $months."月<br/>";
-   }
-  }else{
-    echo "未入力";
-  }
-  ?></p>
+      if (isset($_SESSION['plan']['visit_month'])){
+        foreach ($_SESSION['plan']['visit_month'] as $_SESSION['plan']['visit_month']) {
+        echo $_SESSION['plan']['visit_month']."月<br/>";
+         }
+         }else{
+        echo "未入力";
+     }
+    ?></p>
 
-<p>＊訪問日<br>
-<?php
-echo htmlspecialchars($_SESSION['plan']['visit_day_type']);
+  <p>＊訪問日<br>
+    <?php
+      echo htmlspecialchars($_SESSION['plan']['visit_type_name']);
 ?>
-</p>
+  </p>
 
-</div>
+  </div>
 
     <!-- /Page header -->
 
-
+<div class="row">
 <ul id="sortable1" class="droptrue">
   <li class="ui-state-default">
 
@@ -58,17 +58,17 @@ echo htmlspecialchars($_SESSION['plan']['visit_day_type']);
 </p>
 
 <p>＊滞在時間<br>
-<?php echo htmlspecialchars($_SESSION['plan']["stay_time"]);?>
+<?php echo htmlspecialchars($_SESSION['plan']['stay_time']);?>
 </p>
 
 <p>＊費用<br>
 <div style="display:inline-flex">
-<P><?php echo htmlspecialchars($_SESSION['plan']["fee"]);?></P>円（目安）</p>
-</div>
+<P><?php echo htmlspecialchars($_SESSION['plan']['fee']);?></P>円（目安）
+</div></p>
 
 
 <p>＊メモ<br>
-<p><?php echo htmlspecialchars($_SESSION['plan']["comment"]);?></p>
+<p><?php echo htmlspecialchars($_SESSION['plan']['comment']);?></p>
 </p>
 
 <!-- <div style="display:inline-flex"> -->
@@ -96,7 +96,7 @@ echo htmlspecialchars($_SESSION['plan']['visit_day_type']);
 <div class="panel-body">
   <p>＊交通手段の選択</p>
     <div style="display:inline-flex">
-  <p>バス</p>
+  <p><?php echo htmlspecialchars($_SESSION['plan']['_']);?></p>
 </div>
 
 <p>＊所要時間</p>
@@ -256,10 +256,11 @@ echo htmlspecialchars($_SESSION['plan']['visit_day_type']);
         </li>
 </ul>
 
+</div>
 
+<div class="row" style="margin:5px">
+ <p><input type="submit" name="regist"　value="投稿する"></p>
+<p><input type="submit" value="戻る" name="return" onClick="history.back()"></p>
+</div>
 
- <p><input type="submit" value="投稿する"></p>
-<p><input type="submit" value="書き直す"></p>
-
-
-</body>
+</form>
