@@ -18,7 +18,7 @@
                 <a href=""><?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?></a>
               </h4>
               <div class="favorite-number">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><?php echo "\n" . $likeNum['cnt']; ?>
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><?php echo "\n" . htmlspecialchars($likeNum['cnt']); ?>
               </div>
             </div>
             <div class="col-md-8 mypage-main">
@@ -73,7 +73,7 @@
                               </div>
 
                                   <div class="col-md-12">
-                                      <p>投稿者：<a href="">.....</a>  作成日：<?php echo htmlspecialchars($planContent['created']); ?></p>
+                                      <p>投稿者：<a><?php echo htmlspecialchars($_SESSION['login']['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($planContent['created']); ?></p>
                                   </div>
                           </div>
 
