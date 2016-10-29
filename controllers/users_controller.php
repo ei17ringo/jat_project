@@ -281,7 +281,6 @@
       $favUserList = $user->favUserList();
 
       $maxPage     = $user->mypostpaging();
-
                   // ページングの設置
       $page = '';
       // GETパラメーターで渡されるページ番号を取得
@@ -302,8 +301,17 @@
       // $_SESSION['page'] = min($page, $maxPage);
 
         // ④ページに表示する変数だけ取得
-        $start = ($page - 1) * 5;
+        $_SESSION['start'] = ($page - 1) * 5;
         // $_SESSION['start'] = max(0, $start);
+
+
+      $postPlanContents = $user->postPlanContents();
+
+
+
+
+
+      
 
 
       require('views/layouts/application.php');

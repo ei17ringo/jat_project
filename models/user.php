@@ -78,6 +78,21 @@
     }
 
 
+    function postPlanContents() {
+      $sql = sprintf('SELECT * FROM `plans` WHERE `user_id` = %d LIMIT %d, 5',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
+        $_SESSION['start']
+      );
+      $content     = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $contents = array();
+      while ($table = mysqli_fetch_assoc($content)) {
+        $contents[] = $content;
+      }
+var_dump($content);
+      return $content;
+    }
+
+
     function profile($id) {
       $sql     = sprintf('SELECT * FROM `users` WHERE `id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)
