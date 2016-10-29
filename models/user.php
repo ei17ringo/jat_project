@@ -83,13 +83,24 @@
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
         $_SESSION['start']
       );
-      $content     = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-      $contents = array();
+      $content      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $contents     = array();
       while ($table = mysqli_fetch_assoc($content)) {
         $contents[] = $content;
       }
-var_dump($content);
       return $content;
+    }
+
+
+    function likeNum() {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+      );
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      // 連想配列としてSQLの実行結果を受け取る(keyと値)
+      $likeNum = mysqli_fetch_assoc($record);
+
+      return $likeNum;
     }
 
 

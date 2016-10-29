@@ -18,7 +18,7 @@
                 <a href=""><?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?></a>
               </h4>
               <div class="favorite-number">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><?php echo "\n" . $likeNum['cnt']; ?>
               </div>
             </div>
             <div class="col-md-8 mypage-main">
