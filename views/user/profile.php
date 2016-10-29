@@ -116,27 +116,22 @@
                 
                 <div class="col-md-12 mypage-pagi">
                   <ul class="pagination">
-                    <li>
-                      <a href="#">Prev</a>
-                    </li>
-                    <li>
-                      <a href="#">1</a>
-                    </li>
-                    <li>
-                      <a href="#">2</a>
-                    </li>
-                    <li>
-                      <a href="#">3</a>
-                    </li>
-                    <li>
-                      <a href="#">4</a>
-                    </li>
-                    <li>
-                      <a href="#">5</a>
-                    </li>
-                    <li>
-                      <a href="#">Next</a>
-                    </li>
+                    <?php if($page > 1): ?>
+                      <li>
+                        <a href="mypage?page=1">最初へ</a>
+                      </li>
+                      <li>
+                        <a href="mypage?page=<?php echo $page -1; ?>">Prev</a>
+                      </li>
+                    <?php endif; ?>
+                    <?php if($page < $maxPage): ?>
+                      <li>
+                        <a href="mypage?page=<?php echo $page +1; ?>">Next</a>
+                      </li>
+                      <li>
+                        <a href="mypage?page=<?php echo $maxPage; ?>">最後へ</a>
+                      </li>
+                    <?php endif; ?>
                   </ul>
                 </div>
             </div>
