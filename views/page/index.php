@@ -152,7 +152,7 @@
                                 <div class="col-md-12">
 
                                   <li class="index-comment index-user-comment">
-                                    <p>Description lists<br>
+                                    <p><?php echo htmlspecialchars($indexContent['title']); ?><br>
                                     A description list is perfect for defining terms.<br>
                                     Euismod</p>
                                   </li>

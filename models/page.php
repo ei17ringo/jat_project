@@ -22,6 +22,15 @@
       // 取得結果を返す
       return $rtn;
     }
+
+
+    function indexContent() {
+      $sql = 'SELECT * FROM `plans` ORDER BY `id` DESC LIMIT 3';
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      // 連想配列としてSQLの実行結果を受け取る(keyと値)
+      $table = mysqli_fetch_assoc($record);
+      return $table;
+    }
     
   }
 

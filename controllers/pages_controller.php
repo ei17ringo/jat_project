@@ -100,6 +100,11 @@
         exit();
       }
 
+      $page        = new Page();
+      $indexContent = $page->indexContent();
+
+
+
       require('views/layouts/application.php');
     }
 
