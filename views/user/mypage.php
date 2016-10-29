@@ -29,47 +29,48 @@
               </ul>
 
               <div class="tab-content">
-              <?php foreach($postPlanContents as $planContent): ?>
                   <div role="tabpanel" class="tab-pane active" id="post_plan">
-                    
+                    <?php foreach($postPlanContents as $planContent): ?>
                       <div class="post_plan">
                           <div class="plans-show">
                               <div class="plans-title">
-                                  <div class="col-md-12">
+                                  <div class="col-md-2">
+                                      <div class="position-fix-favoritenum">
+                                          <div class="favorite-number">
+                                              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-8">
                                       <div class="plan-title">
                                           <h3 class="plan-title-name">
                                               <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
                                           </h3>
                                       </div>
                                   </div>
+                                  <div class="col-md-2">
+                                  </div>
 
-                                      <div class="tag-favonum">
-                                          <div class="col-md-10 tag-content-mypage">
-                                              <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz</span>
-                                          </div>
-                                          <div class="col-md-2">
-                                              <div class="position-fix-favoritenum">
-                                                  <div class="favorite-number">
-                                                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
-                                                  </div>
+                                  <div class="tag-favonum">
+                                      <div class="col-md-12 tag-content-mypage">
+                                          <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-md-12">
+                                      <div class="edit-btn">
+                                          <a href="#" class="active">
+                                              <div class="btn-set">
+                                                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                               </div>
-                                          </div>
+                                          </a>
+                                          <a href="#" class="active">
+                                              <div class="btn-set">
+                                                  <span class="glyphicon glyphicon-trash"></span>
+                                              </div>
+                                          </a>
                                       </div>
-
-                                      <div class="col-md-12">
-                                          <div class="edit-btn">
-                                              <a href="#" class="active">
-                                                  <div class="btn-set">
-                                                      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                                  </div>
-                                              </a>
-                                              <a href="#" class="active">
-                                                  <div class="btn-set">
-                                                      <span class="glyphicon glyphicon-trash"></span>
-                                                  </div>
-                                              </a>
-                                          </div>
-                                      </div>
+                                  </div>
                               </div>
 
                                   <div class="col-md-12">
@@ -103,9 +104,85 @@
                                 </p>
                           </div>
                       </div>
+                    <?php endforeach; ?>
                   </div>
-                  <?php endforeach; ?>
-                </div>
+
+                  <div role="tabpanel" class="tab-pane" id="favorite_plan">
+                      <div class="post_plan">
+                          <div class="plans-show">
+                              <div class="plans-title">
+                                  <div class="col-md-2">
+                                      <div class="position-fix-favoritenum">
+                                          <div class="favorite-number">
+                                              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-8">
+                                      <div class="plan-title">
+                                          <h3 class="plan-title-name">
+                                              <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                          </h3>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-2">
+                                  </div>
+
+                                  <div class="tag-favonum">
+                                      <div class="col-md-12 tag-content-mypage">
+                                          <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span>
+                                      </div>
+                                  </div>
+
+                                      <div class="col-md-12">
+                                          <div class="edit-btn">
+                                              <a href="#" class="active">
+                                                  <div class="btn-set">
+                                                      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                  </div>
+                                              </a>
+                                              <a href="#" class="active">
+                                                  <div class="btn-set">
+                                                      <span class="glyphicon glyphicon-trash"></span>
+                                                  </div>
+                                              </a>
+                                          </div>
+                                      </div>
+                              </div>
+
+                                  <div class="col-md-12">
+                                      <p>投稿者：<a href="">◯◯◯◯</a>  作成日：◯◯◯◯年◯◯月◯◯日</p>
+                                  </div>
+                          </div>
+
+                          <div class="plan-contents">
+                              <p class="plan-idea">
+                                      目的地：京都符    訪問した年月：◯◯◯◯年◯◯月<br>
+                                  スポット：<a href="">◯◯◯◯</a><br>
+                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                                  交通手段<br>
+                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                                  交通手段<br>
+                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                                  交通手段<br>
+                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                                  交通手段<br>
+                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                                  交通手段<br>
+                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                                  交通手段<br>
+                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                                  交通手段<br>
+                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                                  交通手段<br>
+                                </p>
+                                <p class="plan-detail">
+                                  <a class="btn" href="#">View details »</a>
+                                </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
 
 

@@ -93,7 +93,7 @@
 
 
     function likeNum() {
-      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `user_id` = %d',
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `favorite_user_id` = %d',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
       );
       $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
