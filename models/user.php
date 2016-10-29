@@ -92,6 +92,20 @@
     }
 
 
+    function friendPlanContents($id) {
+      $sql = sprintf('SELECT * FROM `plans` WHERE `user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id),
+        $_SESSION['start']
+      );
+      $content      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $contents     = array();
+      while ($table = mysqli_fetch_assoc($content)) {
+        $contents[] = $content;
+      }
+      return $contents;
+    }
+
+
     function likeNum() {
       $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `favorite_user_id` = %d',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
@@ -117,6 +131,19 @@
     function mypostpaging() {
       $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plans` WHERE `user_id` = %d',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+      );
+      $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $table     = mysqli_fetch_assoc($recordSet);
+      // ceil()関数：切り上げする関数
+      $maxPage   = ceil($table['cnt'] / 5);
+
+      return $maxPage;
+    }
+
+
+    function postpaging($id) {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plans` WHERE `user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
       );
       $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $table     = mysqli_fetch_assoc($recordSet);
@@ -166,6 +193,18 @@
         $likeStatus = 'LIKE';
       }
       return $likeStatus;
+    }
+
+
+    function likeCount($id) {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `favorite_user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+      );
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      // 連想配列としてSQLの実行結果を受け取る(keyと値)
+      $likeCount = mysqli_fetch_assoc($record);
+
+      return $likeCount;
     }
 
 

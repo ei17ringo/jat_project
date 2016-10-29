@@ -325,6 +325,44 @@
       $viewInfo    = $user->profile($id);
       $resource    = $this->resource;
       $action      = 'profile';
+      $this->_loginCheck();
+        if ($_SESSION['loginCheck'] == 'false') {
+          header('Location: ../user/login');
+          exit();
+        }
+
+      $likeCount   = $user->likeCount($id);
+
+      $maxPage     = $user->postpaging($id);
+                  // ページングの設置
+        $page = '';
+        // GETパラメーターで渡されるページ番号を取得
+        if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+        }
+        // pageパラメーターがない場合は、ページ番号を１にする
+        if ($page == '') {
+          $page = 1;
+        }
+
+        // max関数：()内に指定した複数のデータから、一番大きい値を返す。
+        // ①表示する正しいページの数値(Min)を設定
+        $page = max($page, 1);
+
+        // ③表示する正しいページ数の数値(Max)を設定
+        $page = min($page, $maxPage);
+        // $_SESSION['page'] = min($page, $maxPage);
+
+        // ④ページに表示する変数だけ取得
+        $_SESSION['start'] = ($page - 1) * 5;
+        // $_SESSION['start'] = max(0, $start);
+
+
+      $friendPlanContents = $user->friendPlanContents($id);
+
+
+
+
       require('views/layouts/application.php');
     }
 
@@ -354,10 +392,6 @@
       $viewInfo    = $user->paging($id);
       $resource    = $this->resource;
       $action      = 'paging';
-
-
-
-
     }
 
 

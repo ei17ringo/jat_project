@@ -2,7 +2,6 @@
     $UsersController = new UsersController($db, $table_name, $action);
     $UsersController->action   = $action;
     $UsersController->resource = $resource;
-    $UsersController->id       = $id;
     $error_message = $UsersController->_new($_POST);
 ?>
 
@@ -17,16 +16,16 @@
             <div class="col-md-2 mypage-profile">
               <img alt="user-icon" src="<?php echo $path_adjust_string; ?>../user_picture/<?php echo $viewInfo['user_picture']; ?>" width="140" height="140">
               <h4>
-                <a><?php echo $viewInfo['user_name']; ?></a>
+                <a><?php echo $viewInfo['user_name']; ?>さん</a>
               </h4>
               <div class="favorite-number">
                 <?php if ((isset($viewOptions)) && ($viewOptions == "LIKE")): ?>
                   <form method="post" action="/jat_project/user/like/<?php echo $id ?>">
-                    <button type='submit' name='user_like' value='send'>LIKE：◯◯</button>
+                    <button type='submit' name='user_like' value='send'>LIKE：<?php echo htmlspecialchars($likeCount['cnt']); ?></button>
                   </form>
                 <?php else: ?>
                   <form method="post" action="/jat_project/user/unlike/<?php echo $id ?>">
-                    <button type='submit' name='like' value='send'>UNLIKE：◯◯</button>
+                    <button type='submit' name='like' value='send'>UNLIKE：<?php echo htmlspecialchars($likeCount['cnt']); ?></button>
                   </form>
                 <?php endif; ?>
                 
@@ -35,118 +34,85 @@
             <div class="col-md-8 mypage-main">
               <ul class="nav nav-tabs">
                 <li class="posted-plan">
-                  <a href="#">「<?php echo $viewInfo['user_name']; ?>さん」が投稿した旅路</a>
+                  <a href="#">「<?php echo htmlspecialchars($viewInfo['user_name']); ?>さん」が投稿した旅路</a>
                 </li>
               </ul>
 
-              <div class="plans-show">
-                <div class="plans-title">
-                  <div class="col-md-12">
-                    <div class="plan-title">
-                      <h3 class="plan-title-name">
-                        <a href="#">宇治抹茶スイーツ巡り宇治抹茶スイーツ巡り宇治抹茶スイーツ巡り宇治抹茶スイーツ巡り</a>
-                      </h3>
-                    </div>
-                  </div>
-                  <div class="tag-favonum">
-                    <div class="col-md-10 tag-content-mypage">
-                      <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz</span>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="position-fix-favoritenum">
-                        <div class="favorite-number">
-                          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
-                        </div>
+              <div class="post_plan">
+                <?php foreach($friendPlanContents as $planContent): ?>
+                  <div class="plans-show">
+                      <div class="plans-title">
+                          <div class="col-md-2">
+                              <div class="position-fix-favoritenum">
+                                  <div class="favorite-number">
+                                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-8">
+                              <div class="plan-title">
+                                  <h3 class="plan-title-name">
+                                      <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                  </h3>
+                              </div>
+                          </div>
+                          <div class="col-md-2">
+                          </div>
+
+                          <div class="tag-favonum">
+                              <div class="col-md-12 tag-content-mypage">
+                                  <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span>
+                              </div>
+                          </div>
+
+                          <div class="col-md-12">
+                              <div class="edit-btn">
+                                  <a href="#" class="active">
+                                      <div class="btn-set">
+                                          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                      </div>
+                                  </a>
+                                  <a href="#" class="active">
+                                      <div class="btn-set">
+                                          <span class="glyphicon glyphicon-trash"></span>
+                                      </div>
+                                  </a>
+                              </div>
+                          </div>
                       </div>
-                    </div>
+
+                          <div class="col-md-12">
+                              <p>投稿者：<a><?php echo htmlspecialchars($viewInfo['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($planContent['created']); ?></p>
+                          </div>
                   </div>
-                </div>
-                  <div class="col-md-12">
-                      <p>投稿者：<a href="">◯◯◯◯</a>  作成日：◯◯◯◯年◯◯月◯◯日</p>
-                  </div>
-              </div>
 
                   <div class="plan-contents">
-                    <p class="plan-idea">
-                          目的地：京都符    訪問した年月：◯◯◯◯年◯◯月<br>
-                      スポット：<a href="">◯◯◯◯</a><br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                    </p>
-                    <p class="plan-detail">
-                      <a class="btn" href="#">View details »</a>
-                    </p>
+                      <p class="plan-idea">
+                              目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?>月<br>
+                          スポット：<a href=""></a><br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                        </p>
+                        <p class="plan-detail">
+                          <a class="btn" href="#">View details »</a>
+                        </p>
                   </div>
-
-              <div class="plans-show">
-                <div class="plans-title">
-                  <div class="col-md-12">
-                    <div class="plan-title">
-                      <h3 class="plan-title-name">
-                        <a href="#">宇治抹茶スイーツ巡り宇治抹茶スイーツ巡り宇治抹茶スイーツ巡り宇治抹茶スイーツ巡り</a>
-                      </h3>
-                    </div>
-                  </div>
-
-                  <div class="tag-favonum">
-                    <div class="col-md-10 tag-content-mypage">
-                      <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz</span>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="position-fix-favoritenum">
-                        <div class="favorite-number">
-                          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                  <div class="col-md-12">
-                      <p>投稿者：<a href="">◯◯◯◯</a>  作成日：◯◯◯◯年◯◯月◯◯日</p>
-                  </div>
+                <?php endforeach; ?>
               </div>
-
-                  <div class="plan-contents">
-                    <p class="plan-idea">
-                          目的地：京都符    訪問した年月：◯◯◯◯年◯◯月<br>
-                      スポット：<a href="">◯◯◯◯</a><br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                      ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                      交通手段<br>
-                    </p>
-                    <p class="plan-detail">
-                      <a class="btn" href="#">View details »</a>
-                    </p>
-                  </div>
-
                 
                 <div class="col-md-12 mypage-pagi">
                   <ul class="pagination">
