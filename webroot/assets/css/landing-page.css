@@ -405,10 +405,6 @@ img.favorite-user-picture {
     font: normal 13px sans-serif;
 }
 
-.index-comment.index-user-comment{
-    color:  #808080;
-}
-
 .research{
     border-radius: 3px;
     flex-wrap: wrap;
