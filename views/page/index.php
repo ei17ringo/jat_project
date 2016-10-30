@@ -150,31 +150,13 @@
 
                               <div class="row">
                                 <div class="col-md-12">
-
-                                  <li class="index-comment index-user-comment">
-                                    <p><?php echo htmlspecialchars($indexContent['title']); ?><br>
-                                    A description list is perfect for defining terms.<br>
-                                    Euismod</p>
-                                  </li>
-
-                                  <li class="index-comment index-user-comment">
-                                    <p>Description lists<br>
-                                    A description list is perfect for defining terms.<br>
-                                    Euismod</p>
-                                  </li>
-
-                                  <li class="index-comment index-user-comment">
-                                    <p>Description lists<br>
-                                    A description list is perfect for defining terms.<br>
-                                    Euismod</p>
-                                  </li>
-
-                                  <li class="index-comment index-user-comment">
-                                    <p>Description lists<br>
-                                    A description list is perfect for defining terms.<br>
-                                    Euismod</p>
-                                  </li>
-
+                                  <?php foreach($indexContent as $content): ?>
+                                    <li class="index-comment index-user-comment">
+                                      <h5>旅路タイトル：<?php echo htmlspecialchars($content['title']); ?></h5>
+                                      <p>投稿者：mamamama　作成日：<?php echo htmlspecialchars($content['created']); ?><br>
+                                      Euismod</p>
+                                    </li>
+                                  <?php endforeach; ?>
                                 </div>
                             </div>
 

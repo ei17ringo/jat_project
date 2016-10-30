@@ -100,8 +100,9 @@
         exit();
       }
 
-      $page        = new Page();
-      $indexContent = $page->indexContent();
+      $page             = new Page();
+      $indexContent     = $page->indexContent();
+
 
 
 
