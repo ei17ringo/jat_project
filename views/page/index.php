@@ -81,48 +81,46 @@
                                             <option value="鹿児島県">鹿児島県</option>
 
                                             <option value="沖縄県">沖縄県</option>
-                                          </select>
-                                        </div>
 
-                                      <label class="col-md-4 control-label">旅する月：</label>
+                                    <label class="col-md-4 control-label">旅する月：</label>
+                                      <div class="col-md-8 research">
+                                        <input type="checkbox" name="month[]" value="1" />１月
+                                        <input type="checkbox" name="month[]" value="2" />２月
+                                        <input type="checkbox" name="month[]" value="3" />３月
+                                        <input type="checkbox" name="month[]" value="4" />４月
+                                        <br>
+                                        <input type="checkbox" name="month[]" value="5" />５月
+                                        <input type="checkbox" name="month[]" value="6" />６月
+                                        <input type="checkbox" name="month[]" value="7" />７月
+                                        <input type="checkbox" name="month[]" value="8" />８月
+                                        <br>
+                                        <input type="checkbox" name="month[]" value="9" />９月
+                                        <input type="checkbox" name="month[]" value="10" />10月
+                                        <input type="checkbox" name="month[]" value="11" />11月
+                                        <input type="checkbox" name="month[]" value="12" />12月
+                                        <br>
+                                      </div>
+
+
+                                      <label class="col-md-4 control-label">交通手段：</label>
                                         <div class="col-md-8 research">
-                                          <input type="checkbox" name="month[]" value="1" />１月
-                                          <input type="checkbox" name="month[]" value="2" />２月
-                                          <input type="checkbox" name="month[]" value="3" />３月
-                                          <input type="checkbox" name="month[]" value="4" />４月
+                                          <input type="checkbox" name="transportation[]" value="walk" />徒　歩
+                                          <input type="checkbox" name="transportation[]" value="bike" />自転車
+                                          <input type="checkbox" name="transportation[]" value="autobike" />バイク
+                                          <input type="checkbox" name="transportation[]" value="car" />自動車
                                           <br>
-                                          <input type="checkbox" name="month[]" value="5" />５月
-                                          <input type="checkbox" name="month[]" value="6" />６月
-                                          <input type="checkbox" name="month[]" value="7" />７月
-                                          <input type="checkbox" name="month[]" value="8" />８月
-                                          <br>
-                                          <input type="checkbox" name="month[]" value="9" />９月
-                                          <input type="checkbox" name="month[]" value="10" />10月
-                                          <input type="checkbox" name="month[]" value="11" />11月
-                                          <input type="checkbox" name="month[]" value="12" />12月
-                                          <br>
+                                          <input type="checkbox" name="transportation[]" value="train" />電　車
+                                          <input type="checkbox" name="transportation[]" value="cab" />タクシー
+                                          <input type="checkbox" name="transportation[]" value="other" />その他　
                                         </div>
 
-
-                                        <label class="col-md-4 control-label">交通手段：</label>
-                                          <div class="col-md-8 research">
-                                            <input type="checkbox" name="transportation[]" value="walk" />徒　歩
-                                            <input type="checkbox" name="transportation[]"value="bike" />自転車
-                                            <input type="checkbox" name="transportation[]"value="autobike" />バイク
-                                            <input type="checkbox" name="transportation[]"value="car" />自動車
-                                            <br>
-                                            <input type="checkbox" name="transportation[]"value="train" />電　車
-                                            <input type="checkbox" name="transportation[]"value="cab" />タクシー
-                                            <input type="checkbox" name="transportation[]"value="other" />その他　
-                                          </div>
-
-                                        <label class="col-md-4 control-label">投稿時期：</label>
-                                          <div class="col-md-8 research">
-                                            <select class="form-control" name="view" placeholder="選択してください">
-                                              <option value="">選択してください</option>
-                                              <option value="1month">直近１か月</option>
-                                              <option value="3months">直近３か月</option>
-                                              <option value="6months">直近６か月</option>
+                                      <label class="col-md-4 control-label">投稿時期：</label>
+                                        <div class="col-md-8 research">
+                                          <select class="form-control" name="view" placeholder="選択してください">
+                                            <option value="">選択してください</option>
+                                            <option value="1month">直近１か月</option>
+                                            <option value="3months">直近３か月</option>
+                                            <option value="6months">直近６か月</option>
                                             </select>
                                           </div>
 
@@ -175,6 +173,7 @@
                                   </div>
                                 </div>
                               </div>
+
                               <script type="text/javascript">
                                 function indexTab(){
                                   if(document.getElementById('tabChange')){
