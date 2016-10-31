@@ -14,6 +14,9 @@
     case 'contactus';
         $controller->contactus();
         break;
+    case 'plan_list';
+        $controller->plan_list();
+        break;
     default:
         break;
   }
@@ -51,6 +54,21 @@
 
       require('views/layouts/application.php');
     }
-  }
 
+
+    function plan_list() {
+      $resource        = $this->resource;
+      $action          = 'index';
+      $UsersController = new UsersController();
+      $UsersController -> _loginCheck();
+
+      if ($_SESSION['loginCheck'] == 'false') {
+        header('Location: ../user/login');
+        exit();
+      }
+      require('views/layouts/application.php');
+    }
+
+
+  }
 ?>
