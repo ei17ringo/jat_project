@@ -58,7 +58,7 @@
 
     function plan_list() {
       $resource        = $this->resource;
-      $action          = 'index';
+      $action          = 'plan_list';
       $UsersController = new UsersController();
       $UsersController -> _loginCheck();
 
