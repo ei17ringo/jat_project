@@ -25,7 +25,7 @@
 
 
     function indexContent() {
-      $sql = 'SELECT * FROM `plans` ORDER BY `id` DESC LIMIT 3';
+      $sql = 'SELECT * FROM `plans` ORDER BY `id` DESC LIMIT 4';
       $content = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       // 連想配列としてSQLの実行結果を受け取る(keyと値)
       $contents     = array();

@@ -142,23 +142,57 @@
                       <div class="modal-dialog-post">
                           <div class="modal-content">
                               <div class="modal-header">
-                                <select class="form-control" placeholder="最新投稿">
-                                  <option value="">新着順</option>
-                                  <option value="">人気順</option>
+                                <select id="tabChange" class="form-control" placeholder="最新投稿" onchange="indexTab()">
+                                  <option value="case_new">新着順</option>
+                                  <option value="case_popular">人気順</option>
                                 </select>
                               </div>
 
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <?php foreach($indexContent as $content): ?>
-                                    <li class="index-comment index-user-comment">
-                                      <h5>旅路タイトル：<?php echo htmlspecialchars($content['title']); ?></h5>
-                                      <p>投稿者：mamamama　作成日：<?php echo htmlspecialchars($content['created']); ?><br>
-                                      Euismod</p>
-                                    </li>
-                                  <?php endforeach; ?>
+                              <div id="case_new">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <?php foreach($indexContent as $content): ?>
+                                      <li class="index-comment index-user-comment">
+                                        <h5>旅路タイトル：<?php echo htmlspecialchars($content['title']); ?></h5>
+                                        <p>投稿者：mamamama　作成日：<?php echo htmlspecialchars($content['created']); ?><br>
+                                        Euismod</p>
+                                      </li>
+                                    <?php endforeach; ?>
+                                  </div>
                                 </div>
-                            </div>
+                              </div>
+
+                              <div id="case_popular">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <?php foreach($indexContent as $content): ?>
+                                      <li class="index-comment index-user-comment">
+                                        <h5>旅路タイトル：<?php echo htmlspecialchars($content['title']); ?></h5>
+                                        <p>投稿者：mamamama　作成日：<?php echo htmlspecialchars($content['created']); ?><br>
+                                        Euismodkokokokoko</p>
+                                      </li>
+                                    <?php endforeach; ?>
+                                  </div>
+                                </div>
+                              </div>
+                              <script type="text/javascript">
+                                function indexTab(){
+                                  if(document.getElementById('tabChange')){
+                                    id = document.getElementById('tabChange').value;
+                                    if(id == 'case_new'){
+                                      //フォーム
+                                      document.getElementById('case_new').style.display = "";
+                                      document.getElementById('case_popular').style.display = "none";
+                                    }else if(id == 'case_popular'){
+                                      //フォーム
+                                      document.getElementById('case_new').style.display = "none";
+                                      document.getElementById('case_popular').style.display = "";
+                                    }
+                                  }
+                                }
+                                //オンロードさせ、リロード時に選択を保持
+                                window.onload = indexTab;
+                              </script>
 
                           </div>
                       </div>
