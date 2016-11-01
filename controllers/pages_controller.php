@@ -32,20 +32,16 @@
 
         if (!empty($_POST)) {
           if (isset($_POST['prefecture'])) {
-            $_SESSION['prefenture'] = $_POST['prefecture'];
-            var_dump($_SESSION['prefenture']);
+            $_SESSION['prefecture'] = $_POST['prefecture'];
           }
           if (isset($_POST['month']) && is_array($_POST['month'])) {
             $_SESSION['month'] = $_POST['month'];
-            var_dump($_SESSION['month']);
           }
           if (isset($_POST['transpotation']) && is_array($_POST['transpotation'])) {
             $_SESSION['transpotation'] = $_POST['transpotation'];
-            var_dump($_SESSION['transpotation']);
           }
           if (isset($_POST['view'])) {
             $_SESSION['view'] = $_POST['view'];
-            var_dump($_SESSION['view']);
           }
           header('Location: plan_list');
           exit;
@@ -86,11 +82,14 @@
       $action          = 'plan_list';
       $UsersController = new UsersController();
       $UsersController -> _loginCheck();
-
+      
       if ($_SESSION['loginCheck'] == 'false') {
         header('Location: ../user/login');
         exit();
       }
+
+
+
       require('views/layouts/application.php');
     }
 
