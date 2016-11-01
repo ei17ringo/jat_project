@@ -92,6 +92,20 @@
     }
 
 
+    function postPlanSpots() {
+      $sql = sprintf('SELECT * FROM `plan_spots` WHERE `plan_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $postPlanContents['id'])
+      );
+
+      $plan  =  mysqli_query($this->dbconnect, $sql) or die (mysqli_error($this->dbconnect));
+      $plans     = array();
+      while ($table = mysqli_fetch_assoc($plan)) {
+        $plans[] = $plan;
+      }
+      return $plan;
+    }
+
+
     function friendPlanContents($id) {
       $sql = sprintf('SELECT * FROM `plans` WHERE `user_id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id),

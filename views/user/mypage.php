@@ -59,7 +59,7 @@
 
                                   <div class="col-md-12">
                                       <div class="edit-btn">
-                                          <a href="#" class="active">
+                                          <a href="../plan/edit/<?php echo $planContent['id']; ?>" class="active">
                                               <div class="btn-set">
                                                   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                               </div>

@@ -307,6 +307,7 @@
 
 
       $postPlanContents = $user->postPlanContents();
+      $postPlanSpots    = $user->postPlanSpots();
 
 
 
