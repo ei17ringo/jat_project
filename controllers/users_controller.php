@@ -210,7 +210,6 @@
         header("Location: create");
         exit;
       }
-      // $viewOptions = $user->confirm();
       $resource    = $this->resource;
       $action      = 'confirm';
       require('views/layouts/application.php');

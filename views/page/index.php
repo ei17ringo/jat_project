@@ -18,7 +18,7 @@
                               <div class="modal-header">
                                 <h1 class="text-center">旅路検索</h1>
                               </div>
-                                <form id="plan_search" method="post" action="" class="form-horizontal" role="form" enctype="multipart/form-data">
+                                <form id="plan_search" method="post" action="" class="form-horizontal" role="form">
                                   <div class="modal-body">
                                       <label class="col-md-4 control-label">目的地：</label>
                                         <div class="col-md-8 research">
@@ -104,14 +104,14 @@
 
                                       <label class="col-md-4 control-label">交通手段：</label>
                                         <div class="col-md-8 research">
-                                          <input type="checkbox" name="transportation[]" value="walk" />徒　歩
-                                          <input type="checkbox" name="transportation[]" value="bike" />自転車
-                                          <input type="checkbox" name="transportation[]" value="autobike" />バイク
-                                          <input type="checkbox" name="transportation[]" value="car" />自動車
+                                          <input type="checkbox" name="transpotation[]" value="walk" />徒　歩
+                                          <input type="checkbox" name="transpotation[]" value="bike" />自転車
+                                          <input type="checkbox" name="transpotation[]" value="autobike" />バイク
+                                          <input type="checkbox" name="transpotation[]" value="car" />自動車
                                           <br>
-                                          <input type="checkbox" name="transportation[]" value="train" />電　車
-                                          <input type="checkbox" name="transportation[]" value="cab" />タクシー
-                                          <input type="checkbox" name="transportation[]" value="other" />その他　
+                                          <input type="checkbox" name="transpotation[]" value="train" />電　車
+                                          <input type="checkbox" name="transpotation[]" value="cab" />タクシー
+                                          <input type="checkbox" name="transpotation[]" value="other" />その他　
                                         </div>
 
                                       <label class="col-md-4 control-label">投稿時期：</label>
@@ -130,6 +130,7 @@
                                           </div>
 
                                          <button type="submit" class="btn btn-block btn-default btn-warning" value="Login"/>Search</button>
+              
                                   </div>
                               </form>
                           </div>
@@ -151,8 +152,8 @@
                                   <div class="col-md-12">
                                     <?php foreach($indexContent as $content): ?>
                                       <li class="index-comment index-user-comment">
-                                        <h5>旅路タイトル：<?php echo htmlspecialchars($content['title']); ?></h5>
-                                        <p>投稿者：mamamama　作成日：<?php echo htmlspecialchars($content['created']); ?><br>
+                                        <p>投稿者：<?php echo htmlspecialchars($content['user_id']); ?>　作成日：<?php echo htmlspecialchars($content['created']); ?><br>
+                                        旅路タイトル：<?php echo htmlspecialchars($content['title']); ?><br>
                                         Euismod</p>
                                       </li>
                                     <?php endforeach; ?>
@@ -165,9 +166,9 @@
                                   <div class="col-md-12">
                                     <?php foreach($indexContent as $content): ?>
                                       <li class="index-comment index-user-comment">
-                                        <h5>旅路タイトル：<?php echo htmlspecialchars($content['title']); ?></h5>
                                         <p>投稿者：mamamama　作成日：<?php echo htmlspecialchars($content['created']); ?><br>
-                                        Euismodkokokokoko</p>
+                                        旅路タイトル：<?php echo htmlspecialchars($content['title']); ?><br>
+                                        Euismod</p>
                                       </li>
                                     <?php endforeach; ?>
                                   </div>

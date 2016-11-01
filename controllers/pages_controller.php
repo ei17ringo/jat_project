@@ -26,69 +26,32 @@
     var $action        ='';
     var $error_message ='';
 
-      function _new($sd){
-        $resource = $this->resource;
-        $action   = $this->action;
+    function _new($sd){
+      $resource = $this->resource;
+      $action   = $this->action;
 
+        if (!empty($_POST)) {
+          if (isset($_POST['prefecture'])) {
+            $_SESSION['prefenture'] = $_POST['prefecture'];
+            var_dump($_SESSION['prefenture']);
+          }
+          if (isset($_POST['month']) && is_array($_POST['month'])) {
+            $_SESSION['month'] = $_POST['month'];
+            var_dump($_SESSION['month']);
+          }
+          if (isset($_POST['transpotation']) && is_array($_POST['transpotation'])) {
+            $_SESSION['transpotation'] = $_POST['transpotation'];
+            var_dump($_SESSION['transpotation']);
+          }
+          if (isset($_POST['view'])) {
+            $_SESSION['view'] = $_POST['view'];
+            var_dump($_SESSION['view']);
+          }
+          header('Location: plan_list');
+          exit;
+        }
 
-
-        // if(empty($_POST['prefecture']])){
-        //      echo "何も選んでません";
-        // }else{
-        //     echo $_POST['prefecture'];
-        // }
-
-        if(empty($_POST["month"])){
-             echo "何も選んでません";
-        }else{
-             $month = $_POST["month"];
-             foreach ($month as $value) {
-              $select_month .= $value . ",";
-             }
-             echo $select_month;
-         }
-       
-       if(isset($_POST["prefecture"])) {
-        echo $_POST["prefecture"];
-       }
-
-       if(empty($_POST["transportation"])) {
-             echo "何も選んでません";
-        }else{
-             $transportation = $_POST["transportation"];
-             foreach ($transportation as $value) {
-              $select_transportation .= $value . ",";
-             }
-             echo $select_transportation;
-         }
-       
-        if(isset($_POST["view"])) {
-        echo $_POST["view"];
-       }
-
-
-
-        //  if(empty($_POST["transportation"])){
-        //      echo "何も選んでません";
-        // }else{
-        //      $transportation = $_POST["transportation"];
-        //      $method = array("walk" => "徒歩", "bike" => "自転車", "autobike" => "バイク", "car" => "自動車", "train" => "電車", "cab" => "タクシー", "other" => "その他");
-        //      //②
-        //      for($i=0;$i<count($transportation);$i++){
-        //           $check_transportation[$transportation[$i]]="checked";
-        //      }
-        //      //③
-        //      foreach($transportation as $key => $value){
-        //           $select_transportation .= $method[$value]."、";
-        //      }
-        //      $transportation_list=rtrim($select_transportation, "、");
-        //      echo $transportation_list."を選びました";
-        //  }
-
-
-
-
-      }
+    }
       // function _new($sd)閉じ
 
 
@@ -105,9 +68,6 @@
 
       $page             = new Page();
       $indexContent     = $page->indexContent();
-
-
-
 
       require('views/layouts/application.php');
     }

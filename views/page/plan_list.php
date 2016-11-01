@@ -125,6 +125,10 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-block btn-default btn-warning" value="Login"/>Search</button>
+                                        <?php var_dump($_SESSION['prefecture']);
+                                         var_dump($_SESSION['month']);
+                                         var_dump($_SESSION['transpotation']);;
+                                         var_dump($_SESSION['view']); ?>
                                 </div>
                           </div>
                       </div>
