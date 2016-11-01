@@ -65,11 +65,6 @@ if(empty($sd)){
                     $error_message[] = "<font color=\"red\">※タイトルを入力して下さい。</font><br>";
                 }
 
-                if ($sd["spot_name"]!=="") {
-                    $_SESSION['plan']['spot_number'] = htmlspecialchars($sd["spot_number"],ENT_QUOTES);
-                }else{
-                    $error_message[] = "<font color=\"red\">※スポット名を入力してください。</font><br>";
-                }
                 $this->error_message=$error_message;
 
                 $_SESSION['plan']['visit_year']=$sd['visit_year'];

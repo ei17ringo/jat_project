@@ -5,9 +5,9 @@
 
 
 <!-- Page header -->
-
+<form method="post" action="save" enctype="multipart/form-data">
   <div class="page-header" style="margin-top:70px;">
-  <form method="post" action="save" enctype="multipart/form-data">
+
   <p>プラン名<br>
     <h1><?php echo htmlspecialchars($_SESSION['plan']['title']);?></h1></p>
 
@@ -48,7 +48,7 @@
             <div class="panel-body">
         <p>スポット名<br>
     <h2><?php
-     echo htmlspecialchars($_SESSION['plan']['spot_name']);
+     echo htmlspecialchars($_SESSION['plan']['spot_name'][0]);
      ?></h2></p>
 
 <p><?php echo htmlspecialchars($_SESSION['plan']['area_name']);?></p>
@@ -96,7 +96,7 @@
 <div class="panel-body">
   <p>＊交通手段の選択</p>
     <div style="display:inline-flex">
-  <p><?php echo htmlspecialchars($_SESSION['plan']['_']);?></p>
+  <p><?php echo htmlspecialchars($_SESSION['plan']['trans_way']);?></p>
 </div>
 
 <p>＊所要時間</p>

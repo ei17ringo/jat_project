@@ -216,7 +216,10 @@
 
 
 
-<!-- ボタンを押して追加・削除 -->
+<!-- <!-- ボタンを押して追加・削除 -->
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="../<?php echo $path_adjust_string;?>webroot/jquery.repeater-master/jquery.repeater.js"></script>
+
 <script>
 var $plangj2= $.noConflict(true);
 
@@ -239,9 +242,8 @@ $(document).ready(function () {
 
 </script>
 
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="../<?php echo $path_adjust_string;?>webroot/jquery.repeater-master/jquery.repeater.js"></script>
-<!-- ボタンを押して追加・削除 -->
+
+<!-- ボタンを押して追加・削除 --> -->
 
 
 
