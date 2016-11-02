@@ -93,7 +93,7 @@
 
 
     function favPlan() {
-      $sql = sprintf('SELECT * FROM `plans` p, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps, `plan_like` pl WHERE p.`id` = ps.`plan_id` AND p.`id` = pl.`favorite_plan_id` AND pl.`user_id` = %d LIMIT %d, 5',
+      $sql = sprintf('SELECT * FROM `plans` p, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps, `plan_like` pl, `users` u WHERE p.`id` = ps.`plan_id` AND p.`user_id` = u.`id` AND p.`id` = pl.`favorite_plan_id` AND pl.`user_id` = %d LIMIT %d, 5',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
         $_SESSION['start']
       );

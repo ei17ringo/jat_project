@@ -82,22 +82,8 @@
                               <p class="plan-idea">
                                       目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?>月<br>
                                   スポット：<a href=""><?php echo htmlspecialchars($planContent['spot_name']); ?></a><br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
+                                  <h4>コメント：</h4><br>
+                                    <?php echo htmlspecialchars($planContent['comment']); ?><br>
                                 </p>
                                 <p class="plan-detail">
                                   <a class="btn" href="#">View details »</a>
@@ -160,23 +146,9 @@
                           <div class="plan-contents">
                               <p class="plan-idea">
                                       目的地：京都符    訪問した年月：<?php echo htmlspecialchars($favPlan['visit_year']); ?>年<?php echo htmlspecialchars($favPlan['visit_month']); ?>月<br>
-                                  スポット：<a href="">◯◯◯◯</a><br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
+                                  スポット：<a href=""><?php echo htmlspecialchars($favPlan['spot_name']); ?></a><br>
+                                  <h4>コメント：</h4><br>
+                                    <?php echo htmlspecialchars($favPlan['comment']); ?><br>
                                 </p>
                                 <p class="plan-detail">
                                   <a class="btn" href="#">View details »</a>
