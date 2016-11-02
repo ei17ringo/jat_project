@@ -2,10 +2,8 @@
   require('./controllers/users_controller.php');
 
 
-
-
    // コントローラのクラスをインスタンス化
-   $controller = new SpotsController();
+   $controller = new PlansController();
 
    $controller->resource = $resource;
    $controller->action = $action;
@@ -40,7 +38,7 @@
           break;
     }
 
-   class SpotsController {
+   class PlansController {
     var $resource='';
     var $action='';
     var $error_message='';
@@ -52,37 +50,48 @@
       $action= $this->action;
       $id=$this->id;
 
-      $UsersController = new UsersController();
-     $UsersController -> _loginCheck();
-
-     if ($_SESSION['loginCheck'] == 'false') {
-       header('Location: ../user/login');
-       exit();
-     }
-
-if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
+if(empty($sd)){
+  return;
 } 
                     //ボタンが押されたら//
             $error_message = array(); //<--ここ$error_messageを定義
             if(!empty($sd)){
-                if ($sd["spot_name"] !== "") {
+                if ($sd["title"] !== "") {
+
                 //データがセットされていたら各変数にPOSTのデータを格納
-                        $_SESSION['spot']['spot_name'] = htmlspecialchars($sd["spot_name"],ENT_QUOTES);
+                        $_SESSION['plan']['title'] = htmlspecialchars($sd["title"],ENT_QUOTES);
             //各データがなかったらエラーメッセージを配列に格納
                 }else{
-                    $error_message[] = "<font color=\"red\">※スポットの名前を入力して下さい。</font><br>";
-                }
-
-                if ($sd["address"]!=="") {
-                    $_SESSION['spot']['address'] = htmlspecialchars($sd["address"],ENT_QUOTES);
-                }else{
-                    $error_message[] = "<font color=\"red\">※住所を入力してください。</font><br>";
+                    $error_message[] = "<font color=\"red\">※タイトルを入力して下さい。</font><br>";
                 }
                 $this->error_message=$error_message;
 
+                $_SESSION['plan']['visit_year']=$sd['visit_year'];
 
-                // if ($action=='create') {
-                //新規登録
+                $_SESSION['plan']['visit_month']=$sd['visit_month'];
+
+                $_SESSION['plan']['visit_type_name']=$sd['visit_type_name'];
+
+                $_SESSION['plan']['spots']= $sd['group-a'];
+                
+                // $_SESSION['plan']['transportation']= $sd['group-b'];
+
+                // $_SESSION['plan']['spot_name']=$sd['spot_name'];
+
+                // $_SESSION['plan']['area_name']=$sd['area_name'];
+
+                // $_SESSION['plan']['crowded']=$sd['crowded'];
+
+
+                // $_SESSION['plan']['stay_time']=$sd['stay_time'];
+                //  var_dump($sd['stay_time']);
+
+                // $_SESSION['plan']['fee']=$sd['fee'];
+
+                // $_SESSION['plan']['comment']=$sd['comment'];
+
+
+
                  //画像ファイルの拡張子チェック
                  $fileName= $_FILES['picture_1']['name'];
                   if (!empty($fileName)) {
@@ -98,14 +107,10 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
                 if (!count($error_message)){
                   //画像をアップロードする
                   $picture_1= date('YmdHis') . $_FILES['picture_1']['name'];
-                    move_uploaded_file($_FILES['picture_1']['tmp_name'], 'spot_picture/' . $picture_1);
+                    move_uploaded_file($_FILES['picture_1']['tmp_name'], 'plan_picture/' . $picture_1);
                   //セッションに値を保存
-                  // $_SESSION['spot']=$_POST;
-                  $_SESSION['spot']['picture_1']= $picture_1;
-                  $_SESSION['spot']['delete_picture_1']= $sd['delete_picture_1'];
-                  if($_SESSION['spot']['delete_picture_1']=='1' or $_FILES['picture_1']['name']==null){
-                    $_SESSION['spot']['picture_1']='';
-                  }
+                  // $_SESSION['plan']=$_POST;
+                  $_SESSION['plan']['picture_1']= $picture_1;
                   }
 
 
@@ -124,37 +129,21 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
 
                   //画像をアップロードする
                   $picture_2= date('YmdHis') . $_FILES['picture_2']['name'];
-                    move_uploaded_file($_FILES['picture_2']['tmp_name'], 'spot_picture/' . $picture_2);
+                    move_uploaded_file($_FILES['picture_2']['tmp_name'], 'plan_picture/' . $picture_2);
                   //セッションに値を保存
-                  // $_SESSION['spot']=$_POST;
-                  $_SESSION['spot']['picture_2']= $picture_2;
-                  $_SESSION['spot']['delete_picture_2']= $sd['delete_picture_2'];
-                  if($_SESSION['spot']['delete_picture_2']=='1' or $_FILES['picture_2']['name']==null){
-                    $_SESSION['spot']['picture_2']='';
-                  }
+                  // $_SESSION['plan']=$_POST;
+                  $_SESSION['plan']['picture_2']= $picture_2;
                    }
 
-
                }
-               
-
-
-     if($action=='create'){
-     if(isset($_SESSION['spot']['duplicate'])&&($_SESSION['spot']['duplicate']==true)){
-      $error_message['duplicate']="指定されたスポットは既に登録されています。";
-     }
-   }
-      unset($_SESSION['spot']['duplicate']);
 
 
       //エラーが無い時
                 if (!count($error_message)){
                   //確認ページヘ
                   if($action=='edit'){
-                    // header("Location:../confirm/$id");
                     echo '<script> location.replace("../confirm/'.$id.'");</script>';
-                  }else{
-                    // header("Location:confirm");
+                    }else{
                     echo '<script> location.replace("confirm");</script>';
                   }
                     exit;
@@ -170,36 +159,25 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
 
      function index() {
        // モデルを呼び出す
-       $spot = new Spot();
-       $viewOptions = $spot->index();
+       $plan = new Plan();
+       $viewOptions = $plan->index();
        $action = 'index';
 
        require('views/layout/application.php');
      }
 
      function detail($id) {
-       $spot = new Spot();
-       $viewOptions= $spot->detail($id);
+       $plan = new Plan();
+       $viewOptions= $plan->detail($id);
        $resource= $this->resource;
        $action = 'detail';
 
        require('views/layouts/application.php');
      }
 
-     function confirm($id=null) {
-        $spot= new Spot();
-        if ($id==null){
-          $viewOptions= $spot->duplicate();
-        }else{
-          $viewOptions= $spot->edit($id);
-        }
+     function confirm($id=null){
+        $plan= new Plan();
 
-        if (isset($viewOptions['spot_name'])&& ($viewOptions['spot_name']=='duplicate')){
-          $_SESSION['spot']['duplicate']=true;
-          header("Location:create");
-                    exit;
-        }
-        // $viewOptions= $spot->confirm();
         $resource= $this->resource;
         $action = 'confirm';
 
@@ -207,8 +185,9 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
       }
 
       function save(){
-         $spot= new Spot();
-        $viewOptions= $spot->save();
+         $plan= new Plan();
+        $plan_id= $plan->save();
+        $plan->plan_spots_save($plan_id);
        
         // トップページへ
 　　　　　header('Location:mypage');
@@ -221,7 +200,6 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
       $resource= $this->resource;
 
 
-
             // var_dump($this->error_message);
             require('views/layouts/application.php');
 
@@ -229,8 +207,8 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
 
 
      function edit($id) {
-       $spot = new Spot();
-       $viewOptions = $spot->edit($id);
+       $plan = new Plan();
+       $viewOptions = $plan->edit($id);
        $resource= $this->resource;
        $action = 'edit';
 
@@ -238,21 +216,21 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
      }
 
      function update($id) {
-       $spot = new Spot();
-       $spot->update($id);
+       $plan = new Plan();
+       $plan->update($id);
 
       
      }
 
 
      function delete($id){
-      $spot= new Spot();
-       $viewOptions= $spot -> delete($id);
+      $plan= new Plan();
+       $viewOptions= $plan -> delete($id);
        $action='delete';
 
 
        // indexへ遷移
-       header('Location: /seed_spot/spots/index');
+       header('Location: /seed_plan/plans/index');
        exit();
      }
 
