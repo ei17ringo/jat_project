@@ -361,6 +361,8 @@
 
 
       $friendPlanContents = $user->friendPlanContents($id);
+      var_dump($friendPlanContents);
+
 
 
 

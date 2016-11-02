@@ -38,8 +38,9 @@
                 </li>
               </ul>
 
-              <div class="post_plan">
-                <?php foreach($friendPlanContents as $planContent): ?>
+              <?php foreach($friendPlanContents as $planItem): ?>
+                        <?php var_dump($planItem); ?>
+                <div class="post_plan">
                   <div class="plans-show">
                       <div class="plans-title">
                           <div class="col-md-2">
@@ -52,7 +53,7 @@
                           <div class="col-md-8">
                               <div class="plan-title">
                                   <h3 class="plan-title-name">
-                                      <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                      <a href="#"><?php echo htmlspecialchars($planItem['title']); ?></a>
                                   </h3>
                               </div>
                           </div>
@@ -111,8 +112,8 @@
                           <a class="btn" href="#">View details »</a>
                         </p>
                   </div>
-                <?php endforeach; ?>
-              </div>
+                </div>
+              <?php endforeach; ?>
                 
                 <div class="col-md-12 mypage-pagi">
                   <ul class="pagination">
