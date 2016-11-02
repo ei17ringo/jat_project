@@ -90,22 +90,9 @@
                       <p class="plan-idea">
                               目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planItem['visit_year']); ?>年<?php echo htmlspecialchars($planItem['visit_month']); ?>月<br>
                           スポット：<a href=""><?php echo htmlspecialchars($planItem['spot_name']); ?></a><br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
+                          <h4>コメント：</h4><br>
+                          <?php echo htmlspecialchars($planItem['comment']); ?><br>
+                          
                         </p>
                         <p class="plan-detail">
                           <a class="btn" href="#">View details »</a>
