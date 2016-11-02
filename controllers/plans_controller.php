@@ -64,7 +64,6 @@ if(empty($sd)){
                 }else{
                     $error_message[] = "<font color=\"red\">※タイトルを入力して下さい。</font><br>";
                 }
-
                 $this->error_message=$error_message;
 
                 $_SESSION['plan']['visit_year']=$sd['visit_year'];
@@ -73,17 +72,23 @@ if(empty($sd)){
 
                 $_SESSION['plan']['visit_type_name']=$sd['visit_type_name'];
 
-                $_SESSION['plan']['spot_name']=$sd['spot_name'];
+                $_SESSION['plan']['spots']= $sd['group-a'];
+                
+                $_SESSION['plan']['transportation']= $sd['group-b'];
 
-                $_SESSION['plan']['area_name']=$sd['area_name'];
+                // $_SESSION['plan']['spot_name']=$sd['spot_name'];
 
-                $_SESSION['plan']['crowded']=$sd['crowded'];
+                // $_SESSION['plan']['area_name']=$sd['area_name'];
 
-                $_SESSION['plan']['stay_time']=$sd['stay_time'];
+                // $_SESSION['plan']['crowded']=$sd['crowded'];
 
-                $_SESSION['plan']['fee']=$sd['fee'];
 
-                $_SESSION['plan']['comment']=$sd['comment'];
+                // $_SESSION['plan']['stay_time']=$sd['stay_time'];
+                //  var_dump($sd['stay_time']);
+
+                // $_SESSION['plan']['fee']=$sd['fee'];
+
+                // $_SESSION['plan']['comment']=$sd['comment'];
 
 
 
@@ -181,7 +186,8 @@ if(empty($sd)){
 
       function save(){
          $plan= new Plan();
-        $viewOptions= $plan->save();
+        $plan_id= $plan->save();
+        $plan->plan_spots_save($plan_id);
        
         // トップページへ
 　　　　　header('Location:mypage');

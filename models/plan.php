@@ -79,8 +79,10 @@ function save() {
                mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['visit_type_name'])
            );
            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-           unset($_SESSION['plan']);
 
+           $last_id = mysqli_insert_id($this->dbconnect);
+           // unset($_SESSION['plan']);
+           return $last_id;
       }
 //       // トップページへ
 // 　　　　　header('Location:mypage');

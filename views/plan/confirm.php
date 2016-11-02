@@ -48,35 +48,35 @@
             <div class="panel-body">
         <p>スポット名<br>
     <h2><?php
-     echo htmlspecialchars($_SESSION['plan']['spot_name'][0]);
+     echo htmlspecialchars($_SESSION['plan']['spots'][0]['spot_name']);
      ?></h2></p>
 
-<p><?php echo htmlspecialchars($_SESSION['plan']['area_name']);?></p>
+<p><?php echo htmlspecialchars($_SESSION['plan']['spots'][0]['area_name']);?></p>
 
 <p>＊混雑具合<br>
- <?php echo htmlspecialchars($_SESSION['plan']['crowded']);?>
+ <?php echo htmlspecialchars($_SESSION['plan']['spots'][0]['crowded']);?>
 </p>
 
 <p>＊滞在時間<br>
-<?php echo htmlspecialchars($_SESSION['plan']['stay_time']);?>
+<?php echo htmlspecialchars($_SESSION['plan']['spots'][0]['stay_time']);?>
 </p>
 
 <p>＊費用<br>
 <div style="display:inline-flex">
-<P><?php echo htmlspecialchars($_SESSION['plan']['fee']);?></P>円（目安）
+<P><?php echo htmlspecialchars($_SESSION['plan']['spots'][0]['fee']);?></P>円（目安）
 </div></p>
 
 
 <p>＊メモ<br>
-<p><?php echo htmlspecialchars($_SESSION['plan']['comment']);?></p>
+<p><?php echo htmlspecialchars($_SESSION['plan']['spots'][0]['comment']);?></p>
 </p>
 
 <!-- <div style="display:inline-flex"> -->
  <div class="panel-body">
-                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['plan']['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['plan']['spots'][0]['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
             </div>
  <div class="panel-body">
-                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['plan']['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
+                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['plan']['spots'][0]['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
             </div>
 </div>
 
@@ -96,20 +96,20 @@
 <div class="panel-body">
   <p>＊交通手段の選択</p>
     <div style="display:inline-flex">
-  <p><?php echo htmlspecialchars($_SESSION['plan']['trans_way']);?></p>
+  <p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['trans_way']);?></p>
+  <p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['other_way']) ;?></p>
 </div>
 
 <p>＊所要時間</p>
 <div style="display:inline-flex">
-<p>0</p>時間
-<p>15</p>分
+<p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['trans_time']);?></p>
 </div>
 
 <p>＊費用<br>
-<p>230</p>円（目安）</p>
+<p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['trans_fee']);?></p>円（目安）</p>
 
 <p>＊メモ<br>
-費用はバス１人分の運賃です。</p>
+<?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['comment']);?></p>
 
 </div>
 
@@ -126,39 +126,35 @@
          <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <h2>清水寺</h2></p>
+    <h2><?php echo htmlspecialchars($_SESSION['plan']['spots'][1]['spot_name']);?></h2></p>
 
-<p>京都</p>
+<p><?php echo htmlspecialchars($_SESSION['plan']['spots'][1]['area_name']);?></p>
 
 <p>＊混雑具合<br>
- めちゃ混み
+<?php echo htmlspecialchars($_SESSION['plan']['spots'][1]['crowded']);?>
 </p>
 
 <p>＊滞在時間</p>
 <div style="display:inline-flex">
-<p>1</p>時間
-<p>30</p>分
+<p><?php echo htmlspecialchars($_SESSION['plan']['spots'][1]['stay_time']);?></p>
 </div>
 
 <p>＊費用<br>
 <div style="display:inline-flex">
-<P>2000円</P>（目安）</p>
+<P><?php echo htmlspecialchars($_SESSION['plan']['spots'][1]['fee']);?></P>円（目安）</p>
 </div>
 
 
 <p>＊メモ<br>
-<p>京都デートの定番スポット！
-カップルで存分に楽しめると思います。
-二人分の参拝料とお守りを購入してだいたい2000円くらいでした。
-歩きやすい靴でいくことをお勧めします(°▽°)</p>
+<p><?php echo htmlspecialchars($_SESSION['plan']['spots'][1]['comment']);?></p>
 </p>
 
 <!-- <div style="display:inline-flex"> -->
- <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+  <div class="panel-body">
+                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['plan']['spots'][1]['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
             </div>
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['plan']['spots'][1]['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
             </div>
 </div>
 
@@ -180,20 +176,20 @@
 <div class="panel-body">
                 <p>＊交通手段の選択</p>
                 <div style="display:inline-flex">
-    <p>バス</p>
+    <p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][1]['trans_way']);?></p>
+    <p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][1]['other_way']) ;?></p>
 </div>
 
 <p>＊所要時間</p>
 <div style="display:inline-flex">
-<p>0</p>時間
-<p>15</p>分
+<p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][1]['trans_time']);?></p>
 </div>
 
 <p>＊費用<br>
-<p>230</p>円（目安）</p>
+<p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][1]['trans_fee']);?></p>円（目安）</p>
 
 <p>＊メモ<br>
-費用はバス１人分の運賃です。</p>
+<?php echo htmlspecialchars($_SESSION['plan']['transportation'][1]['comment']);?></p></p>
 
 </div>
             <!-- /Body -->
@@ -213,39 +209,36 @@
            <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <h2>清水寺</h2></p>
+    <p>スポット名<br>
+    <h2><?php echo htmlspecialchars($_SESSION['plan']['spots'][2]['spot_name']);?></h2></p>
 
-<p>京都</p>
+<p><?php echo htmlspecialchars($_SESSION['plan']['spots'][2]['area_name']);?></p>
 
 <p>＊混雑具合<br>
- めちゃ混み
+<?php echo htmlspecialchars($_SESSION['plan']['spots'][2]['crowded']);?>
 </p>
 
 <p>＊滞在時間</p>
 <div style="display:inline-flex">
-<p>1</p>時間
-<p>30</p>分
+<p><?php echo htmlspecialchars($_SESSION['plan']['spots'][2]['stay_time']);?></p>
 </div>
 
 <p>＊費用<br>
 <div style="display:inline-flex">
-<P>2000円</P>（目安）</p>
+<P><?php echo htmlspecialchars($_SESSION['plan']['spots'][2]['fee']);?></P>円（目安）</p>
 </div>
 
 
 <p>＊メモ<br>
-<p>京都デートの定番スポット！
-カップルで存分に楽しめると思います。
-二人分の参拝料とお守りを購入してだいたい2000円くらいでした。
-歩きやすい靴でいくことをお勧めします(°▽°)</p>
+<p><?php echo htmlspecialchars($_SESSION['plan']['spots'][2]['comment']);?></p>
 </p>
 
 <!-- <div style="display:inline-flex"> -->
- <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+  <div class="panel-body">
+                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['plan']['spots'][2]['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
             </div>
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <img src="../<?php echo $path_adjust_string;?>plan_picture/<?php echo htmlspecialchars($_SESSION['plan']['spots'][2]['picture_2'], ENT_QUOTES, 'UTF-8'); ?>" width="208" height="129">
             </div>
 </div>
 

@@ -10,10 +10,8 @@
 
 
 <!-- Page header -->
-
-  <div class="page-header" style="margin-top:70px;">
-
 <form method="post" action="" enctype="multipart/form-data" class="repeater">
+  <div class="page-header" style="margin-top:70px;">
         <p>プラン名<br>
     <input type="text" name="title" size="60"></p>
 
@@ -32,7 +30,7 @@
 <option value="2019">2019</option>
 <option value="2020">2020</option>
 </select>
-年 
+年
 </p>
 
     <p>＊訪問した月を選択してください。（複数選択可）<br>
@@ -53,9 +51,7 @@
 <p>＊訪問日を選択してください。<br>
 <input type="radio" name="visit_type_name" value="平日" checked> 平日
 <input type="radio" name="visit_type_name" value="土日・祝祭日"> 土日・祝祭日
-
 </p>
-
 
 </div>
 
@@ -63,7 +59,9 @@
 
 
 <ul id="sortable1" class="droptrue" data-repeater-list="group-a">
-  <li class="ui-state-default">
+  <input data-repeater-delete type="button" value="削除"/>
+  <input data-repeater-create type="button" value="追加"/>
+  <li data-repeater-item class="ui-state-default">
 
 <dl class="syncer-acdn-faq">
   <dt class="syncer-acdn" data-target="syncer-acdn-01">スポット</dt>
@@ -73,7 +71,8 @@
             <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <input type="text" name="spot_name[]" size="40"></p>
+    <input type="text" name="spot_name" size="40"></p>
+
 
 <p><select name="area_name">
 <option value="">都道府県の選択</option>
@@ -148,8 +147,6 @@
 <p>＊滞在時間<br>
 <input type="text" name="stay_time" placeholder="例:1時間30分" size="14"></p>
 
-</div>
-
 <p>＊費用<br>
 <input type="text" name="fee" size="6">円（目安）</p>
 
@@ -161,8 +158,6 @@
 <input type="file" name="picture_1">
 <p>画像ファイル②</p>
 <input type="file" name="picture_2">
-
-</div>
             <!-- /Body -->
 
 
@@ -170,8 +165,6 @@
         </dd>
         </dl>
   </li>
-  <input data-repeater-delete type="button" value="削除"/>
-  <input data-repeater-create type="button" value="追加"/>
 </ul>
 
 
@@ -180,7 +173,8 @@
 
 
 <ul id="sortable2" class="dropfalse" data-repeater-list="group-b">
-
+ <input data-repeater-delete type="button" value="削除"/>
+  <input data-repeater-create type="button" value="追加"/>
   <li class="ui-state-highlight">
 
         <dl class="syncer-acdn-faq">
@@ -209,29 +203,20 @@
 </div>
 
 <p>＊所要時間</p>
-<div style="display:inline-flex">
-<input type="text" name="hour" size="4">時間
-<input type="text" name="minute" size="4">分
-</div>
+<input type="text" name="trans_time" placeholder="例:30分" size="14"></p>
 
 <p>＊費用<br>
-<input type="text" name="suppot_name" size="6">円（目安）</p>
+<input type="text" name="trans_fee" size="6">円（目安）</p>
 
 <p>＊メモ<br>
-<textarea name="example1" cols="50" rows="5"></textarea></p>
+<textarea name="comment" cols="50" rows="5"></textarea></p>
 
 </div>
             <!-- /Body -->
-    
-
         <!-- /Panel -->
         </dd>
         </dl>
   </li>
-
-  <input data-repeater-delete type="button" value="削除"/>
-  <input data-repeater-create type="button" value="追加"/>
-
 </ul>
 
 
