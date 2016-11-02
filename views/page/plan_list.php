@@ -21,7 +21,7 @@
                                             <?php if($_SESSION['prefecture'] == $pref):?>
                                               echo ('<option value="$pref" selected="selected"><?php echo $pref; ?></option>');
                                             <?php else: ?>
-                                              echo ('<option value="$pref"><?php echo $pref; ?>'</option>');
+                                              echo ('<option value="$pref"><?php echo $pref; ?></option>');
                                             <?php endif; ?>
                                           <?php endforeach; ?>
                                         </select>
@@ -30,21 +30,16 @@
                                     <label class="col-md-4 control-label">旅する月：</label>
                                       <div class="col-md-8 research">
 
-                                        <input type="checkbox" name="month[]" value="1" />１月
-                                        <input type="checkbox" name="month[]" value="2" />２月
-                                        <input type="checkbox" name="month[]" value="3" />３月
-                                        <input type="checkbox" name="month[]" value="4" />４月
-                                        <br>
-                                        <input type="checkbox" name="month[]" value="5" />５月
-                                        <input type="checkbox" name="month[]" value="6" />６月
-                                        <input type="checkbox" name="month[]" value="7" />７月
-                                        <input type="checkbox" name="month[]" value="8" />８月
-                                        <br>
-                                        <input type="checkbox" name="month[]" value="9" />９月
-                                        <input type="checkbox" name="month[]" value="10" />10月
-                                        <input type="checkbox" name="month[]" value="11" />11月
-                                        <input type="checkbox" name="month[]" value="12" />12月
-                                        <br>
+                                      <?php foreach($_SESSION['tsuki'] as $tsuki): ?>
+                                        <?php foreach ($_SESSION['month'] as $month): ?>
+                                          <?php if ($month == $tsuki): ?>
+                                            <?php echo '<input type="checkbox" name="month[]" value="$tsuki" checked="checked">'; ?><?php echo $tsuki; ?> 
+                                          <?php else: ?>
+                                            <?php echo '<input type="checkbox" name="month[]" value="$tsuki">'; ?><?php echo $tsuki; ?>
+                                          <?php endif; ?>
+                                        <?php endforeach; ?>
+                                      <?php endforeach; ?>
+
                                       </div>
 
 

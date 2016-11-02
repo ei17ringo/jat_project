@@ -84,20 +84,20 @@
 
                                     <label class="col-md-4 control-label">旅する月：</label>
                                       <div class="col-md-8 research">
-                                        <input type="checkbox" name="month[]" value="1" />１月
-                                        <input type="checkbox" name="month[]" value="2" />２月
-                                        <input type="checkbox" name="month[]" value="3" />３月
-                                        <input type="checkbox" name="month[]" value="4" />４月
+                                        <input type="checkbox" name="month[]" value="１月" />１月
+                                        <input type="checkbox" name="month[]" value="２月" />２月
+                                        <input type="checkbox" name="month[]" value="３月" />３月
+                                        <input type="checkbox" name="month[]" value="４月" />４月
                                         <br>
-                                        <input type="checkbox" name="month[]" value="5" />５月
-                                        <input type="checkbox" name="month[]" value="6" />６月
-                                        <input type="checkbox" name="month[]" value="7" />７月
-                                        <input type="checkbox" name="month[]" value="8" />８月
+                                        <input type="checkbox" name="month[]" value="５月" />５月
+                                        <input type="checkbox" name="month[]" value="６月" />６月
+                                        <input type="checkbox" name="month[]" value="７月" />７月
+                                        <input type="checkbox" name="month[]" value="８月" />８月
                                         <br>
-                                        <input type="checkbox" name="month[]" value="9" />９月
-                                        <input type="checkbox" name="month[]" value="10" />10月
-                                        <input type="checkbox" name="month[]" value="11" />11月
-                                        <input type="checkbox" name="month[]" value="12" />12月
+                                        <input type="checkbox" name="month[]" value="９月" />９月
+                                        <input type="checkbox" name="month[]" value="10月" />10月
+                                        <input type="checkbox" name="month[]" value="11月" />11月
+                                        <input type="checkbox" name="month[]" value="12月" />12月
                                         <br>
                                       </div>
 
