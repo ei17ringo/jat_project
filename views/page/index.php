@@ -104,14 +104,14 @@
 
                                       <label class="col-md-4 control-label">交通手段：</label>
                                         <div class="col-md-8 research">
-                                          <input type="checkbox" name="transpotation[]" value="walk" />徒　歩
-                                          <input type="checkbox" name="transpotation[]" value="bike" />自転車
-                                          <input type="checkbox" name="transpotation[]" value="autobike" />バイク
-                                          <input type="checkbox" name="transpotation[]" value="car" />自動車
+                                          <input type="checkbox" name="transpotation[]" value="徒　歩" />徒　歩
+                                          <input type="checkbox" name="transpotation[]" value="自転車" />自転車
+                                          <input type="checkbox" name="transpotation[]" value="バイク" />バイク
+                                          <input type="checkbox" name="transpotation[]" value="自動車" />自動車
                                           <br>
-                                          <input type="checkbox" name="transpotation[]" value="train" />電　車
-                                          <input type="checkbox" name="transpotation[]" value="cab" />タクシー
-                                          <input type="checkbox" name="transpotation[]" value="other" />その他　
+                                          <input type="checkbox" name="transpotation[]" value="電　車" />電　車
+                                          <input type="checkbox" name="transpotation[]" value="タクシー" />タクシー
+                                          <input type="checkbox" name="transpotation[]" value="その他" />その他
                                         </div>
 
                                       <label class="col-md-4 control-label">投稿時期：</label>

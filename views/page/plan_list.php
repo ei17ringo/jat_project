@@ -31,13 +31,13 @@
                                       <div class="col-md-8 research">
 
                                       <?php foreach($_SESSION['tsuki'] as $tsuki): ?>
-                                        <?php foreach ($_SESSION['month'] as $month): ?>
-                                          <?php if ($month == $tsuki): ?>
-                                            <?php echo '<input type="checkbox" name="month[]" value="$tsuki" checked="checked">'; ?><?php echo $tsuki; ?> 
-                                          <?php else: ?>
-                                            <?php echo '<input type="checkbox" name="month[]" value="$tsuki">'; ?><?php echo $tsuki; ?>
-                                          <?php endif; ?>
-                                        <?php endforeach; ?>
+                                        <?php $checked = ''; ?>
+                                          <?php foreach ($_SESSION['month'] as $month): ?>
+                                            <?php if ($month == $tsuki): ?>
+                                                <?php $checked = 'checked="checked"'; ?>
+                                              <?php endif; ?>
+                                            <?php endforeach; ?>
+                                          <?php echo '<input type="checkbox" name="month[]" value="$tsuki" '. $checked .'>'; ?><?php echo $tsuki; ?>
                                       <?php endforeach; ?>
 
                                       </div>
@@ -45,14 +45,17 @@
 
                                       <label class="col-md-4 control-label">交通手段：</label>
                                         <div class="col-md-8 research">
-                                          <input type="checkbox" name="transportation[]" value="walk" checked="checked" />徒　歩
-                                          <input type="checkbox" name="transportation[]" value="bike" />自転車
-                                          <input type="checkbox" name="transportation[]" value="autobike" />バイク
-                                          <input type="checkbox" name="transportation[]" value="car" />自動車
-                                          <br>
-                                          <input type="checkbox" name="transportation[]" value="train" />電　車
-                                          <input type="checkbox" name="transportation[]" value="cab" />タクシー
-                                          <input type="checkbox" name="transportation[]" value="other" />その他　
+
+                                        <?php foreach($_SESSION['kotsu'] as $kotsu): ?>
+                                          <?php $checked = ''; ?>
+                                            <?php foreach ($_SESSION['transpotation'] as $transpotation): ?>
+                                              <?php if ($transpotation == $kotsu): ?>
+                                                  <?php $checked = 'checked="checked"'; ?>
+                                                <?php endif; ?>
+                                              <?php endforeach; ?>
+                                            <?php echo '<input type="checkbox" name="transpotation[]" value="$kotsu" '. $checked .'>'; ?><?php echo $kotsu; ?>
+                                        <?php endforeach; ?>
+                                        
                                         </div>
 
                                       <label class="col-md-4 control-label">投稿時期：</label>
