@@ -107,8 +107,9 @@
 
 
     function friendPlanContents($id) {
-      $sql = sprintf('SELECT * FROM `plans` p, `users` u, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id` AND p.`user_id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $id)
+      $sql = sprintf('SELECT * FROM `plans` p, `users` u, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id` AND p.`user_id` = %d LIMIT %d, 5',
+        mysqli_real_escape_string($this->dbconnect, $id),
+        $_SESSION['start']
       );
       $content      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $contents     = array();

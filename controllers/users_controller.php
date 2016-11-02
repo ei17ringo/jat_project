@@ -32,9 +32,6 @@
       case 'unlike';
           $controller->unlike($id);
           break;
-      case 'paging':
-          $controller->mypostpaging($id);
-          break;
       case 'edit':
           $controller->edit($id);
           break;
@@ -305,16 +302,8 @@
         $_SESSION['start'] = ($page - 1) * 5;
         // $_SESSION['start'] = max(0, $start);
 
-
       $postPlanContents = $user->postPlanContents();
       $favPlans         = $user->favPlan();
-
-
-
-
-
-      
-
 
       require('views/layouts/application.php');
     }
@@ -358,13 +347,7 @@
         $_SESSION['start'] = ($page - 1) * 5;
         // $_SESSION['start'] = max(0, $start);
 
-
       $friendPlanContents = $user->friendPlanContents($id);
-
-
-
-
-
 
       require('views/layouts/application.php');
     }
