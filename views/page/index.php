@@ -152,9 +152,10 @@
                                   <div class="col-md-12">
                                     <?php foreach($indexContent as $content): ?>
                                       <li class="index-comment index-user-comment">
-                                        <p>投稿者：<?php echo htmlspecialchars($content['user_id']); ?>　作成日：<?php echo htmlspecialchars($content['created']); ?><br>
+                                        <p>投稿者：<?php echo htmlspecialchars($content['user_name']); ?>さん　作成日：<?php echo htmlspecialchars($content['created']); ?><br>
                                         旅路タイトル：<?php echo htmlspecialchars($content['title']); ?><br>
-                                        Euismod</p>
+                                        行き先：<?php echo htmlspecialchars($content['spot_name']); ?><br>
+                                        <a href="../plan/detail/<?php echo htmlspecialchars($content['plan_id']); ?>">View details »</a></p>
                                       </li>
                                     <?php endforeach; ?>
                                   </div>
