@@ -307,7 +307,8 @@
 
 
       $postPlanContents = $user->postPlanContents();
-      $postPlanSpots    = $user->postPlanSpots();
+      // $postPlanSpots    = $user->postPlanSpots();
+      $favPlans = $user->favPlan();
 
 
 

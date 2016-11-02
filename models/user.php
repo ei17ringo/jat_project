@@ -92,17 +92,30 @@
     }
 
 
-    function postPlanSpots() {
-      $sql = sprintf('SELECT * FROM `plan_spots` WHERE `plan_id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $postPlanContents['id'])
-      );
+    // function postPlanSpots() {
+    //   $sql = sprintf('SELECT * FROM `plan_spots` WHERE `plan_id` = %d',
+    //     mysqli_real_escape_string($this->dbconnect, $postPlanContents['id'])
+    //   );
 
-      $plan  =  mysqli_query($this->dbconnect, $sql) or die (mysqli_error($this->dbconnect));
-      $plans     = array();
-      while ($table = mysqli_fetch_assoc($plan)) {
-        $plans[] = $plan;
+    //   $plan  =  mysqli_query($this->dbconnect, $sql) or die (mysqli_error($this->dbconnect));
+    //   $plans     = array();
+    //   while ($table = mysqli_fetch_assoc($plan)) {
+    //     $plans[] = $plan;
+    //   }
+    //   return $plan;
+    // }
+
+
+    function favPlan() {
+      $sql = sprintf('SELECT * FROM `plans` p, `plan_like` pl WHERE p.`id` = pl.`favorite_plan_id` AND pl.`user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+      );
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $rtn = array();
+      while ($table = mysqli_fetch_assoc($record)) {
+        $rtn[] = $table;
       }
-      return $plan;
+      return $rtn;
     }
 
 

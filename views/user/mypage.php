@@ -53,7 +53,7 @@
 
                                   <div class="tag-favonum">
                                       <div class="col-md-12 tag-content-mypage">
-                                          <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span>
+                                          <!-- <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span> -->
                                       </div>
                                   </div>
 
@@ -107,7 +107,9 @@
                     <?php endforeach; ?>
                   </div>
 
+
                   <div role="tabpanel" class="tab-pane" id="favorite_plan">
+                    <?php foreach($favPlans as $favPlan): ?>
                       <div class="post_plan">
                           <div class="plans-show">
                               <div class="plans-title">
@@ -121,7 +123,7 @@
                                   <div class="col-md-8">
                                       <div class="plan-title">
                                           <h3 class="plan-title-name">
-                                              <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                              <a href="#"><?php echo htmlspecialchars($favPlan['title']); ?></a>
                                           </h3>
                                       </div>
                                   </div>
@@ -130,12 +132,12 @@
 
                                   <div class="tag-favonum">
                                       <div class="col-md-12 tag-content-mypage">
-                                          <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span>
+                                          <!-- <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span> -->
                                       </div>
                                   </div>
 
                                       <div class="col-md-12">
-                                          <div class="edit-btn">
+                                          <!-- <div class="edit-btn">
                                               <a href="#" class="active">
                                                   <div class="btn-set">
                                                       <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -146,18 +148,18 @@
                                                       <span class="glyphicon glyphicon-trash"></span>
                                                   </div>
                                               </a>
-                                          </div>
+                                          </div> -->
                                       </div>
                               </div>
 
                                   <div class="col-md-12">
-                                      <p>投稿者：<a href="">◯◯◯◯</a>  作成日：◯◯◯◯年◯◯月◯◯日</p>
+                                      <p>投稿者：<a href="">◯◯◯◯</a>  作成日：<?php echo htmlspecialchars($favPlan['created']); ?></p>
                                   </div>
                           </div>
 
                           <div class="plan-contents">
                               <p class="plan-idea">
-                                      目的地：京都符    訪問した年月：◯◯◯◯年◯◯月<br>
+                                      目的地：京都符    訪問した年月：<?php echo htmlspecialchars($favPlan['visit_year']); ?>年<?php echo htmlspecialchars($favPlan['visit_month']); ?>月<br>
                                   スポット：<a href="">◯◯◯◯</a><br>
                                   ◯◯◯◯◯◯◯◯◯◯◯◯<br>
                                   交通手段<br>
@@ -181,6 +183,7 @@
                                 </p>
                           </div>
                       </div>
+                    <?php endforeach; ?>
                   </div>
               </div>
 
