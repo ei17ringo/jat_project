@@ -52,7 +52,7 @@
                           <div class="col-md-8">
                               <div class="plan-title">
                                   <h3 class="plan-title-name">
-                                      <a href="#"><?php echo htmlspecialchars($planItem['title']); ?></a>
+                                      <a href="../plan/detail/<?php echo htmlspecialchars($planItem['plan_id']); ?>"><?php echo htmlspecialchars($planItem['title']); ?></a>
                                   </h3>
                               </div>
                           </div>
@@ -89,13 +89,13 @@
                   <div class="plan-contents">
                       <p class="plan-idea">
                               目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planItem['visit_year']); ?>年<?php echo htmlspecialchars($planItem['visit_month']); ?>月<br>
-                          スポット：<a href=""><?php echo htmlspecialchars($planItem['spot_name']); ?></a><br>
+                          スポット：<a href="../spot/detail/<?php echo htmlspecialchars($planItem['spot_id']); ?>"><?php echo htmlspecialchars($planItem['spot_name']); ?></a><br>
                           <h4>コメント：</h4><br>
                           <?php echo htmlspecialchars($planItem['comment']); ?><br>
                           
                         </p>
                         <p class="plan-detail">
-                          <a class="btn" href="#">View details »</a>
+                          <a class="btn" href="../plan/detail/<?php echo htmlspecialchars($planItem['plan_id']); ?>">View details »</a>
                         </p>
                   </div>
                 </div>

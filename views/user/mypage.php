@@ -44,7 +44,7 @@
                                   <div class="col-md-8">
                                       <div class="plan-title">
                                           <h3 class="plan-title-name">
-                                              <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                              <a href="../plan/detail/<?php echo htmlspecialchars($planContent['plan_id']); ?>"><?php echo htmlspecialchars($planContent['title']); ?></a>
                                           </h3>
                                       </div>
                                   </div>
@@ -81,12 +81,12 @@
                           <div class="plan-contents">
                               <p class="plan-idea">
                                       目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?>月<br>
-                                  スポット：<a href=""><?php echo htmlspecialchars($planContent['spot_name']); ?></a><br>
+                                  スポット：<a href="../spot/detail/<?php echo htmlspecialchars($planContent['spot_id']); ?>"><?php echo htmlspecialchars($planContent['spot_name']); ?></a><br>
                                   <h4>コメント：</h4><br>
                                     <?php echo htmlspecialchars($planContent['comment']); ?><br>
                                 </p>
                                 <p class="plan-detail">
-                                  <a class="btn" href="#">View details »</a>
+                                  <a class="btn" href="../plan/detail/<?php echo htmlspecialchars($planContent['plan_id']); ?>">View details »</a>
                                 </p>
                           </div>
                       </div>
@@ -109,7 +109,7 @@
                                   <div class="col-md-8">
                                       <div class="plan-title">
                                           <h3 class="plan-title-name">
-                                              <a href="#"><?php echo htmlspecialchars($favPlan['title']); ?></a>
+                                              <a href="../plan/detail/<?php echo htmlspecialchars($favPlan['plan_id']); ?>"><?php echo htmlspecialchars($favPlan['title']); ?></a>
                                           </h3>
                                       </div>
                                   </div>
@@ -139,19 +139,19 @@
                               </div>
 
                                   <div class="col-md-12">
-                                      <p>投稿者：<a href=""><?php echo htmlspecialchars($favPlan['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($favPlan['created']); ?></p>
+                                      <p>投稿者：<a href="profile/<?php echo htmlspecialchars($favPlan['user_id']); ?>"><?php echo htmlspecialchars($favPlan['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($favPlan['created']); ?></p>
                                   </div>
                           </div>
 
                           <div class="plan-contents">
                               <p class="plan-idea">
                                       目的地：京都符    訪問した年月：<?php echo htmlspecialchars($favPlan['visit_year']); ?>年<?php echo htmlspecialchars($favPlan['visit_month']); ?>月<br>
-                                  スポット：<a href=""><?php echo htmlspecialchars($favPlan['spot_name']); ?></a><br>
+                                  スポット：<a href="../spot/detail/<?php echo htmlspecialchars($favPlan['spot_id']); ?>"><?php echo htmlspecialchars($favPlan['spot_name']); ?></a><br>
                                   <h4>コメント：</h4><br>
                                     <?php echo htmlspecialchars($favPlan['comment']); ?><br>
                                 </p>
                                 <p class="plan-detail">
-                                  <a class="btn" href="#">View details »</a>
+                                  <a class="btn" href="../plan/detail/<?php echo htmlspecialchars($favPlan['plan_id']); ?>">View details »</a>
                                 </p>
                           </div>
                       </div>
