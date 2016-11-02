@@ -307,8 +307,7 @@
 
 
       $postPlanContents = $user->postPlanContents();
-      // $postPlanSpots    = $user->postPlanSpots();
-      $favPlans = $user->favPlan();
+      $favPlans         = $user->favPlan();
 
 
 
@@ -361,7 +360,7 @@
 
 
       $friendPlanContents = $user->friendPlanContents($id);
-      var_dump($friendPlanContents);
+
 
 
 

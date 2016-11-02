@@ -81,7 +81,7 @@
                           <div class="plan-contents">
                               <p class="plan-idea">
                                       目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?>月<br>
-                                  スポット：<a href=""></a><br>
+                                  スポット：<a href=""><?php echo htmlspecialchars($planContent['spot_name']); ?></a><br>
                                   ◯◯◯◯◯◯◯◯◯◯◯◯<br>
                                   交通手段<br>
                                   ◯◯◯◯◯◯◯◯◯◯◯◯<br>
@@ -153,7 +153,7 @@
                               </div>
 
                                   <div class="col-md-12">
-                                      <p>投稿者：<a href="">◯◯◯◯</a>  作成日：<?php echo htmlspecialchars($favPlan['created']); ?></p>
+                                      <p>投稿者：<a href=""><?php echo htmlspecialchars($favPlan['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($favPlan['created']); ?></p>
                                   </div>
                           </div>
 

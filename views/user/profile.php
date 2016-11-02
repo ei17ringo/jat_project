@@ -37,9 +37,8 @@
                   <a href="#">「<?php echo htmlspecialchars($viewInfo['user_name']); ?>さん」が投稿した旅路</a>
                 </li>
               </ul>
-
+<?php var_dump($friendPlanContents); ?>
               <?php foreach($friendPlanContents as $planItem): ?>
-                        <?php var_dump($planItem); ?>
                 <div class="post_plan">
                   <div class="plans-show">
                       <div class="plans-title">
@@ -62,7 +61,7 @@
 
                           <div class="tag-favonum">
                               <div class="col-md-12 tag-content-mypage">
-                                  <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span>
+                                  <!-- <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span> -->
                               </div>
                           </div>
 
@@ -83,14 +82,14 @@
                       </div>
 
                           <div class="col-md-12">
-                              <p>投稿者：<a><?php echo htmlspecialchars($viewInfo['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($planContent['created']); ?></p>
+                              <p>投稿者：<a><?php echo htmlspecialchars($viewInfo['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($planItem['created']); ?></p>
                           </div>
                   </div>
 
                   <div class="plan-contents">
                       <p class="plan-idea">
-                              目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?>月<br>
-                          スポット：<a href=""></a><br>
+                              目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planItem['visit_year']); ?>年<?php echo htmlspecialchars($planItem['visit_month']); ?>月<br>
+                          スポット：<a href=""><?php echo htmlspecialchars($planItem['spot_name']); ?></a><br>
                           ◯◯◯◯◯◯◯◯◯◯◯◯<br>
                           交通手段<br>
                           ◯◯◯◯◯◯◯◯◯◯◯◯<br>

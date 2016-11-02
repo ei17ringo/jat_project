@@ -79,36 +79,23 @@
 
 
     function postPlanContents() {
-      $sql = sprintf('SELECT * FROM `plans` WHERE `user_id` = %d LIMIT %d, 5',
+      $sql = sprintf('SELECT * FROM `plans` p, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps WHERE p.`id` = ps.`plan_id` AND `user_id` = %d LIMIT %d, 5',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
         $_SESSION['start']
       );
       $content      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $contents     = array();
       while ($table = mysqli_fetch_assoc($content)) {
-        $contents[] = $content;
+        $contents[] = $table;
       }
-      return $content;
+      return $contents;
     }
 
 
-    // function postPlanSpots() {
-    //   $sql = sprintf('SELECT * FROM `plan_spots` WHERE `plan_id` = %d',
-    //     mysqli_real_escape_string($this->dbconnect, $postPlanContents['id'])
-    //   );
-
-    //   $plan  =  mysqli_query($this->dbconnect, $sql) or die (mysqli_error($this->dbconnect));
-    //   $plans     = array();
-    //   while ($table = mysqli_fetch_assoc($plan)) {
-    //     $plans[] = $plan;
-    //   }
-    //   return $plan;
-    // }
-
-
     function favPlan() {
-      $sql = sprintf('SELECT * FROM `plans` p, `plan_like` pl WHERE p.`id` = pl.`favorite_plan_id` AND pl.`user_id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+      $sql = sprintf('SELECT * FROM `plans` p, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps, `plan_like` pl WHERE p.`id` = ps.`plan_id` AND p.`id` = pl.`favorite_plan_id` AND pl.`user_id` = %d LIMIT %d, 5',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
+        $_SESSION['start']
       );
       $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $rtn = array();
@@ -120,13 +107,13 @@
 
 
     function friendPlanContents($id) {
-      $sql = sprintf('SELECT * FROM `plans` WHERE `user_id` = %d',
+      $sql = sprintf('SELECT * FROM `plans` p, `users` u, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id` AND p.`user_id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)
       );
       $content      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $contents     = array();
       while ($table = mysqli_fetch_assoc($content)) {
-        $contents[] = $content;
+        $contents[] = $table;
       }
       return $contents;
     }
