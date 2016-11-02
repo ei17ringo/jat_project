@@ -74,7 +74,7 @@ if(empty($sd)){
 
                 $_SESSION['plan']['spots']= $sd['group-a'];
                 
-                $_SESSION['plan']['transportation']= $sd['group-b'];
+                // $_SESSION['plan']['transportation']= $sd['group-b'];
 
                 // $_SESSION['plan']['spot_name']=$sd['spot_name'];
 

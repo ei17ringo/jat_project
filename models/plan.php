@@ -93,17 +93,24 @@ function save() {
 function plan_spots_save($plan_id) {
 // 投稿をDBに登録
   if(empty($error)){
-     $sql = sprintf('INSERT INTO `plan_spots` SET `spot_name`="%s", `area_name`="%s", `crowded`="%s", `stay_time`="%s", `fee`="%s", `comment`="%s", `picture_1`="%s", `picture_2`="%s",`created`=now()',
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['spot_name']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['area_name']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['cowded']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['stay_time']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['fee']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['comment']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['picture_1']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['picture_2'])
+    foreach ($_SESSION['plan']['spots'] as $spot) {
+     $sql = sprintf('INSERT INTO `plan_spots` SET `plan_id`=%d, spot_id=%d, `spot_name`="%s", `spot_number`=%d,
+      `area_name`="%s", `crowded`="%s", `stay_time`="%s", `fee`="%s", `comment`="%s", `picture_1`="%s", `picture_2`="%s",`created`=now()',
+               $plan_id,
+               -1,
+               mysqli_real_escape_string($this->dbconnect, $spot['spot_name']),
+               1,
+               mysqli_real_escape_string($this->dbconnect, $spot['area_name']),
+               mysqli_real_escape_string($this->dbconnect, $spot['crowded']),
+               mysqli_real_escape_string($this->dbconnect, $spot['stay_time']),
+               mysqli_real_escape_string($this->dbconnect, $spot['fee']),
+               mysqli_real_escape_string($this->dbconnect, $spot['comment']),
+               mysqli_real_escape_string($this->dbconnect, ''),
+               mysqli_real_escape_string($this->dbconnect, '')
            );
            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+           }
+
            $last_id = mysqli_insert_id($this->dbconnect);
            unset($_SESSION['plan']);
            return $last_id;
