@@ -7,7 +7,7 @@
 
 <!-- Page header -->
 
-  <div class="page-header">
+  <div class="page-header" style="margin-top:70px;">
     
         <p>プラン名<br>
     <h1><?php echo $viewOptions['plan']['title']; ?></h1>
@@ -27,56 +27,68 @@
     <!-- /Page header -->
 
 
-<ul id="sortable1" class="droptrue">
+<ul>
+
+<?php foreach($viewOptions['plan_spots'] as $plan_spot):?>
   <li class="ui-state-default">
-
-
 <dl class="syncer-acdn-faq">
-  <dt class="syncer-acdn" data-target="syncer-acdn-01">行き先①</dt>
+  <dt class="syncer-acdn" data-target="syncer-acdn-01">行き先</dt>
 
-    <dd id="syncer-acdn-01">
+    <!-- <dd id="syncer-acdn-01"> -->
 
             <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <h2><?php echo $viewOptions['plan_spots'][0]['spot_name']; ?></h2></p>
+    <h2><?php echo $plan_spot['spot_name']; ?></h2></p>
 
-<p><?php echo $viewOptions['plan_spots'][0]['area_name']; ?></p>
+<p><?php echo $plan_spot['area_name']; ?></p>
 
 <p>＊混雑具合<br>
-<?php echo $viewOptions['plan_spots'][0]['crowded']; ?>
+<?php echo $plan_spot['crowded']; ?>
 </p>
 
 <p>＊滞在時間</p>
-<p><?php echo $viewOptions['plan_spots'][0]['stay_time']; ?></p>分
-</div>
+<p><?php echo $plan_spot['stay_time']; ?>分</p>
 
 <p>＊費用<br>
 <div style="display:inline-flex">
-<P><?php echo $viewOptions['plan_spots'][0]['fee']; ?></P>円（目安）</p>
-</div>
+<P><?php echo $plan_spot['fee']; ?></P>円（目安）</p>
+</div></p>
 
 
 <p>＊メモ<br>
-<p><?php echo $viewOptions['plan_spots'][0]['comment']; ?></p>
+<p><?php echo $plan_spot['comment']; ?></p>
 </p>
+
+</div>
 
 <!-- <div style="display:inline-flex"> -->
  <div class="panel-body">
-                <a href="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][0]['picture_1']; ?>" width="208" height="129">
+                <?php if(empty($plan_spot['picture_1'])): ?>
+                <img src="../../webroot/assets/img/no_image.png" width="208" height="129">
+              <?php else:?>
+                <a href="../../spot_picture/<?php echo $plan_spot['picture_1']; ?>"><img src="../../spot_picture/<?php echo $plan_spot['picture_1']; ?>" width="208" height="129">
             </a>
+          <?php endif;?>
             </div>
  <div class="panel-body">
-                <a href="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][0]['picture_2']; ?>" width="208" height="129">
+ <?php if(empty($plan_spot['picture_2'])): ?>
+                <img src="../../webroot/assets/img/no_image.png" width="208" height="129">
+              <?php else:?>
+                <a href="../../spot_picture/<?php echo $plan_spot['picture_2']; ?>"><img src="../../spot_picture/<?php echo $plan_spot['picture_2']; ?>" width="208" height="129">
             </a>
+             <?php endif;?>
             </div>
+
 <!-- </div> -->
 
             <!-- /Body -->
 
        
-        <!-- /Panel --></dd>　</dl>
+        <!-- /Panel --><!-- </dd> -->　</dl>
   </li>
+
+<?php endforeach ;?>
 
 
   <li class="ui-state-default">
@@ -111,144 +123,6 @@
 
         <!-- /Panel --></dd></dl>
         </li>
-
-
- <li class="ui-state-default">
-
-
-<dl class="syncer-acdn-faq">
-  <dt class="syncer-acdn" data-target="syncer-acdn-02">行き先②</dt>
-
-    <dd id="syncer-acdn-02">
-
-            <!-- Body -->
-            <div class="panel-body">
-        <p>スポット名<br>
-    <h2><?php echo $viewOptions['plan_spots'][1]['spot_name']; ?></h2></p>
-
-<p><?php echo $viewOptions['plan_spots'][1]['area_name']; ?></p>
-
-<p>＊混雑具合<br>
-<?php echo $viewOptions['plan_spots'][1]['crowded']; ?>
-</p>
-
-<p>＊滞在時間</p>
-<p><?php echo $viewOptions['plan_spots'][1]['stay_time']; ?></p>分
-</div>
-
-<p>＊費用<br>
-<div style="display:inline-flex">
-<P><?php echo $viewOptions['plan_spots'][1]['fee']; ?></P>円（目安）</p>
-</div>
-
-
-<p>＊メモ<br>
-<p><?php echo $viewOptions['plan_spots'][1]['comment']; ?></p>
-</p>
-
-<!-- <div style="display:inline-flex"> -->
- <div class="panel-body">
-                <a href="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][1]['picture_1']; ?>" width="208" height="129">
-            </a>
-            </div>
- <div class="panel-body">
-                <a href="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][1]['picture_2']; ?>" width="208" height="129">
-            </a>
-            </div>
-<!-- </div> -->
-
-            <!-- /Body -->
-
-       
-        <!-- /Panel --></dd>　</dl>
-  </li>
-
-
-  <li class="ui-state-default">
-  <dl class="syncer-acdn-faq">
-  <dt class="syncer-acdn" data-target="syncer-acdn-102">移動経路②</dt>
-    
-    <dd id="syncer-acdn-102">
-    
-    
-           <!-- Body -->
-<div class="panel-body">
-                <p>＊交通手段の選択</p>
-                <div style="display:inline-flex">
-    <p>バス</p>
-</div>
-
-<p>＊所要時間</p>
-<div style="display:inline-flex">
-<p>0</p>時間
-<p>15</p>分
-</div>
-
-<p>＊費用<br>
-<p>230</p>円（目安）</p>
-
-<p>＊メモ<br>
-費用はバス１人分の運賃です。</p>
-
-</div>
-            <!-- /Body -->
-    
-    
-
-        <!-- /Panel --></dd></dl>
-        </li>
-
-        <li class="ui-state-default">
-
-
-<dl class="syncer-acdn-faq">
-  <dt class="syncer-acdn" data-target="syncer-acdn-03">行き先③</dt>
-
-    <dd id="syncer-acdn-03">
-
-            <!-- Body -->
-            <div class="panel-body">
-        <p>スポット名<br>
-    <h2><?php echo $viewOptions['plan_spots'][2]['spot_name']; ?></h2></p>
-
-<p><?php echo $viewOptions['plan_spots'][2]['area_name']; ?></p>
-
-<p>＊混雑具合<br>
-<?php echo $viewOptions['plan_spots'][2]['crowded']; ?>
-</p>
-
-<p>＊滞在時間</p>
-<p><?php echo $viewOptions['plan_spots'][2]['stay_time']; ?></p>分
-</div>
-
-<p>＊費用<br>
-<div style="display:inline-flex">
-<P><?php echo $viewOptions['plan_spots'][2]['fee']; ?></P>円（目安）</p>
-</div>
-
-
-<p>＊メモ<br>
-<p><?php echo $viewOptions['plan_spots'][2]['comment']; ?></p>
-</p>
-
-<!-- <div style="display:inline-flex"> -->
- <div class="panel-body">
-                <a href="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][2]['picture_1']; ?>" width="208" height="129">
-            </a>
-            </div>
- <div class="panel-body">
-                <a href="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][2]['picture_2']; ?>" width="208" height="129">
-            </a>
-            </div>
-<!-- </div> -->
-
-            <!-- /Body -->
-
-       
-        <!-- /Panel --></dd>　</dl>
-  </li>
-
-
 
 </ul>
  
