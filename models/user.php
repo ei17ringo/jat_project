@@ -120,6 +120,19 @@
     }
 
 
+    function friendPostPaging($id) {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plans` p, `users` u, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id` AND p.`user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+      );
+      $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $table     = mysqli_fetch_assoc($recordSet);
+      // ceil()関数：切り上げする関数
+      $maxPage   = ceil($table['cnt'] / 5);
+
+      return $maxPage;
+    }
+
+
     function likeNum() {
       $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `favorite_user_id` = %d',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
@@ -180,15 +193,6 @@
 
       return $maxLikePage;
     }
-    
-
-    function show($id) {
-      $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
-      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-      $result  = mysqli_fetch_assoc($results);
-    }
 
 
     function likeStatus($id) {
@@ -237,34 +241,6 @@
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
         mysqli_real_escape_string($this->dbconnect, $id)
       );
-      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-    }
-
-
-    function edit($id) {
-      $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
-      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-      $result  = mysqli_fetch_assoc($results);
-      return $result;
-    }
-
-
-    function update($post, $id) {
-      $sql = sprintf('UPDATE `blogs` SET `title`= "%s",`body`= "%s" WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $post['title']),
-        mysqli_real_escape_string($this->dbconnect, $post['body']),
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
-      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-    }
-
-    
-    function delete($id) {
-      $sql = sprintf('UPDATE `blogs` SET `delete_flag`= 1 WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
     }
   }

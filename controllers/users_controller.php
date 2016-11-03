@@ -344,7 +344,7 @@
 
       $likeCount   = $user->likeCount($id);
 
-      $maxPage     = $user->postpaging($id);
+      $maxPage     = $user->friendPostPaging($id);
                   // ページングの設置
         $page = '';
         // GETパラメーターで渡されるページ番号を取得
