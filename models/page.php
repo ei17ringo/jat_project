@@ -48,13 +48,8 @@
     }
 
 
-    function searchContent($view,$areaName) {
-      if (empty($areaName)) {
-        $areaSubQuery = ' (SELECT * FROM `plan_spots` WHERE `spot_number` = 1)';
-      } else {
-        $areaSubQuery = '(SELECT * FROM `plan_spots` WHERE `area_name` ="' . $areaName . '" group by `plan_id`)';
-      }
-
+    function searchContent($view,$areaName,$month) {
+      
       if (empty($view)) {
         $viewSubQuery = '';
       } else {
@@ -67,8 +62,22 @@
       }
         $viewSubQuery = ' AND p.`created` > now()-INTERVAL ' . $viewMonth . ' MONTH ';
       }
+
+      if (empty($areaName)) {
+        $areaSubQuery = ' (SELECT * FROM `plan_spots` WHERE `spot_number` = 1)';
+      } else {
+        $areaSubQuery = '(SELECT * FROM `plan_spots` WHERE `area_name` ="' . $areaName . '" group by `plan_id`)';
+      }
+
+      if (empty($month)) {
+        foreach ($month as $when) {
+          if ($when = '１月') {
+            $viewWhen = ''
+          }
+        }
+      }
       
-      $sql = 'SELECT * FROM `plans` p, `users` u,' . $areaSubQuery . ' ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id`' . $viewSubQuery . 'ORDER BY p.`id` DESC';
+      $sql = 'SELECT * FROM `plans` p, `users` u,' . $areaSubQuery . ' ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id`' . $viewSubQuery . ' ORDER BY p.`id` DESC';
       var_dump($sql);
 
       $content = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
