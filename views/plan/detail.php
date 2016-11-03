@@ -93,7 +93,7 @@
 
   <li class="ui-state-default">
   <dl class="syncer-acdn-faq">
-  <dt class="syncer-acdn" data-target="syncer-acdn-101">移動経路①</dt>
+  <dt class="syncer-acdn" data-target="syncer-acdn-101">移動経路</dt>
     
     <dd id="syncer-acdn-101">
     

@@ -10,7 +10,7 @@
 
 
 <!-- Page header -->
-<form method="post" action="" enctype="multipart/form-data" class="repeater">
+<form id="form1" method="post" action="" enctype="multipart/form-data" class="repeater">
   <div class="page-header" style="margin-top:70px;">
         <p>プラン名<br>
     <input type="text" name="title" size="60"></p>
@@ -166,16 +166,16 @@
         </dl>
   </li>
 </ul>
+</form>
 
 
 
 
-
-
+<form id="form2" method="post" action="" class="repeater">
 <ul id="sortable2" class="dropfalse" data-repeater-list="group-b">
  <input data-repeater-delete type="button" value="削除"/>
   <input data-repeater-create type="button" value="追加"/>
-  <li class="ui-state-highlight">
+  <li data-repeater-item class="ui-state-highlight">
 
         <dl class="syncer-acdn-faq">
   <dt class="syncer-acdn" data-target="syncer-acdn-101">移動経路</dt>
@@ -223,6 +223,12 @@
 
 <br style="clear:both">
 
-<p><input type="submit" value="確認ページへ"></p>
+<p><input type="button" value="確認ページへ" onclick="send()"></p>
 </form>
+<script type="text/javascript">
+function send(){
+  var target1= document.getElementById("form1");
 
+  target1.submit();
+}
+</script>

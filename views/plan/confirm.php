@@ -34,10 +34,14 @@
   </div>
 
     <!-- /Page header -->
-
+<?php var_dump($_SESSION['plan_spots']);?>
 <div class="row">
 <ul>
+
 <?php foreach($_SESSION['plan_spots'] as $plan_spot):?>
+
+
+  <?php if (isset($plan_spot['spot_name'])):?>
   <li class="ui-state-default">
 <dl class="syncer-acdn-faq">
   <dt class="syncer-acdn" data-target="syncer-acdn-01">行き先</dt>
@@ -90,48 +94,49 @@
 <!-- </dd> -->
 </dl>
 </li>
-<?php endforeach ;?>
-
+<?php else:?>
 
   <li class="ui-state-default">
   <dl class="syncer-acdn-faq">
-  <dt class="syncer-acdn" data-target="syncer-acdn-101">移動経路①</dt>
+  <dt class="syncer-acdn" data-target="syncer-acdn-101">移動経路</dt>
     
-    <dd id="syncer-acdn-101">
+<!--     <dd id="syncer-acdn-101"> -->
     
     
             <!-- Body -->
 <div class="panel-body">
   <p>＊交通手段の選択</p>
     <div style="display:inline-flex">
-  <p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['trans_way']);?></p>
-  <p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['other_way']) ;?></p>
+  <p><?php echo htmlspecialchars($plan_spot['trans_way']);?></p>
+  <p><?php echo htmlspecialchars($plan_spot['other_way']) ;?></p>
 </div>
 
 <p>＊所要時間</p>
 <div style="display:inline-flex">
-<p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['trans_time']);?></p>
+<p><?php echo htmlspecialchars($plan_spot['trans_time']);?></p>
 </div>
 
 <p>＊費用<br>
-<p><?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['trans_fee']);?></p>円（目安）</p>
+<p><?php echo htmlspecialchars($plan_spot['trans_fee']);?></p>円（目安）</p>
 
 <p>＊メモ<br>
-<?php echo htmlspecialchars($_SESSION['plan']['transportation'][0]['comment']);?></p>
+<?php echo htmlspecialchars($plan_spot['comment']);?></p>
 
 </div>
 
 
-        </dd>
+ <!--        </dd> -->
         </dl>
         </li>
+      <?php endif;?>
+ <?php endforeach ;?>
 
 </ul>
 
 </div>
 
 <div class="row" style="margin:5px">
- <p><input type="submit" name="regist"　value="投稿する"></p>
+ <p><input type="submit" name="regist" value="投稿する"></p>
 <p><input type="submit" value="戻る" name="return" onClick="history.back()"></p>
 </div>
 

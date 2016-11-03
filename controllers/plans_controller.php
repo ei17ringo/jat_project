@@ -73,6 +73,8 @@ if(empty($sd)){
                 $_SESSION['plan']['visit_type_name']=$sd['visit_type_name'];
 
                 $_SESSION['plan_spots']= $sd['group-a'];
+
+                var_dump($sd['group-a']);
                 
                 // $_SESSION['plan']['transportation']= $sd['group-b'];
 
@@ -144,7 +146,7 @@ if(empty($sd)){
                   if($action=='edit'){
                     echo '<script> location.replace("../confirm/'.$id.'");</script>';
                     }else{
-                    echo '<script> location.replace("confirm");</script>';
+                    // echo '<script> location.replace("confirm");</script>';
                   }
                     exit;
                    }
@@ -189,7 +191,9 @@ if(empty($sd)){
          $plan= new Plan();
         $plan_id= $plan->save();
         $plan->plan_spots_save($plan_id);
-       
+        $plan->transportation_save($plan_id);
+        unset($_SESSION['plan']);
+        unset($_SESSION['plan_spots']);
         // トップページへ
 　　　　　header('Location:mypage');
          exit();
