@@ -32,15 +32,6 @@
       case 'unlike';
           $controller->unlike($id);
           break;
-      case 'edit':
-          $controller->edit($id);
-          break;
-      case 'update':
-          $controller->update($id, $post);
-          break;
-      case 'delete':
-          $controller->delete($id);
-          break;
       case 'logout':
           $controller->logout($id);
           break;
@@ -401,32 +392,5 @@
       $action      = 'paging';
     }
 
-
-
-    function edit($id) {
-      $user        = new User();
-      $viewOptions = $user->edit($id);
-      $action      = 'edit';
-      require('views/layouts/application.php');
-    }
-
-
-    function update($post, $id) {
-      $user = new User();
-      $user->update($id, $post);
-      // indexへ遷移
-      header('Location: /seed_blog/blogs/index');
-      exit();
-    }
-
-
-    function delete($id) {
-      $user        = new User();
-      $viewOptions = $user->delete($id);
-      $action      = 'delete';
-      // indexへ遷移
-      header('Location: /seed_blog/blogs/index');
-      exit();
-    }
   }
 ?>
