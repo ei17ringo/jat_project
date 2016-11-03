@@ -196,28 +196,6 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
 <script src="../<?php echo $path_adjust_string;?>webroot/jquery-ui-1.12.1.custom/accordion.js"></script>
 
-<script>
-   var $plangj= $.noConflict(true);
-   (function($) {
-  $( function() {
-    $( "ul.droptrue" ).sortable({
-      connectWith: "ul"
-    });
- 
-    $( "ul.dropfalse" ).sortable({
-      connectWith: "ul",
-      dropOnEmpty: false
-    });
- 
-    $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
-  } );
-  })($plangj);
-  </script>
-
-
-
-<!-- ボタンを押して追加・削除 -->
-></script>
 
 <script>
    var $plangj= $.noConflict(true);

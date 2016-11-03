@@ -34,7 +34,6 @@
   </div>
 
     <!-- /Page header -->
-<?php var_dump($_SESSION['plan_spots']);?>
 <div class="row">
 <ul>
 
