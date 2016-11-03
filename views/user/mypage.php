@@ -24,12 +24,28 @@
             <div class="col-md-8 mypage-main">
                 <!-- Nav tabs -->
               <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#post_plan" aria-controls="post_plan" role="tab" data-toggle="tab">自分が投稿した旅路</a></li>
-                <li role="presentation"><a href="#favorite_plan" aria-controls="favorite_plan" role="tab" data-toggle="tab">お気に入り旅路</a></li>
+                <?php if(isset($_GET['post_plan'])): ?>
+                  <li role="presentation" class="active"><a href="#post_plan" aria-controls="post_plan" role="tab" data-toggle="tab">自分が投稿した旅路</a></li>
+                <?php elseif((empty($_GET['post_plan'])) && (empty($_GET['favorite_plan']))): ?>
+                  <li role="presentation" class="active"><a href="#post_plan" aria-controls="post_plan" role="tab" data-toggle="tab">自分が投稿した旅路</a></li>
+                <?php else: ?>
+                  <li role="presentation"><a href="#post_plan" aria-controls="post_plan" role="tab" data-toggle="tab">自分が投稿した旅路</a></li>
+                <?php endif; ?>
+                <?php if(isset($_GET['favorite_plan'])): ?>
+                  <li role="presentation" class="active"><a href="#favorite_plan" aria-controls="favorite_plan" role="tab" data-toggle="tab">お気に入り旅路</a></li>
+                <?php else: ?>
+                  <li role="presentation"><a href="#favorite_plan" aria-controls="favorite_plan" role="tab" data-toggle="tab">お気に入り旅路</a></li>
+                <?php endif; ?>
               </ul>
 
               <div class="tab-content">
+                <?php if(isset($_GET['post_plan'])): ?>
                   <div role="tabpanel" class="tab-pane active" id="post_plan">
+                <?php elseif((empty($_GET['post_plan'])) && (empty($_GET['favorite_plan']))): ?>
+                  <div role="tabpanel" class="tab-pane active" id="post_plan">
+                <?php else: ?>
+                  <div role="tabpanel" class="tab-pane" id="post_plan">
+                <?php endif; ?>
                     <?php foreach($postPlanContents as $planContent): ?>
                       <div class="post_plan">
                           <div class="plans-show">
@@ -91,10 +107,33 @@
                           </div>
                       </div>
                     <?php endforeach; ?>
+                    <div class="col-md-12 mypage-pagi">
+                      <ul class="pagination">
+                      <?php if($page > 1): ?>
+                        <li>
+                          <a href="mypage?post_plan=1">最初へ</a>
+                        </li>
+                        <li>
+                          <a href="mypage?post_plan=<?php echo $page -1; ?>">Prev</a>
+                        </li>
+                      <?php endif; ?>
+                      <?php if($page < $maxPage): ?>
+                        <li>
+                          <a href="mypage?post_plan=<?php echo $page +1; ?>">Next</a>
+                        </li>
+                        <li>
+                          <a href="mypage?post_plan=<?php echo $maxPage; ?>">最後へ</a>
+                        </li>
+                      <?php endif; ?>
+                      </ul>
+                    </div>
                   </div>
 
-
-                  <div role="tabpanel" class="tab-pane" id="favorite_plan">
+                  <?php if(isset($_GET['favorite_plan'])): ?>
+                    <div role="tabpanel" class="tab-pane active" id="favorite_plan">
+                  <?php else: ?>
+                    <div role="tabpanel" class="tab-pane" id="favorite_plan">
+                  <?php endif;?>
                     <?php foreach($favPlans as $favPlan): ?>
                       <div class="post_plan">
                           <div class="plans-show">
@@ -156,32 +195,29 @@
                           </div>
                       </div>
                     <?php endforeach; ?>
+                      <div class="col-md-12 mypage-pagi">
+                        <ul class="pagination">
+                        <?php if($likePage > 1): ?>
+                          <li>
+                            <a href="mypage?favorite_plan=1">最初へ</a>
+                          </li>
+                          <li>
+                            <a href="mypage?favorite_plan=<?php echo $likePage -1; ?>">Prev</a>
+                          </li>
+                        <?php endif; ?>
+                        <?php if($likePage < $maxLikePage): ?>
+                          <li>
+                            <a href="mypage?favorite_plan=<?php echo $likePage +1; ?>">Next</a>
+                          </li>
+                          <li>
+                            <a href="mypage?favorite_plan=<?php echo $maxLikePage; ?>">最後へ</a>
+                          </li>
+                        <?php endif; ?>
+                        </ul>
                   </div>
+                </div>
               </div>
 
-
-
-                
-              <div class="col-md-12 mypage-pagi">
-                <ul class="pagination">
-                <?php if($page > 1): ?>
-                  <li>
-                    <a href="mypage?page=1">最初へ</a>
-                  </li>
-                  <li>
-                    <a href="mypage?page=<?php echo $page -1; ?>">Prev</a>
-                  </li>
-                <?php endif; ?>
-                <?php if($page < $maxPage): ?>
-                  <li>
-                    <a href="mypage?page=<?php echo $page +1; ?>">Next</a>
-                  </li>
-                  <li>
-                    <a href="mypage?page=<?php echo $maxPage; ?>">最後へ</a>
-                  </li>
-                <?php endif; ?>
-                </ul>
-              </div>
             </div>
             <div class="col-md-2">
               <h4>

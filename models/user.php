@@ -95,7 +95,7 @@
     function favPlan() {
       $sql = sprintf('SELECT * FROM `plans` p, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps, `plan_like` pl, `users` u WHERE p.`id` = ps.`plan_id` AND p.`user_id` = u.`id` AND p.`id` = pl.`favorite_plan_id` AND pl.`user_id` = %d LIMIT %d, 5',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
-        $_SESSION['start']
+        $_SESSION['likeStart']
       );
       $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $rtn = array();
@@ -168,18 +168,19 @@
     }
 
 
-    function favpostpaging() {
+    function myLikePaging() {
       // ②必要なページ数を計算する
-      $sql = 'SELECT COUNT(*) AS cnt FROM `plans`';
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plans` p, `plan_like` pl WHERE p.`user_id` = %d AND pl.`favorite_plan_id` = p.`id`',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+        );
       $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $table     = mysqli_fetch_assoc($recordSet);
       // ceil()関数：切り上げする関数
-      $maxPage   = ceil($table['cnt'] / 5);
+      $maxLikePage   = ceil($table['cnt'] / 5);
 
-      return $maxPage;
-
+      return $maxLikePage;
     }
-
+    
 
     function show($id) {
       $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',

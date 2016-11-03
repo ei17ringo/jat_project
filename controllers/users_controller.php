@@ -282,8 +282,8 @@
                   // ページングの設置
         $page = '';
         // GETパラメーターで渡されるページ番号を取得
-        if (isset($_REQUEST['page'])) {
-          $page = $_REQUEST['page'];
+        if (isset($_REQUEST['post_plan'])) {
+          $page = $_REQUEST['post_plan'];
         }
         // pageパラメーターがない場合は、ページ番号を１にする
         if ($page == '') {
@@ -293,13 +293,34 @@
         // max関数：()内に指定した複数のデータから、一番大きい値を返す。
         // ①表示する正しいページの数値(Min)を設定
         $page = max($page, 1);
-
         // ③表示する正しいページ数の数値(Max)を設定
         $page = min($page, $maxPage);
         // $_SESSION['page'] = min($page, $maxPage);
-
         // ④ページに表示する変数だけ取得
         $_SESSION['start'] = ($page - 1) * 5;
+        // $_SESSION['start'] = max(0, $start);
+
+
+        $maxLikePage     = $user->myLikePaging();
+                  // ページングの設置
+        $likePage = '';
+        // GETパラメーターで渡されるページ番号を取得
+        if (isset($_REQUEST['favorite_plan'])) {
+          $likePage = $_REQUEST['favorite_plan'];
+        }
+        // pageパラメーターがない場合は、ページ番号を１にする
+        if ($likePage == '') {
+          $likePage = 1;
+        }
+
+        // max関数：()内に指定した複数のデータから、一番大きい値を返す。
+        // ①表示する正しいページの数値(Min)を設定
+        $likePage = max($likePage, 1);
+        // ③表示する正しいページ数の数値(Max)を設定
+        $likePage = min($likePage, $maxLikePage);
+        // $_SESSION['page'] = min($page, $maxPage);
+        // ④ページに表示する変数だけ取得
+        $_SESSION['likeStart'] = ($likePage - 1) * 5;
         // $_SESSION['start'] = max(0, $start);
 
       $postPlanContents = $user->postPlanContents();
