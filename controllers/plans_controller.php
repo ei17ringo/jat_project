@@ -213,7 +213,8 @@ if(empty($sd)){
 
      function edit($id) {
        $plan = new Plan();
-       $viewOptions = $plan->edit($id);
+       $viewOptions['plan'] = $plan->edit($id);
+       $viewOptions['plan_spots']= $plan->plan_spots_edit($id);
        $resource= $this->resource;
        $action = 'edit';
 

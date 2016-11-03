@@ -69,6 +69,19 @@ function edit($id){
     }
 
 
+    function plan_spots_edit($id){
+    $sql=sprintf('SELECT * FROM `plan_spots` WHERE `plan_id`=%d',
+      mysqli_real_escape_string($this->dbconnect, $id)
+      );
+    $results=mysqli_query($this->dbconnect,$sql)or die(mysqli_error($this->dbconnect));
+    $spots=array();
+    while ($result = mysqli_fetch_assoc($results)) {
+      $spots[]=$result;
+    }
+    return $spots;
+    }
+
+
   function delete($id){
   $sql=sprintf('UPDATE `plans` SET `delete_flag`=1 WHERE `id`=%d',
   mysqli_real_escape_string($this->dbconnect,$id)
