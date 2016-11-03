@@ -1,8 +1,6 @@
 <?php
     $PlansController = new PlansController($db, $table_name, $action);
-    $plans_record = $plansController->show($id);
-
-    $plan = mysqli_fetch_assoc($plan_record);
+    $PlansController->_new($_POST);
 ?>
 
 <body>
@@ -12,15 +10,16 @@
   <div class="page-header">
     
         <p>プラン名<br>
-    <h1>京都紅葉デート</h1>
+    <h1><?php echo $viewOptions['plan']['title']; ?></h1>
 
+    <p>訪問した年<br>
+ <?php echo $viewOptions['plan']['visit_year']; ?></p>
 
+    <p>＊訪問した月<br>
+    <?php echo $viewOptions['plan']['visit_month']; ?></p>
 
-    <p>＊訪問した月を選択してください。（複数選択可）<br>
-    10月</p>
-
-<p>＊訪問日を選択してください。<br>
-土日・祝祭日
+<p>＊訪問日<br>
+<?php echo $viewOptions['plan']['visit_type_name']; ?>
 </p>
 
 </div>
@@ -34,46 +33,42 @@
 
 <dl class="syncer-acdn-faq">
   <dt class="syncer-acdn" data-target="syncer-acdn-01">行き先①</dt>
-    
+
     <dd id="syncer-acdn-01">
-            
-    
+
             <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <h2>清水寺</h2></p>
+    <h2><?php echo $viewOptions['plan_spots'][0]['spot_name']; ?></h2></p>
 
-<p>京都</p>
+<p><?php echo $viewOptions['plan_spots'][0]['area_name']; ?></p>
 
 <p>＊混雑具合<br>
- めちゃ混み
+<?php echo $viewOptions['plan_spots'][0]['crowded']; ?>
 </p>
 
 <p>＊滞在時間</p>
-<div style="display:inline-flex">
-<p>1</p>時間
-<p>30</p>分
+<p><?php echo $viewOptions['plan_spots'][0]['stay_time']; ?></p>分
 </div>
 
 <p>＊費用<br>
 <div style="display:inline-flex">
-<P>2000円</P>（目安）</p>
+<P><?php echo $viewOptions['plan_spots'][0]['fee']; ?></P>円（目安）</p>
 </div>
 
 
 <p>＊メモ<br>
-<p>京都デートの定番スポット！
-カップルで存分に楽しめると思います。
-二人分の参拝料とお守りを購入してだいたい2000円くらいでした。
-歩きやすい靴でいくことをお勧めします(°▽°)</p>
+<p><?php echo $viewOptions['plan_spots'][0]['comment']; ?></p>
 </p>
 
 <!-- <div style="display:inline-flex"> -->
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <a href="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][0]['picture_1']; ?>" width="208" height="129">
+            </a>
             </div>
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <a href="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][0]['picture_2']; ?>" width="208" height="129">
+            </a>
             </div>
 <!-- </div> -->
 
@@ -118,57 +113,55 @@
         </li>
 
 
-  <li class="ui-state-default">
-  <dl class="syncer-acdn-faq">
+ <li class="ui-state-default">
+
+
+<dl class="syncer-acdn-faq">
   <dt class="syncer-acdn" data-target="syncer-acdn-02">行き先②</dt>
+
     <dd id="syncer-acdn-02">
 
-            
-    
             <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <h2>清水寺</h2></p>
+    <h2><?php echo $viewOptions['plan_spots'][1]['spot_name']; ?></h2></p>
 
-<p>京都</p>
+<p><?php echo $viewOptions['plan_spots'][1]['area_name']; ?></p>
 
 <p>＊混雑具合<br>
- めちゃ混み
+<?php echo $viewOptions['plan_spots'][1]['crowded']; ?>
 </p>
 
 <p>＊滞在時間</p>
-<div style="display:inline-flex">
-<p>1</p>時間
-<p>30</p>分
+<p><?php echo $viewOptions['plan_spots'][1]['stay_time']; ?></p>分
 </div>
 
 <p>＊費用<br>
 <div style="display:inline-flex">
-<P>2000円</P>（目安）</p>
+<P><?php echo $viewOptions['plan_spots'][1]['fee']; ?></P>円（目安）</p>
 </div>
 
 
 <p>＊メモ<br>
-<p>京都デートの定番スポット！
-カップルで存分に楽しめると思います。
-二人分の参拝料とお守りを購入してだいたい2000円くらいでした。
-歩きやすい靴でいくことをお勧めします(°▽°)</p>
+<p><?php echo $viewOptions['plan_spots'][1]['comment']; ?></p>
 </p>
 
 <!-- <div style="display:inline-flex"> -->
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <a href="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][1]['picture_1']; ?>" width="208" height="129">
+            </a>
             </div>
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <a href="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][1]['picture_2']; ?>" width="208" height="129">
+            </a>
             </div>
 <!-- </div> -->
 
             <!-- /Body -->
 
-     
+       
         <!-- /Panel --></dd>　</dl>
-</li>
+  </li>
 
 
   <li class="ui-state-default">
@@ -205,57 +198,58 @@
         <!-- /Panel --></dd></dl>
         </li>
 
-  <li class="ui-state-default">
-  <dl class="syncer-acdn-faq">
+        <li class="ui-state-default">
+
+
+<dl class="syncer-acdn-faq">
   <dt class="syncer-acdn" data-target="syncer-acdn-03">行き先③</dt>
+
     <dd id="syncer-acdn-03">
 
-            
-    
-           <!-- Body -->
+            <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
-    <h2>清水寺</h2></p>
+    <h2><?php echo $viewOptions['plan_spots'][2]['spot_name']; ?></h2></p>
 
-<p>京都</p>
+<p><?php echo $viewOptions['plan_spots'][2]['area_name']; ?></p>
 
 <p>＊混雑具合<br>
- めちゃ混み
+<?php echo $viewOptions['plan_spots'][2]['crowded']; ?>
 </p>
 
 <p>＊滞在時間</p>
-<div style="display:inline-flex">
-<p>1</p>時間
-<p>30</p>分
+<p><?php echo $viewOptions['plan_spots'][2]['stay_time']; ?></p>分
 </div>
 
 <p>＊費用<br>
 <div style="display:inline-flex">
-<P>2000円</P>（目安）</p>
+<P><?php echo $viewOptions['plan_spots'][2]['fee']; ?></P>円（目安）</p>
 </div>
 
 
 <p>＊メモ<br>
-<p>京都デートの定番スポット！
-カップルで存分に楽しめると思います。
-二人分の参拝料とお守りを購入してだいたい2000円くらいでした。
-歩きやすい靴でいくことをお勧めします(°▽°)</p>
+<p><?php echo $viewOptions['plan_spots'][2]['comment']; ?></p>
 </p>
 
 <!-- <div style="display:inline-flex"> -->
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <a href="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][2]['picture_1']; ?>" width="208" height="129">
+            </a>
             </div>
  <div class="panel-body">
-                <img class="img-responsive img-rounded" src="//placehold.it/220x150" />
+                <a href="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>"><img src="../../spot_picture/<?php echo $viewOptions['plan_spots'][2]['picture_2']; ?>" width="208" height="129">
+            </a>
             </div>
 <!-- </div> -->
 
             <!-- /Body -->
 
-     
+       
         <!-- /Panel --></dd>　</dl>
-        </li>
+  </li>
+
+
+
 </ul>
  
 

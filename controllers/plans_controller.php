@@ -168,7 +168,8 @@ if(empty($sd)){
 
      function detail($id) {
        $plan = new Plan();
-       $viewOptions= $plan->detail($id);
+       $viewOptions['plan']= $plan->detail($id);
+       $viewOptions['plan_spots']= $plan->plan_spots_detail($id);
        $resource= $this->resource;
        $action = 'detail';
 
