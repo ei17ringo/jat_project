@@ -83,12 +83,16 @@ function edit($id){
 function save() {
 // 投稿をDBに登録
   if(empty($error)){
+    $visit_months='';
+    foreach ($_SESSION['plan']['visit_month'] as $visit_month) {
+      $visit_months.=$visit_month.'月,';
+    }
      $sql = sprintf('INSERT INTO `plans` SET `user_id`="%d", `title`="%s", `visit_year`="%s", `visit_month`="%s", `visit_type_name`="%s",`created`=now()',
               
                mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
                mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['title']),
                mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['visit_year']),
-               mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['visit_month']),
+               mysqli_real_escape_string($this->dbconnect, $visit_months),
                mysqli_real_escape_string($this->dbconnect, $_SESSION['plan']['visit_type_name'])
            );
            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
@@ -106,7 +110,7 @@ function save() {
 function plan_spots_save($plan_id) {
 // 投稿をDBに登録
   if(empty($error)){
-    foreach ($_SESSION['plan']['spots'] as $spot) {
+    foreach ($_SESSION['plan_spots'] as $spot) {
      $sql = sprintf('INSERT INTO `plan_spots` SET `plan_id`=%d, spot_id=%d, `spot_name`="%s", `spot_number`=%d,
       `area_name`="%s", `crowded`="%s", `stay_time`="%s", `fee`="%s", `comment`="%s", `picture_1`="%s", `picture_2`="%s",`created`=now()',
                $plan_id,
