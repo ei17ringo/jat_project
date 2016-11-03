@@ -54,7 +54,7 @@
 
                                     <div class="form-group">
                                        <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login"/>
-                                       <span class="pull-right"><a href="/jat_project/user/create">Register</a></span>
+                                       <span class="pull-right"><a href="../user/create">Register</a></span>
                                     </div>
 
                                 </div>

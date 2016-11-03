@@ -12,6 +12,7 @@
                               <div class="modal-header">
                                 <h1 class="text-center">旅路検索</h1>
                               </div>
+                              <form id="plan_search" method="post" action="" class="form-horizontal" role="form">
                                 <div class="modal-body">
                                     <label class="col-md-4 control-label">目的地：</label>
                                       <div class="col-md-8 research">
@@ -80,17 +81,15 @@
                                           </select>
                                         </div>
 
-                                      <label class="col-md-4 control-label"> タ グ ：</label>
+                                      <!-- <label class="col-md-4 control-label"> タ グ ：</label>
                                         <div class="col-md-8 research">
                                           <input type="text" class="form-control" placeholder="例）デート、紅葉、のんびり">
-                                        </div>
+                                        </div> -->
 
                                         <button type="submit" class="btn btn-block btn-default btn-warning" value="Login"/>Search</button>
-                                        <?php var_dump($_SESSION['prefecture']);
-                                         var_dump($_SESSION['month']);
-                                         var_dump($_SESSION['transpotation']);;
-                                         var_dump($_SESSION['view']); ?>
+                                       
                                 </div>
+                              </form>
                           </div>
                       </div>
                 </div>
@@ -124,7 +123,7 @@
                     <div class="btn-group">
                       <select id="tabChange" class="form-control" placeholder="最新投稿" onchange="indexTab()">
                         <option value="case_new">新着順</option>
-                        <option value="case_popular">人気順</option>
+<!--                         <option value="case_popular">人気順</option> -->
                       </select>
                     </div>
 
@@ -145,129 +144,56 @@
         </div>
 
         <div id="case_new">
-          <div class="content-section-a">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="plans-show">
-                  <div class="plan-upper-content">
-                    <div class="col-md-3 tag-content">
-                      <!-- <span class="glyphicon glyphicon-tags-mypage" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz</span> -->
-                    </div>
-                    <div class="col-md-6">
-                      <div class="plan-title">
-                        <h3>
-                          <a href="#">宇治抹茶スイーツ巡り</a>
-                        </h3><br>
-                        <p>投稿者：<a href="">◯◯◯◯</a>  作成日：◯◯◯◯年◯◯月◯◯日</p>
+          <?php foreach($searchContent as $search): ?>
+            <div class="content-section-a">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="plans-show">
+                    <div class="plan-upper-content">
+                      <div class="col-md-3 tag-content">
+                      </div>
+                      <div class="col-md-6">
+                        <div class="plan-title">
+                          <h3>
+                            <a href="../plan/detail/<?php echo htmlspecialchars($search['id'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($search['title'], ENT_QUOTES, 'UTF-8'); ?></a>
+                          </h3><br>
+                          <p>投稿者：<a href="../user/profile/<?php echo htmlspecialchars($search['user_id'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($search['user_name'], ENT_QUOTES, 'UTF-8'); ?>さん</a>  作成日：<?php echo htmlspecialchars($search['created'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 position-fix-plan-list">
+                        <div class="position-fix-plan-list">
+                          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-3 position-fix-plan-list">
-                      <div class="position-fix-plan-list">
-                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
+                      <div class="plan-contents">
+                        <div class="col-md-8">
+                          <p class="plan-idea">
+                            訪問した年月：<?php echo htmlspecialchars($search['visit_year'], ENT_QUOTES, 'UTF-8'); ?>年<?php echo htmlspecialchars($search['visit_month'], ENT_QUOTES, 'UTF-8'); ?>月<br>
+                            行き先：<?php echo htmlspecialchars($search['area_name'], ENT_QUOTES, 'UTF-8'); ?><br>
+                            スポット：<?php echo htmlspecialchars($search['spot_name'], ENT_QUOTES, 'UTF-8'); ?>　混み具合：<?php echo htmlspecialchars($search['crowded'], ENT_QUOTES, 'UTF-8'); ?>）　滞在時間：<?php echo htmlspecialchars($search['stay_time'], ENT_QUOTES, 'UTF-8'); ?>分<br>
+                            コメント：<br>
+                            <?php echo htmlspecialchars($search['comment']); ?>
+                            
+                          </p>
+                          <p class="plan-detail-plan-list">
+                            <a class="btn" href="../plan/detail/<?php echo htmlspecialchars($search['id'], ENT_QUOTES, 'UTF-8'); ?>">View details »</a>
+                          </p>
+                        </div>
+                        <div class="col-md-4">
+                          <img alt="Bootstrap Image Preview" src="../user_picture/<?php echo htmlspecialchars($search['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" />
+                        </div>
                       </div>
-                    </div>
                   </div>
-
-                    <div class="plan-contents">
-                      <div class="col-md-8">
-                        <p class="plan-idea">
-                          目的地：京都符    訪問した年月：◯◯◯◯年◯◯月<br>
-                          スポット：◯◯◯◯<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                        </p>
-                        <p class="plan-detail-plan-list">
-                          <a class="btn" href="#">View details »</a>
-                        </p>
-                      </div>
-                      <div class="col-md-4">
-                        <img alt="Bootstrap Image Preview" src="http://lorempixel.com/275/275/" />
-                      </div>
-                    </div>
                 </div>
               </div>
+              <!-- /.container -->
             </div>
-            <!-- /.container -->
-        </div>
-      <!-- /.content-section-a -->
-
-        <div class="content-section-b">
-
-          <div class="container-fluid">
-            <div class="row">
-              <div class="plans-show">
-                <div class="plan-upper-content">
-                  <div class="col-md-3 tag-content">
-                    <!-- <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijklmnopqrstuvwxyz</span> -->
-                  </div>
-                  <div class="col-md-6">
-                    <div class="plan-title">
-                      <h3>
-                        <a href="#">宇治抹茶スイーツ巡り</a>
-                      </h3><br>
-                      <p>投稿者：<a href="">◯◯◯◯</a>  作成日：◯◯◯◯年◯◯月◯◯日</p>
-                    </div>
-                  </div>
-                  <div class="col-md-3 position-fix-plan-list">
-                    <div class="position-fix-plan-list">
-                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
-                    </div>
-                  </div>
-                </div>
-
-                  <div class="plan-contents">
-                    <div class="col-md-8">
-                      <p class="plan-idea">
-                        目的地：京都符    訪問した年月：◯◯◯◯年◯◯月<br>
-                        スポット：◯◯◯◯<br>
-                        ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                        交通手段<br>
-                        ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                        交通手段<br>
-                        ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                        交通手段<br>
-                        ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                        交通手段<br>
-                        ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                        交通手段<br>
-                        ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                        交通手段<br>
-                        ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                        交通手段<br>
-                        ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                        交通手段<br>
-                      </p>
-                      <p class="plan-detail-plan-list">
-                        <a class="btn" href="#">View details »</a>
-                      </p>
-                    </div>
-                    <div class="col-md-4">
-                      <img alt="Bootstrap Image Preview" src="http://lorempixel.com/275/275/" />
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <!-- /.container -->
-        </div>
-      <!-- /.content-section-b -->
+        <!-- /.content-section-a -->
+        <?php endforeach; ?>
       </div>
 
-        <div id="case_popular">
+<!--         <div id="case_popular">
           <div class="content-section-a">
             <div class="container-fluid">
               <div class="row">
@@ -324,11 +250,11 @@
                 </div>
               </div>
             </div>
-            <!-- /.container -->
-        </div>
+            <!- /.container -->
+<!--         </div> -->
       <!-- /.content-section-a -->
 
-        <div class="content-section-b">
+ <!--        <div class="content-section-b">
 
           <div class="container-fluid">
             <div class="row">
@@ -384,29 +310,29 @@
                   </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- /.container -->
-        </div>
+        <!-- </div> -->
       <!-- /.content-section-b -->
-      </div>
+      <!-- </div> -->
 
         <script type="text/javascript">
-          function indexTab(){
-            if(document.getElementById('tabChange')){
-              id = document.getElementById('tabChange').value;
-              if(id == 'case_new'){
-                //フォーム
-                document.getElementById('case_new').style.display = "";
-                document.getElementById('case_popular').style.display = "none";
-              }else if(id == 'case_popular'){
-                //フォーム
-                document.getElementById('case_new').style.display = "none";
-                document.getElementById('case_popular').style.display = "";
-              }
-            }
-          }
+          // function indexTab(){
+          //   if(document.getElementById('tabChange')){
+          //     id = document.getElementById('tabChange').value;
+          //     if(id == 'case_new'){
+          //       //フォーム
+          //       document.getElementById('case_new').style.display = "";
+          //       document.getElementById('case_popular').style.display = "none";
+          //     }else if(id == 'case_popular'){
+          //       //フォーム
+          //       document.getElementById('case_new').style.display = "none";
+          //       document.getElementById('case_popular').style.display = "";
+          //     }
+          //   }
+          // }
           //オンロードさせ、リロード時に選択を保持
-          window.onload = indexTab;
+          // window.onload = indexTab;
         </script>
 
 

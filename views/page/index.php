@@ -124,10 +124,10 @@
                                             </select>
                                           </div>
 
-                                        <label class="col-md-4 control-label"> タ グ ：</label>
+                                        <!-- <label class="col-md-4 control-label"> タ グ ：</label>
                                           <div class="col-md-8 research">
                                             <input type="text" class="form-control" placeholder="例）デート、紅葉、のんびり">
-                                          </div>
+                                          </div> -->
 
                                          <button type="submit" class="btn btn-block btn-default btn-warning" value="Login"/>Search</button>
               

@@ -30,6 +30,11 @@
       $resource = $this->resource;
       $action   = $this->action;
 
+        $_SESSION['prefecture']   = '';
+        $_SESSION['month']        = '';
+        $_SESSION['tranpotation'] = '';
+        $_SESSION['view']         = '';
+
         if (!empty($_POST)) {
           if (isset($_POST['prefecture'])) {
             $_SESSION['prefecture'] = $_POST['prefecture'];
@@ -91,6 +96,28 @@
         header('Location: ../user/login');
         exit();
       }
+
+      $page             = new Page();
+      $searchContent    = $page->searchContent($_SESSION['view'],$_SESSION['prefecture']);
+
+      // if (!empty($_POST)) {
+      //     if (isset($_POST['prefecture'])) {
+      //       $_SESSION['prefecture'] = $_POST['prefecture'];
+      //     }
+      //     if (isset($_POST['month']) && is_array($_POST['month'])) {
+      //       $_SESSION['month'] = $_POST['month'];
+      //     }
+      //     if (isset($_POST['transpotation']) && is_array($_POST['transpotation'])) {
+      //       $_SESSION['transpotation'] = $_POST['transpotation'];
+      //     }
+      //     if (isset($_POST['view'])) {
+      //       $_SESSION['view'] = $_POST['view'];
+      //     }
+      //     header('Location: plan_list');
+      //     exit;
+      //   }
+
+
 
       // $planView->planView();
 
