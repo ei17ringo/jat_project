@@ -40,7 +40,7 @@
           break;
     }
   }
-}
+
 
 
   class UsersController {
