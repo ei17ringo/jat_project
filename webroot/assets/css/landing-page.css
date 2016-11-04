@@ -405,10 +405,6 @@ img.favorite-user-picture {
     font: normal 13px sans-serif;
 }
 
-.index-comment.index-user-comment{
-    color:  #808080;
-}
-
 .research{
     border-radius: 3px;
     flex-wrap: wrap;
@@ -595,7 +591,7 @@ img.favorite-user-picture {
     background-color:  #f3f3f3;
 }
 
-.index-comment.index-user-comment p{
+.index-comment.index-user-comment {
     background-color: #e2f8ff;
 }
 
@@ -616,13 +612,15 @@ img.favorite-user-picture {
     top: 18px;
 }
 
-.index-comment p{
+.index-comment {
     line-height: 1.5;
     padding: 10px 10px;
+    margin: 5px 0px;
     width: 100%;
     position: relative;
     word-wrap: break-word;
     text-align: left;
+
 }
 
 .author-comment p:after{
