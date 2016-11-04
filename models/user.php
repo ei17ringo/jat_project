@@ -78,6 +78,73 @@
     }
 
 
+    function postPlanContents() {
+      $sql = sprintf('SELECT * FROM `plans` p, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps WHERE p.`id` = ps.`plan_id` AND `user_id` = %d LIMIT %d, 5',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
+        $_SESSION['start']
+      );
+      $content      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $contents     = array();
+      while ($table = mysqli_fetch_assoc($content)) {
+        $contents[] = $table;
+      }
+      return $contents;
+    }
+
+
+    function favPlan() {
+      $sql = sprintf('SELECT * FROM `plans` p, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps, `plan_like` pl, `users` u WHERE p.`id` = ps.`plan_id` AND p.`user_id` = u.`id` AND p.`id` = pl.`favorite_plan_id` AND pl.`user_id` = %d LIMIT %d, 5',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
+        $_SESSION['likeStart']
+      );
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $rtn = array();
+      while ($table = mysqli_fetch_assoc($record)) {
+        $rtn[] = $table;
+      }
+      return $rtn;
+    }
+
+
+    function friendPlanContents($id) {
+      $sql = sprintf('SELECT * FROM `plans` p, `users` u, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id` AND p.`user_id` = %d LIMIT %d, 5',
+        mysqli_real_escape_string($this->dbconnect, $id),
+        $_SESSION['start']
+      );
+      $content      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $contents     = array();
+      while ($table = mysqli_fetch_assoc($content)) {
+        $contents[] = $table;
+      }
+      return $contents;
+    }
+
+
+    function friendPostPaging($id) {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plans` p, `users` u, (SELECT * FROM `plan_spots` WHERE `spot_number` = 1) ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id` AND p.`user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+      );
+      $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $table     = mysqli_fetch_assoc($recordSet);
+      // ceil()関数：切り上げする関数
+      $maxPage   = ceil($table['cnt'] / 5);
+
+      return $maxPage;
+    }
+
+
+    function likeNum() {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `favorite_user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+      );
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      // 連想配列としてSQLの実行結果を受け取る(keyと値)
+      $likeNum = mysqli_fetch_assoc($record);
+
+      return $likeNum;
+    }
+
+
     function profile($id) {
       $sql     = sprintf('SELECT * FROM `users` WHERE `id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)
@@ -88,12 +155,43 @@
     }
 
 
-    function show($id) {
-      $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
+    function mypostpaging() {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plans` WHERE `user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+      );
+      $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $table     = mysqli_fetch_assoc($recordSet);
+      // ceil()関数：切り上げする関数
+      $maxPage   = ceil($table['cnt'] / 5);
+
+      return $maxPage;
+    }
+
+
+    function postpaging($id) {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plans` WHERE `user_id` = %d',
         mysqli_real_escape_string($this->dbconnect, $id)
+      );
+      $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $table     = mysqli_fetch_assoc($recordSet);
+      // ceil()関数：切り上げする関数
+      $maxPage   = ceil($table['cnt'] / 5);
+
+      return $maxPage;
+    }
+
+
+    function myLikePaging() {
+      // ②必要なページ数を計算する
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plans` p, `plan_like` pl WHERE p.`user_id` = %d AND pl.`favorite_plan_id` = p.`id`',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
         );
-      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-      $result  = mysqli_fetch_assoc($results);
+      $recordSet = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $table     = mysqli_fetch_assoc($recordSet);
+      // ceil()関数：切り上げする関数
+      $maxLikePage   = ceil($table['cnt'] / 5);
+
+      return $maxLikePage;
     }
 
 
@@ -117,6 +215,18 @@
     }
 
 
+    function likeCount($id) {
+      $sql = sprintf('SELECT COUNT(*) AS cnt FROM `user_like` WHERE `favorite_user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+      );
+      $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      // 連想配列としてSQLの実行結果を受け取る(keyと値)
+      $likeCount = mysqli_fetch_assoc($record);
+
+      return $likeCount;
+    }
+
+
     function like($id) {
       $sql = sprintf('INSERT INTO `user_like`(`user_id`, `favorite_user_id`) VALUES ( %d, %d)',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
@@ -131,34 +241,6 @@
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
         mysqli_real_escape_string($this->dbconnect, $id)
       );
-      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-    }
-
-
-    function edit($id) {
-      $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
-      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-      $result  = mysqli_fetch_assoc($results);
-      return $result;
-    }
-
-
-    function update($post, $id) {
-      $sql = sprintf('UPDATE `blogs` SET `title`= "%s",`body`= "%s" WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $post['title']),
-        mysqli_real_escape_string($this->dbconnect, $post['body']),
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
-      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-    }
-
-    
-    function delete($id) {
-      $sql = sprintf('UPDATE `blogs` SET `delete_flag`= 1 WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
     }
   }

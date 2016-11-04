@@ -6,47 +6,39 @@
   $controller->action   = $action;
   $controller->id       = $id;
   // アクション名によって、呼び出すメソッドを変える
-  if ($resource=='ueser') {
 
-  switch ($action) {
-    case 'create';
-        $controller->create();
-        break;
-    case 'confirm':
-        $controller->confirm();
-        break;
-    case 'save':
-        $controller->save($post);
-        break;
-    case 'login':
-        $controller->login();
-        break;
-    case 'mypage';
-        $controller->mypage();
-        break;
-    case 'profile';
-        $controller->profile($id);
-        break;
-    case 'like';
-        $controller->like($id);
-        break;
-    case 'unlike';
-        $controller->unlike($id);
-        break;
-    case 'edit':
-        $controller->edit($id);
-        break;
-    case 'update':
-        $controller->update($id, $post);
-        break;
-    case 'delete':
-        $controller->delete($id);
-        break;
-    case 'logout':
-        $controller->logout($id);
-        break;
-    default:
-        break;
+  if ($resource == "user") {
+    switch ($action) {
+      case 'create';
+          $controller->create();
+          break;
+      case 'confirm':
+          $controller->confirm();
+          break;
+      case 'save':
+          $controller->save($post);
+          break;
+      case 'login':
+          $controller->login();
+          break;
+      case 'mypage';
+          $controller->mypage();
+          break;
+      case 'profile';
+          $controller->profile($id);
+          break;
+      case 'like';
+          $controller->like($id);
+          break;
+      case 'unlike';
+          $controller->unlike($id);
+          break;
+      case 'logout':
+          $controller->logout($id);
+          break;
+      default:
+          break;
+    }
   }
 }
 
@@ -272,11 +264,67 @@
       $action      = 'mypage';
       $viewOptions = $user->mypage();
       $this->_loginCheck();
-      if ($_SESSION['loginCheck'] == 'false') {
-        header('Location: ../user/login');
-        exit();
-      }
+        if ($_SESSION['loginCheck'] == 'false') {
+          header('Location: ../user/login');
+          exit();
+        }
       $favUserList = $user->favUserList();
+      $likeNum     = $user->likeNum();
+
+      $maxPage     = $user->mypostpaging();
+                  // ページングの設置
+        $page = '';
+        // GETパラメーターで渡されるページ番号を取得
+        if (isset($_REQUEST['post_plan'])) {
+          $page = $_REQUEST['post_plan'];
+        }
+        // pageパラメーターがない場合は、ページ番号を１にする
+        if ($page == '') {
+          $page = 1;
+        }
+
+        // max関数：()内に指定した複数のデータから、一番大きい値を返す。
+        // ①表示する正しいページの数値(Min)を設定
+        $page = max($page, 1);
+        // ③表示する正しいページ数の数値(Max)を設定
+        $page = min($page, $maxPage);
+        // $_SESSION['page'] = min($page, $maxPage);
+        // ④ページに表示する変数だけ取得
+        $_SESSION['start'] = ($page - 1) * 5;
+        if($_SESSION['start'] < 0){
+          $_SESSION['start'] = 0;
+        }
+        // $_SESSION['start'] = max(0, $start);
+
+
+        $maxLikePage     = $user->myLikePaging();
+                  // ページングの設置
+        $likePage = '';
+        // GETパラメーターで渡されるページ番号を取得
+        if (isset($_REQUEST['favorite_plan'])) {
+          $likePage = $_REQUEST['favorite_plan'];
+        }
+        // pageパラメーターがない場合は、ページ番号を１にする
+        if ($likePage == '') {
+          $likePage = 1;
+        }
+
+        // max関数：()内に指定した複数のデータから、一番大きい値を返す。
+        // ①表示する正しいページの数値(Min)を設定
+        $likePage = max($likePage, 1);
+        // ③表示する正しいページ数の数値(Max)を設定
+        $likePage = min($likePage, $maxLikePage);
+        // $_SESSION['page'] = min($page, $maxPage);
+        // ④ページに表示する変数だけ取得
+        $_SESSION['likeStart'] = ($likePage - 1) * 5;
+        if($_SESSION['likeStart'] < 0){
+          $_SESSION['likeStart'] = 0;
+        }
+        // $_SESSION['start'] = max(0, $start);
+
+      $postPlanContents = $user->postPlanContents();
+      $favPlans         = $user->favPlan();
+
       require('views/layouts/application.php');
     }
 
@@ -287,6 +335,43 @@
       $viewInfo    = $user->profile($id);
       $resource    = $this->resource;
       $action      = 'profile';
+      $this->_loginCheck();
+        if ($_SESSION['loginCheck'] == 'false') {
+          header('Location: ../user/login');
+          exit();
+        }
+
+      $likeCount   = $user->likeCount($id);
+
+      $maxPage     = $user->friendPostPaging($id);
+                  // ページングの設置
+        $page = '';
+        // GETパラメーターで渡されるページ番号を取得
+        if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
+        }
+        // pageパラメーターがない場合は、ページ番号を１にする
+        if ($page == '') {
+          $page = 1;
+        }
+
+        // max関数：()内に指定した複数のデータから、一番大きい値を返す。
+        // ①表示する正しいページの数値(Min)を設定
+        $page = max($page, 1);
+
+        // ③表示する正しいページ数の数値(Max)を設定
+        $page = min($page, $maxPage);
+        // $_SESSION['page'] = min($page, $maxPage);
+
+        // ④ページに表示する変数だけ取得
+        $_SESSION['start'] = ($page - 1) * 5;
+        if($_SESSION['start'] < 0){
+          $_SESSION['start'] = 0;
+        }
+        // $_SESSION['start'] = max(0, $start);
+
+      $friendPlanContents = $user->friendPlanContents($id);
+
       require('views/layouts/application.php');
     }
 
@@ -311,30 +396,12 @@
     }
 
 
-    function edit($id) {
+    function mypostpaging($id) {
       $user        = new User();
-      $viewOptions = $user->edit($id);
-      $action      = 'edit';
-      require('views/layouts/application.php');
+      $viewInfo    = $user->paging($id);
+      $resource    = $this->resource;
+      $action      = 'paging';
     }
 
-
-    function update($post, $id) {
-      $user = new User();
-      $user->update($id, $post);
-      // indexへ遷移
-      header('Location: /seed_blog/blogs/index');
-      exit();
-    }
-
-    
-    function delete($id) {
-      $user        = new User();
-      $viewOptions = $user->delete($id);
-      $action      = 'delete';
-      // indexへ遷移
-      header('Location: /seed_blog/blogs/index');
-      exit();
-    }
   }
 ?>

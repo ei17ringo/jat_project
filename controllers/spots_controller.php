@@ -2,8 +2,6 @@
   require('./controllers/users_controller.php');
 
 
-
-
    // コントローラのクラスをインスタンス化
    $controller = new SpotsController();
 
