@@ -6,6 +6,7 @@
   $controller->action   = $action;
   $controller->id       = $id;
   // アクション名によって、呼び出すメソッドを変える
+
   if ($resource == "user") {
     switch ($action) {
       case 'create';
@@ -39,6 +40,7 @@
           break;
     }
   }
+}
 
 
   class UsersController {
