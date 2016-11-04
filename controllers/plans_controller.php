@@ -68,11 +68,17 @@ if(empty($sd)){
 
                 $_SESSION['plan']['visit_year']=$sd['visit_year'];
 
-                $_SESSION['plan']['visit_month']=$sd['visit_month'];
+                if(isset($sd['plan']['visit_month'])){
+                  $_SESSION['plan']['visit_month']=$sd['visit_month'];
+                }
 
                 $_SESSION['plan']['visit_type_name']=$sd['visit_type_name'];
 
-                $_SESSION['plan_spots']= array_merge($sd['group-a'],$sd['group-b']);
+                if(isset($sd['group-b'])){
+                  $_SESSION['plan_spots']= array_merge($sd['group-a'],$sd['group-b']);
+                }else{
+                  $_SESSION['plan_spots']=$sd['group-a'];
+                }
 
                 // var_dump($sd['group-a']);
                 
@@ -94,48 +100,48 @@ if(empty($sd)){
 
 
 
-                 //画像ファイルの拡張子チェック
-                 $fileName= $_FILES['picture_1']['name'];
-                  if (!empty($fileName)) {
-                   $ext= substr($fileName, -3);
-                   $ext= strtolower($ext);
+                //  //画像ファイルの拡張子チェック
+                //  $fileName= $_FILES['picture_1']['name'];
+                //   if (!empty($fileName)) {
+                //    $ext= substr($fileName, -3);
+                //    $ext= strtolower($ext);
 
-                    if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
-                     $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
-                      }
-                    }
+                //     if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
+                //      $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
+                //       }
+                //     }
 
-                //エラーが無い時
-                if (!count($error_message)){
-                  //画像をアップロードする
-                  $picture_1= date('YmdHis') . $_FILES['picture_1']['name'];
-                    move_uploaded_file($_FILES['picture_1']['tmp_name'], 'plan_picture/' . $picture_1);
-                  //セッションに値を保存
-                  // $_SESSION['plan']=$_POST;
-                  $_SESSION['plan']['picture_1']= $picture_1;
-                  }
+                // //エラーが無い時
+                // if (!count($error_message)){
+                //   //画像をアップロードする
+                //   $picture_1= date('YmdHis') . $_FILES['picture_1']['name'];
+                //     move_uploaded_file($_FILES['picture_1']['tmp_name'], 'plan_picture/' . $picture_1);
+                //   //セッションに値を保存
+                //   // $_SESSION['plan']=$_POST;
+                //   $_SESSION['plan']['picture_1']= $picture_1;
+                //   }
 
 
-                   //画像ファイルの拡張子チェック
-                 $fileName= $_FILES['picture_2']['name'];
-                  if (!empty($fileName)) {
-                   $ext= substr($fileName, -3);
-                   $ext= strtolower($ext);
-                  if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
-                   $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
-                      }
-                    }
+                //    //画像ファイルの拡張子チェック
+                //  $fileName= $_FILES['picture_2']['name'];
+                //   if (!empty($fileName)) {
+                //    $ext= substr($fileName, -3);
+                //    $ext= strtolower($ext);
+                //   if ($ext != 'jpg'&& $ext !='gif'&& $ext !='png'){
+                //    $error_message['picture_path']= "<font color=\"red\">※写真などは「.gif」か「.jpg」か「.png」の画像を指定してください。</font>";
+                //       }
+                //     }
                   
-                //エラーが無い時
-                if (!count($error_message)){
+                // //エラーが無い時
+                // if (!count($error_message)){
 
-                  //画像をアップロードする
-                  $picture_2= date('YmdHis') . $_FILES['picture_2']['name'];
-                    move_uploaded_file($_FILES['picture_2']['tmp_name'], 'plan_picture/' . $picture_2);
-                  //セッションに値を保存
-                  // $_SESSION['plan']=$_POST;
-                  $_SESSION['plan']['picture_2']= $picture_2;
-                   }
+                //   //画像をアップロードする
+                //   $picture_2= date('YmdHis') . $_FILES['picture_2']['name'];
+                //     move_uploaded_file($_FILES['picture_2']['tmp_name'], 'plan_picture/' . $picture_2);
+                //   //セッションに値を保存
+                //   // $_SESSION['plan']=$_POST;
+                //   $_SESSION['plan']['picture_2']= $picture_2;
+                //    }
 
                }
 
@@ -172,6 +178,7 @@ if(empty($sd)){
        $plan = new Plan();
        $viewOptions['plan']= $plan->detail($id);
        $viewOptions['plan_spots']= $plan->plan_spots_detail($id);
+       $viewOptions['transportation']= $plan->transportation_detail($id);
        $resource= $this->resource;
        $action = 'detail';
 
@@ -215,6 +222,7 @@ if(empty($sd)){
        $plan = new Plan();
        $viewOptions['plan'] = $plan->edit($id);
        $viewOptions['plan_spots']= $plan->plan_spots_edit($id);
+       $viewOptions['transportation']= $plan->transportation_edit($id);
        $resource= $this->resource;
        $action = 'edit';
 

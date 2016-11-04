@@ -232,3 +232,13 @@ function send(){
   target1.submit();
 }
 </script>
+
+<?php
+//ここに記述し、表示させる
+if (isset($error_message)&&(count($error_message)>0)) {
+    foreach ($error_message as $message){
+        echo $message;
+    }
+}
+
+?>
