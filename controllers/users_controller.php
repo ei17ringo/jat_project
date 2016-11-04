@@ -289,6 +289,9 @@
         // $_SESSION['page'] = min($page, $maxPage);
         // ④ページに表示する変数だけ取得
         $_SESSION['start'] = ($page - 1) * 5;
+        if($_SESSION['start'] < 0){
+          $_SESSION['start'] = 0;
+        }
         // $_SESSION['start'] = max(0, $start);
 
 
@@ -312,6 +315,9 @@
         // $_SESSION['page'] = min($page, $maxPage);
         // ④ページに表示する変数だけ取得
         $_SESSION['likeStart'] = ($likePage - 1) * 5;
+        if($_SESSION['likeStart'] < 0){
+          $_SESSION['likeStart'] = 0;
+        }
         // $_SESSION['start'] = max(0, $start);
 
       $postPlanContents = $user->postPlanContents();
@@ -357,6 +363,9 @@
 
         // ④ページに表示する変数だけ取得
         $_SESSION['start'] = ($page - 1) * 5;
+        if($_SESSION['start'] < 0){
+          $_SESSION['start'] = 0;
+        }
         // $_SESSION['start'] = max(0, $start);
 
       $friendPlanContents = $user->friendPlanContents($id);
