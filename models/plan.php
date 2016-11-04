@@ -152,10 +152,23 @@ function plan_spots_save($plan_id) {
     var_dump($_SESSION['plan_spots']);
     foreach ($_SESSION['plan_spots'] as $spot) {
       if(isset($spot['spot_name'])){
+     $sql=sprintf('SELECT * FROM `spots` WHERE `spot_name`="%s"',
+      mysqli_real_escape_string($this->dbconnect, $spot['spot_name'])
+      );
+    $results=mysqli_query($this->dbconnect,$sql)or die(mysqli_error($this->dbconnect));
+
+    $result = mysqli_fetch_assoc($results);
+    if ($result==false) {
+      $spot['spot_id']=-1;
+    }else{
+      $spot['spot_id']=$result['spot_id'];
+    }
+
+
      $sql = sprintf('INSERT INTO `plan_spots` SET `plan_id`=%d, spot_id=%d, `spot_name`="%s", `spot_number`=%s,
       `area_name`="%s", `crowded`="%s", `stay_time`="%s", `fee`="%s", `comment`="%s", `picture_1`="%s", `picture_2`="%s",`created`=now()',
                $plan_id,
-               -1,
+               $spot['spot_id'],
                mysqli_real_escape_string($this->dbconnect, $spot['spot_name']),
                mysqli_real_escape_string($this->dbconnect, $spot['sort_number']),
                mysqli_real_escape_string($this->dbconnect, $spot['area_name']),
