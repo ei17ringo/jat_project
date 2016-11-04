@@ -187,6 +187,9 @@ if(empty($sd)){
 
      function confirm($id=null){
         $plan= new Plan();
+        if ($id==!null){
+          $viewOptions= $plan->edit($id);
+        }
 
         $resource= $this->resource;
         $action = 'confirm';

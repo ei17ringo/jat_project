@@ -6,11 +6,10 @@
     $error_message=$PlansController->_new($_POST);
 ?>
 
-<body>
 
 <!-- Page header -->
-<form method="post" action="">
-  <div class="page-header">
+<form id="form1" method="post" action="">
+  <div class="page-header" style="margin-top:70px;">
     
         <p>プラン名<br>
     <input type="text" name="plan_name" size="60" value="<?php echo $viewOptions['plan']['title']; ?>"></p>
@@ -70,7 +69,7 @@
 <dl class="syncer-acdn-faq">
   <dt class="syncer-acdn" data-target="syncer-acdn-01">行き先</dt>
 
-    <!-- <dd id="syncer-acdn-01"> -->
+    <dd id="syncer-acdn-01">
 
             <!-- Body -->
             <div class="panel-body">
@@ -176,12 +175,14 @@
             <!-- /Body -->
 
        
-        <!-- /Panel --><!-- </dd> -->　</dl>
+        <!-- /Panel -->
+        </dd>
+        </dl>
   </li>
 
 <?php endforeach ;?>
 
-
+<?php foreach($viewOptions['transportation'] as $trans):?>
   <li class="ui-state-default">
   <dl class="syncer-acdn-faq">
   <dt class="syncer-acdn" data-target="syncer-acdn-101">移動経路</dt>
@@ -192,43 +193,68 @@
             <!-- Body -->
 <div class="panel-body">
                 <p>＊交通手段の選択</p>
-                <div style="display:inline-flex">
-    <p>バス</p>
+    <p><?php echo $trans['trans_way']; ?></p>
+    <p><?php if (isset($trans['other_way'])){
+      echo $trans['other_way'];
+      } ?></p>
+      <div style="display:inline-flex">
+    <p><select name="trans_way">
+<option value=""></option>
+<option value="徒歩" selected>徒歩</option>
+<option value="電車">電車</option>
+<option value="バス">バス</option>
+<option value="自家用車">自家用車</option>
+<option value="タクシー">タクシー</option>
+<option value="自転車">自転車</option>
+<option value="バイク">バイク</option>
+<option value="飛行機">飛行機</option>
+<option value="その他">その他</option>
+</select><p><small>その他の場合は入力してください。</small><input type="text" name="other_way" size="10"></p></p>
+</div>
 </div>
 
 <p>＊所要時間</p>
 <div style="display:inline-flex">
-<p>0</p>時間
-<p>15</p>分
+<p><input type="text" name="trans_time" value="<?php echo $trans['trans_time']; ?>" size="14"></p>
 </div>
 
 <p>＊費用<br>
-<p>230</p>円（目安）</p>
+<p><input type="text" name="trans_fee" size="6" value="<?php echo $trans['trans_fee']; ?>">円（目安）</p>
 
 <p>＊メモ<br>
-費用はバス１人分の運賃です。</p>
+<textarea name="comment" cols="50" rows="5"><?php echo $trans['comment']; ?></textarea></p></p>
 
 </div>
             <!-- /Body -->
     
 
-        <!-- /Panel --></dd></dl>
+        <!-- /Panel -->
+        </dd>
+        </dl>
         </li>
+        <?php endforeach ;?>
 
 </ul>
- 
 
 
 
-
-
-
- 
 <br style="clear:both">
 
+<p><input type="button" value="確認ページへ" onclick="send()"></p>
 </form>
-<p><input type="submit" value="確認画面へ"></p>
- 
+<script type="text/javascript">
+function send(){
+  var target1= document.getElementById("form1");
 
+  target1.submit();
+}
+</script>
 
-</body>
+<?php
+//ここに記述し、表示させる
+if (isset($error_message)&&(count($error_message)>0)) {
+    foreach ($error_message as $message){
+        echo $message;
+    }
+}
+?>

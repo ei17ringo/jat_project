@@ -202,14 +202,28 @@
    (function($) {
   $( function() {
     $( "ul.droptrue" ).sortable({
-      connectWith: "ul"
+      connectWith: "ul",
+
+      stop : function(event,ui){
+
+        tags = document.getElementsByTagName('input');
+        sort_count = 1;
+        for(i=0; i<tags.length; i++ ){
+          if( tags.item(i).getAttribute('type') == 'hidden' ){
+            tags.item(i).value = sort_count;
+            console.log(sort_count);
+            sort_count++;
+          }
+        }
+      }
+
     });
- 
+
     $( "ul.dropfalse" ).sortable({
       connectWith: "ul",
       dropOnEmpty: false
     });
- 
+
     $( "#sortable1, #sortable2, #sortable3" ).disableSelection();
   } );
   })($plangj);

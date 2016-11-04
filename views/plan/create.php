@@ -162,6 +162,7 @@
 
 
         <!-- /Panel -->
+        <input name="sort_number" value="1" type="hidden" />
         </dd>
         </dl>
   </li>
@@ -214,6 +215,7 @@
 </div>
             <!-- /Body -->
         <!-- /Panel -->
+        <input name="sort_number" value="1" type="hidden" />
         </dd>
         </dl>
   </li>

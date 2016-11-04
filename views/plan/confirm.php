@@ -37,6 +37,14 @@
 <div class="row">
 <ul>
 
+<?php
+$sort=array();
+foreach ((array) $_SESSION['plan_spots'] as $key => $value) {
+  $sort[$key]= $value['sort_number'];
+}
+array_multisort($sort, SORT_ASC, $_SESSION['plan_spots']);
+?>
+
 <?php foreach($_SESSION['plan_spots'] as $plan_spot):?>
 
 

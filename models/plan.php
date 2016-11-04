@@ -49,6 +49,19 @@ class Plan{
     }
 
 
+    function transportation_detail($id){
+    $sql=sprintf('SELECT * FROM `transportation` WHERE `plan_id`=%d',
+      mysqli_real_escape_string($this->dbconnect, $id)
+      );
+    $results=mysqli_query($this->dbconnect,$sql)or die(mysqli_error($this->dbconnect));
+    $trans=array();
+    while ($result = mysqli_fetch_assoc($results)) {
+      $trans[]=$result;
+    }
+    return $trans;
+    }
+
+
   function create(){
     // $sql=sprintf('INSERT INTO `plans`(`title`, `body`, `delete_flag`, `created`) VALUES("%s","%s",0,now())',
     //   mysqli_real_escape_string($this->dbconnect,$post['title']),
@@ -79,6 +92,19 @@ function edit($id){
       $spots[]=$result;
     }
     return $spots;
+    }
+
+
+    function transportation_edit($id){
+    $sql=sprintf('SELECT * FROM `transportation` WHERE `plan_id`=%d',
+      mysqli_real_escape_string($this->dbconnect, $id)
+      );
+    $results=mysqli_query($this->dbconnect,$sql)or die(mysqli_error($this->dbconnect));
+    $trans=array();
+    while ($result = mysqli_fetch_assoc($results)) {
+      $trans[]=$result;
+    }
+    return $trans;
     }
 
 
@@ -126,12 +152,12 @@ function plan_spots_save($plan_id) {
     var_dump($_SESSION['plan_spots']);
     foreach ($_SESSION['plan_spots'] as $spot) {
       if(isset($spot['spot_name'])){
-     $sql = sprintf('INSERT INTO `plan_spots` SET `plan_id`=%d, spot_id=%d, `spot_name`="%s", `spot_number`=%d,
+     $sql = sprintf('INSERT INTO `plan_spots` SET `plan_id`=%d, spot_id=%d, `spot_name`="%s", `spot_number`=%s,
       `area_name`="%s", `crowded`="%s", `stay_time`="%s", `fee`="%s", `comment`="%s", `picture_1`="%s", `picture_2`="%s",`created`=now()',
                $plan_id,
                -1,
                mysqli_real_escape_string($this->dbconnect, $spot['spot_name']),
-               1,
+               mysqli_real_escape_string($this->dbconnect, $spot['sort_number']),
                mysqli_real_escape_string($this->dbconnect, $spot['area_name']),
                mysqli_real_escape_string($this->dbconnect, $spot['crowded']),
                mysqli_real_escape_string($this->dbconnect, $spot['stay_time']),
@@ -140,15 +166,17 @@ function plan_spots_save($plan_id) {
                mysqli_real_escape_string($this->dbconnect, ''),
                mysqli_real_escape_string($this->dbconnect, '')
            );
+     var_dump($sql);
            mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
            }
 
            $last_id = mysqli_insert_id($this->dbconnect);
            // unset($_SESSION['plan']);
-           return $last_id;
+
 
          }
       }
+      return $last_id;
 }
 
 
@@ -158,11 +186,11 @@ function transportation_save($plan_id) {
     foreach ($_SESSION['plan_spots'] as $trans) {
       var_dump('abcd');
       if(isset($trans['trans_way'])){
-     $sql = sprintf('INSERT INTO `transportation` SET `plan_id`=%d, spot_id=%d, `trans_number`=%d, `trans_way`="%s", `trans_other`=%d,
+     $sql = sprintf('INSERT INTO `transportation` SET `plan_id`=%d, spot_id=%d, `trans_number`=%s, `trans_way`="%s", `trans_other`=%d,
       `trans_time`="%s", `trans_fee`="%s", `comment`="%s", `created`=now()',
                $plan_id,
                -1,
-               1,
+               mysqli_real_escape_string($this->dbconnect, $trans['sort_number']),
                mysqli_real_escape_string($this->dbconnect, $trans['trans_way']),
                mysqli_real_escape_string($this->dbconnect, $trans['trans_other']),
                mysqli_real_escape_string($this->dbconnect, $trans['trans_time']),
