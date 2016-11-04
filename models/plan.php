@@ -158,12 +158,13 @@ function plan_spots_save($plan_id) {
     $results=mysqli_query($this->dbconnect,$sql)or die(mysqli_error($this->dbconnect));
 
     $result = mysqli_fetch_assoc($results);
+    var_dump($result);
     if ($result==false) {
       $spot['spot_id']=-1;
     }else{
-      $spot['spot_id']=$result['spot_id'];
+      $spot['spot_id']=$result['id'];
     }
-
+var_dump($sql);
 
      $sql = sprintf('INSERT INTO `plan_spots` SET `plan_id`=%d, spot_id=%d, `spot_name`="%s", `spot_number`=%s,
       `area_name`="%s", `crowded`="%s", `stay_time`="%s", `fee`="%s", `comment`="%s", `picture_1`="%s", `picture_2`="%s",`created`=now()',

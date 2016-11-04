@@ -39,7 +39,11 @@
             <!-- Body -->
             <div class="panel-body">
         <p>スポット名<br>
+        <?php if(isset($plan_spot['spot_name'])):?>
+          <h2><a href="../../spot/detail/<?php echo $plan_spot['spot_id'];?>"><?php echo $plan_spot['spot_name']; ?></a></h2>
+        <?php else:?>
     <h2><?php echo $plan_spot['spot_name']; ?></h2></p>
+  <?php endif; ?>
 
 <p><?php echo $plan_spot['area_name']; ?></p>
 
