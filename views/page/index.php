@@ -111,6 +111,7 @@
                                           <br>
                                           <input type="checkbox" name="transpotation[]" value="電　車" />電　車
                                           <input type="checkbox" name="transpotation[]" value="タクシー" />タクシー
+                                          <input type="checkbox" name="transpotation[]" value="バ　ス" />バ　ス
                                           <input type="checkbox" name="transpotation[]" value="その他" />その他
                                         </div>
 

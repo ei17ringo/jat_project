@@ -48,8 +48,49 @@
     }
 
 
-    function searchContent($view,$areaName,$month) {
-      
+    function searchContent($month,$areaName,$transpotation,$view) {
+
+      if (!empty($month)) {
+          $cnt = 0;
+          $monthSubQuery = "AND (";
+        foreach ($month as $when) {
+          $cnt += 1;
+          if ($cnt < count($month)){
+          $monthSubQuery .= "p.`visit_month` LIKE '%" . $when . "%' OR ";
+        } else {
+          $monthSubQuery .= "p.`visit_month` LIKE '%" . $when . "%' ";
+        }
+      }
+      $monthSubQuery .= ") ";
+    } else {
+      $monthSubQuery = "";
+    }
+
+
+    if (empty($areaName)) {
+        $areaSubQuery = ' (SELECT * FROM `plan_spots` WHERE `spot_number` = 1)';
+      } else {
+        $areaSubQuery = '(SELECT * FROM `plan_spots` WHERE `area_name` ="' . $areaName . '" group by `plan_id`)';
+      }
+
+
+      if (!empty($transpotation)) {
+          $cnt = 0;
+          $transpotationSubQuery = "AND (";
+        foreach ($transpotation as $trans) {
+          $cnt += 1;
+          if ($cnt < count($transpotation)){
+          $transpotationSubQuery .= "p.`visit_type_name` LIKE '%" . $trans . "%' OR ";
+        } else {
+          $transpotationSubQuery .= "p.`visit_type_name` LIKE '%" . $trans . "%' ";
+        }
+      }
+      $transpotationSubQuery .= ") ";
+    } else {
+      $transpotationSubQuery = "";
+    }
+
+
       if (empty($view)) {
         $viewSubQuery = '';
       } else {
@@ -63,21 +104,13 @@
         $viewSubQuery = ' AND p.`created` > now()-INTERVAL ' . $viewMonth . ' MONTH ';
       }
 
-      if (empty($areaName)) {
-        $areaSubQuery = ' (SELECT * FROM `plan_spots` WHERE `spot_number` = 1)';
-      } else {
-        $areaSubQuery = '(SELECT * FROM `plan_spots` WHERE `area_name` ="' . $areaName . '" group by `plan_id`)';
-      }
-
-      if (empty($month)) {
-        foreach ($month as $when) {
-          if ($when = '１月') {
-            $viewWhen = ''
-          }
-        }
-      }
       
-      $sql = 'SELECT * FROM `plans` p, `users` u,' . $areaSubQuery . ' ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id`' . $viewSubQuery . ' ORDER BY p.`id` DESC';
+
+      
+
+      
+
+      $sql = "SELECT * FROM `plans` p, `users` u," . $areaSubQuery . " ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id`" . $viewSubQuery . "" . $monthSubQuery . "" . $transpotationSubQuery . "ORDER BY p.`id` DESC";
       var_dump($sql);
 
       $content = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
