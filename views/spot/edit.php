@@ -1,9 +1,12 @@
 <?php
     $SpotsController = new SpotsController($db, $table_name, $action);
-    $SpotsController->action=$action;
-    $SpotsController->resource=$resource;
-    $SpotsController->id=$id;
-    $error_message=$SpotsController->_new($_POST);
+    $SpotsController->_new($_POST);
+
+    $error_message=array();
+
+
+
+
 ?>
 
 <div class="container">
@@ -20,7 +23,8 @@
 
                         <h4 class="panel-title">
                             <span class="glyphicon glyphicon-file">
-                            </span>スポット編集</h4>
+                            </span>スポット編集
+                        </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
                         <div class="panel-body">
@@ -28,9 +32,14 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <label for="spot_name">
-                                            ＊スポットの名称</label><br><input type="text" name="spot_name" size=40 value="<?php echo $viewOptions['spot_name']; ?>"></div>
+                                            ＊スポットの名称</label><br>
+                                        <input type="text" name="spot_name" size=40 value="<?php echo $viewOptions['spot_name']; ?>">
+                                    </div>
                                     <div class="form-group">
-                                    <label for="adress">＊スポットの住所</label><br><textarea name="address"><?php echo $viewOptions['address']; ?></textarea>
+                                    <label for="adress">＊スポットの住所</label><br>
+                                    <textarea name="address">
+                                      <?php echo $viewOptions['address']; ?>
+                                    </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -38,6 +47,7 @@
                                   <div class="form-group">
                                         <label for="tags">
                                             ＊タグ</label>
+
                                         <div id="small"></div>
                                   </div>
         <script>
@@ -50,21 +60,20 @@
             });
             });
         </script>
+
+
                             </div>
 
                             <div class="well well-sm">
                              <label for="image">
                              ＊画像ファイル</label>
-                             <p><input type="checkbox" name="delete_picture_1" value="1">削除する</p>
                              <p><img src="../../spot_picture/<?php echo $viewOptions['picture_1']; ?>" width="208" height="129"></p>
                              <input type="file" name="picture_1">
-                             
                             </div>
 
                             <div class="well well-sm">
                              <label for="image">
                              ＊画像ファイル</label>
-                             <p><input type="checkbox" name="delete_picture_2" value="$row">削除する</p>
                              <p><img src="../../spot_picture/<?php echo $viewOptions['picture_2']; ?>" width="208" height="129"></p>
                              <input type="file" name="picture_2">
                             </div>

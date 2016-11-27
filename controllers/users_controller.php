@@ -6,7 +6,6 @@
   $controller->action   = $action;
   $controller->id       = $id;
   // アクション名によって、呼び出すメソッドを変える
-
   if ($resource == "user") {
     switch ($action) {
       case 'create';
@@ -33,6 +32,18 @@
       case 'unlike';
           $controller->unlike($id);
           break;
+      case 'paging':
+          $controller->mypostpaging($id);
+          break;
+      case 'edit':
+          $controller->edit($id);
+          break;
+      case 'update':
+          $controller->update($id, $post);
+          break;
+      case 'delete':
+          $controller->delete($id);
+          break;
       case 'logout':
           $controller->logout($id);
           break;
@@ -40,7 +51,6 @@
           break;
     }
   }
-
 
 
   class UsersController {
@@ -274,8 +284,8 @@
                   // ページングの設置
         $page = '';
         // GETパラメーターで渡されるページ番号を取得
-        if (isset($_REQUEST['post_plan'])) {
-          $page = $_REQUEST['post_plan'];
+        if (isset($_REQUEST['page'])) {
+          $page = $_REQUEST['page'];
         }
         // pageパラメーターがない場合は、ページ番号を１にする
         if ($page == '') {
@@ -285,44 +295,24 @@
         // max関数：()内に指定した複数のデータから、一番大きい値を返す。
         // ①表示する正しいページの数値(Min)を設定
         $page = max($page, 1);
+
         // ③表示する正しいページ数の数値(Max)を設定
         $page = min($page, $maxPage);
         // $_SESSION['page'] = min($page, $maxPage);
+
         // ④ページに表示する変数だけ取得
         $_SESSION['start'] = ($page - 1) * 5;
-        if($_SESSION['start'] < 0){
-          $_SESSION['start'] = 0;
-        }
         // $_SESSION['start'] = max(0, $start);
 
-
-        $maxLikePage     = $user->myLikePaging();
-                  // ページングの設置
-        $likePage = '';
-        // GETパラメーターで渡されるページ番号を取得
-        if (isset($_REQUEST['favorite_plan'])) {
-          $likePage = $_REQUEST['favorite_plan'];
-        }
-        // pageパラメーターがない場合は、ページ番号を１にする
-        if ($likePage == '') {
-          $likePage = 1;
-        }
-
-        // max関数：()内に指定した複数のデータから、一番大きい値を返す。
-        // ①表示する正しいページの数値(Min)を設定
-        $likePage = max($likePage, 1);
-        // ③表示する正しいページ数の数値(Max)を設定
-        $likePage = min($likePage, $maxLikePage);
-        // $_SESSION['page'] = min($page, $maxPage);
-        // ④ページに表示する変数だけ取得
-        $_SESSION['likeStart'] = ($likePage - 1) * 5;
-        if($_SESSION['likeStart'] < 0){
-          $_SESSION['likeStart'] = 0;
-        }
-        // $_SESSION['start'] = max(0, $start);
 
       $postPlanContents = $user->postPlanContents();
-      $favPlans         = $user->favPlan();
+
+
+
+
+
+      
+
 
       require('views/layouts/application.php');
     }
@@ -342,7 +332,7 @@
 
       $likeCount   = $user->likeCount($id);
 
-      $maxPage     = $user->friendPostPaging($id);
+      $maxPage     = $user->postpaging($id);
                   // ページングの設置
         $page = '';
         // GETパラメーターで渡されるページ番号を取得
@@ -364,12 +354,13 @@
 
         // ④ページに表示する変数だけ取得
         $_SESSION['start'] = ($page - 1) * 5;
-        if($_SESSION['start'] < 0){
-          $_SESSION['start'] = 0;
-        }
         // $_SESSION['start'] = max(0, $start);
 
+
       $friendPlanContents = $user->friendPlanContents($id);
+
+
+
 
       require('views/layouts/application.php');
     }
@@ -402,5 +393,32 @@
       $action      = 'paging';
     }
 
+
+
+    function edit($id) {
+      $user        = new User();
+      $viewOptions = $user->edit($id);
+      $action      = 'edit';
+      require('views/layouts/application.php');
+    }
+
+
+    function update($post, $id) {
+      $user = new User();
+      $user->update($id, $post);
+      // indexへ遷移
+      header('Location: /seed_blog/blogs/index');
+      exit();
+    }
+
+
+    function delete($id) {
+      $user        = new User();
+      $viewOptions = $user->delete($id);
+      $action      = 'delete';
+      // indexへ遷移
+      header('Location: /seed_blog/blogs/index');
+      exit();
+    }
   }
 ?>

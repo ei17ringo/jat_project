@@ -3,7 +3,6 @@
     $PlansController->action=$action;
     $PlansController->resource=$resource;
     $error_message=array();
-
     //初期表示はエラーチェックをしない
     $error_message=$PlansController->_new($_POST);
 ?>
@@ -230,7 +229,6 @@
 <script type="text/javascript">
 function send(){
   var target1= document.getElementById("form1");
-
   target1.submit();
 }
 </script>
@@ -242,5 +240,4 @@ if (isset($error_message)&&(count($error_message)>0)) {
         echo $message;
     }
 }
-
 ?>

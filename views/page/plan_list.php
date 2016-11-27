@@ -14,12 +14,11 @@
                               </div>
                               <form id="research" method="post" action="" class="form-horizontal" role="form">
                                 <div class="modal-body">
-                                <div class="row">
+
                                     <label class="col-md-4 control-label">目的地：</label>
                                       <div class="col-md-8 research">
                                         <select class="form-control" name="prefecture" placeholder="都道府県">
                                           <option value="">都道府県の選択</option>
-
                                           <?php foreach($_SESSION['prefs'] as $pref): ?>
                                             <?php if($_SESSION['prefecture'] == $pref):?>
                                               <?php echo '<option value="'.$pref.'" selected="selected">'; ?><?php echo $pref; ?>
@@ -32,36 +31,33 @@
 
                                     <label class="col-md-4 control-label">旅する月：</label>
                                       <div class="col-md-8 research">
-
-                                      <?php foreach($_SESSION['tsuki'] as $tsuki): ?>
-                                        <?php $checked = ''; ?>
-                                          <?php if (!empty($_SESSION['month'])) :?> 
-                                            <?php foreach ($_SESSION['month'] as $month): ?>
-                                                <?php if ($month == $tsuki): ?>
-                                                    <?php $checked = 'checked="checked"'; ?>
-                                                  <?php endif; ?>
-                                                <?php endforeach; ?>
-                                          <?php endif; ?>
-                                              <?php echo '<input type="checkbox" name="month[]" value="'.$tsuki.'" '. $checked .'>'; ?><?php echo $tsuki; ?>
-                                      <?php endforeach; ?>
+                                        <?php foreach($_SESSION['tsuki'] as $tsuki): ?>
+                                          <?php $checked = ''; ?>
+                                            <?php if (!empty($_SESSION['month'])) :?> 
+                                              <?php foreach ($_SESSION['month'] as $month): ?>
+                                                  <?php if ($month == $tsuki): ?>
+                                                      <?php $checked = 'checked="checked"'; ?>
+                                                    <?php endif; ?>
+                                                  <?php endforeach; ?>
+                                            <?php endif; ?>
+                                                <?php echo '<input type="checkbox" name="month[]" value="'.$tsuki.'" '. $checked .'>'; ?><?php echo $tsuki; ?>
+                                        <?php endforeach; ?>
                                       </div>
 
 
                                       <label class="col-md-4 control-label">交通手段：</label>
                                         <div class="col-md-8 research">
-
-                                        <?php foreach($_SESSION['kotsu'] as $kotsu): ?>
-                                          <?php $checked = ''; ?>
-                                            <?php if(!empty($_SESSION['transpotation'])): ?>
-                                              <?php foreach ($_SESSION['transpotation'] as $transpotation): ?>
-                                                <?php if ($transpotation == $kotsu): ?>
-                                                    <?php $checked = 'checked="checked"'; ?>
-                                                  <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
-                                              <?php echo '<input type="checkbox" name="transpotation[]" value="'.$kotsu.'" '. $checked .'>'; ?><?php echo $kotsu; ?>
-                                        <?php endforeach; ?>
-                                        
+                                          <?php foreach($_SESSION['kotsu'] as $kotsu): ?>
+                                            <?php $checked = ''; ?>
+                                              <?php if(!empty($_SESSION['transpotation'])): ?>
+                                                <?php foreach ($_SESSION['transpotation'] as $transpotation): ?>
+                                                  <?php if ($transpotation == $kotsu): ?>
+                                                      <?php $checked = 'checked="checked"'; ?>
+                                                    <?php endif; ?>
+                                                  <?php endforeach; ?>
+                                              <?php endif; ?>
+                                                <?php echo '<input type="checkbox" name="transpotation[]" value="'.$kotsu.'" '. $checked .'>'; ?><?php echo $kotsu; ?>
+                                          <?php endforeach; ?>
                                         </div>
 
                                       <label class="col-md-4 control-label">投稿時期：</label>
@@ -85,22 +81,15 @@
                                               <?php endif; ?>
                                           </select>
                                         </div>
-                                      </div>
 
-                                      <!-- <label class="col-md-4 control-label"> タ グ ：</label>
-                                        <div class="col-md-8 research">
-                                          <input type="text" class="form-control" placeholder="例）デート、紅葉、のんびり">
-                                        </div> -->
-                                        <input type="hidden" name="research" value=1>
-                                        <button type="submit" class="btn btn-block btn-default btn-warning" value="research"/>Search</button>
-                                       
+                                        <button type="submit" class="btn btn-block btn-default btn-warning" value="Login"/>Search</button>
                                 </div>
                               </form>
                           </div>
                       </div>
-              </div>
-              <div class="col-md-2">
-              </div>
+                </div>
+                <div class="col-md-2">
+                </div>
             </div>
         </div>
         <!-- /.container -->

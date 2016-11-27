@@ -38,94 +38,109 @@
                 </li>
               </ul>
 
-              <?php foreach($friendPlanContents as $planItem): ?>
-                  <div class="post_plan">
-                          <div class="plans-show">
-                              <div class="plans-title">
-                                  <div class="col-md-2">
-                                      <div class="position-fix-favoritenum">
-                                          <div class="favorite-number">
-                                              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-8">
-                                      <div class="plan-title">
-                                          <h3 class="plan-title-name">
-                                              <a href="../plan/detail/<?php echo htmlspecialchars($planItem['plan_id']); ?>"><?php echo htmlspecialchars($planItem['title']); ?></a>
-                                          </h3>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-2">
-                                  </div>
-
-                                  <div class="tag-favonum">
-                                      <div class="col-md-12 tag-content-mypage">
-                                          <!-- <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span> -->
-                                      </div>
-                                  </div>
-
-                                  <div class="col-md-12">
-                                      <div class="edit-btn">
-                                          <a href="../plan/edit/<?php echo $planItem['id']; ?>" class="active">
-                                              <div class="btn-set">
-                                                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                              </div>
-                                          </a>
-                                          <a href="#" class="active">
-                                              <div class="btn-set">
-                                                  <span class="glyphicon glyphicon-trash"></span>
-                                              </div>
-                                          </a>
-                                      </div>
+              <div class="post_plan">
+                <?php foreach($friendPlanContents as $planContent): ?>
+                  <div class="plans-show">
+                      <div class="plans-title">
+                          <div class="col-md-2">
+                              <div class="position-fix-favoritenum">
+                                  <div class="favorite-number">
+                                      <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>：◯◯
                                   </div>
                               </div>
-
-                                  <div class="col-md-12">
-                                      <p>投稿者：<a><?php echo htmlspecialchars($viewInfo['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($planItem['created']); ?></p>
-                                  </div>
+                          </div>
+                          <div class="col-md-8">
+                              <div class="plan-title">
+                                  <h3 class="plan-title-name">
+                                      <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                  </h3>
+                              </div>
+                          </div>
+                          <div class="col-md-2">
                           </div>
 
-                          <div class="plan-contents">
-                              <p class="plan-idea">
-                                      目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planItem['visit_year']); ?>年<?php echo htmlspecialchars($planItem['visit_month']); ?>月<br>
-                                      スポット：<a href="../spot/detail/<?php echo htmlspecialchars($planItem['spot_id']); ?>"><?php echo htmlspecialchars($planItem['spot_name']); ?></a><br>
-                                      <h4>コメント：</h4><br>
-                                      <?php echo htmlspecialchars($planItem['comment']); ?><br>
-                                </p>
-                                <p class="plan-detail">
-                                  <a class="btn" href="../plan/detail/<?php echo htmlspecialchars($planItem['plan_id']); ?>">View details »</a>
-                                </p>
+                          <div class="tag-favonum">
+                              <div class="col-md-12 tag-content-mypage">
+                                  <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span>
+                              </div>
+                          </div>
+
+                          <div class="col-md-12">
+                              <div class="edit-btn">
+                                  <a href="#" class="active">
+                                      <div class="btn-set">
+                                          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                      </div>
+                                  </a>
+                                  <a href="#" class="active">
+                                      <div class="btn-set">
+                                          <span class="glyphicon glyphicon-trash"></span>
+                                      </div>
+                                  </a>
+                              </div>
                           </div>
                       </div>
-              <?php endforeach; ?>
 
-              <div class="col-md-12 mypage-pagi">
-                <ul class="pagination">
-                <?php if($page > 1): ?>
-                  <li>
-                    <a href='<?php echo $id ?>?page=1'>最初へ</a>
-                  </li>
-                  <li>
-                    <a href='<?php echo $id ?>?page=<?php echo $page -1; ?>'>Prev</a>
-                  </li>
-                <?php endif; ?>
-                <?php if($page < $maxPage): ?>
-                  <li>
-                    <a href='<?php echo $id ?>?page=<?php echo $page +1; ?>'>Next</a>
-                  </li>
-                  <li>
-                    <a href='<?php echo $id ?>page=<?php echo $maxPage; ?>'>最後へ</a>
-                  </li>
-                <?php endif; ?>
-                </ul>
+                          <div class="col-md-12">
+                              <p>投稿者：<a><?php echo htmlspecialchars($viewInfo['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($planContent['created']); ?></p>
+                          </div>
+                  </div>
+
+                  <div class="plan-contents">
+                      <p class="plan-idea">
+                              目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?>月<br>
+                          スポット：<a href=""></a><br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                          交通手段<br>
+                        </p>
+                        <p class="plan-detail">
+                          <a class="btn" href="#">View details »</a>
+                        </p>
+                  </div>
+                <?php endforeach; ?>
               </div>
+                
+                <div class="col-md-12 mypage-pagi">
+                  <ul class="pagination">
+                    <?php if($page > 1): ?>
+                      <li>
+                        <a href="mypage?page=1">最初へ</a>
+                      </li>
+                      <li>
+                        <a href="mypage?page=<?php echo $page -1; ?>">Prev</a>
+                      </li>
+                    <?php endif; ?>
+                    <?php if($page < $maxPage): ?>
+                      <li>
+                        <a href="mypage?page=<?php echo $page +1; ?>">Next</a>
+                      </li>
+                      <li>
+                        <a href="mypage?page=<?php echo $maxPage; ?>">最後へ</a>
+                      </li>
+                    <?php endif; ?>
+                  </ul>
+                </div>
             </div>
             <div class="col-md-2">
               
             </div>
           </div>
-      </div>
+        </div>
         <!-- /.container -->
+
     </div>
     <!-- /.content-section-a -->

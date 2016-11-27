@@ -1,19 +1,21 @@
 <?php
+// session_start();
+
     $SpotsController = new SpotsController($db, $table_name, $action);
-    $SpotsController->action=$action;
-    $SpotsController->resource=$resource;
     $error_message=array();
 
      //初期表示はエラーチェックをしない
 
         $error_message=$SpotsController->_new($_POST);
+
+
 ?>
 
 
 <div class="container">
     <div class="row">
 
-    <form method="post" action="" enctype="multipart/form-data">
+    <form method="post" action="" method="post" enctype="multipart/form-data">
 
         <div class="col-md-12" style="top:70px;">
             <div class="panel-group" id="accordion">

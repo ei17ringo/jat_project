@@ -245,7 +245,6 @@
 <script type="text/javascript">
 function send(){
   var target1= document.getElementById("form1");
-
   target1.submit();
 }
 </script>

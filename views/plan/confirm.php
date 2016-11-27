@@ -1,6 +1,5 @@
 <?php
     $PlansController = new PlansController($db, $table_name, $action);
-
 ?>
 
 
