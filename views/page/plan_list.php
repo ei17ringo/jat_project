@@ -14,9 +14,9 @@
                               </div>
                               <form id="research" method="post" action="" class="form-horizontal" role="form">
                                 <div class="modal-body">
-                                <div class="row">
-                                    <label class="col-md-4 control-label">目的地：</label>
-                                      <div class="col-md-8 research">
+                                  <div class="hundle">
+                                    <label class="col-md-4 controls">目的地：</label>
+                                      <div class="col-md-8 researchs">
                                         <select class="form-control" name="prefecture" placeholder="都道府県">
                                           <option value="">都道府県の選択</option>
 
@@ -29,63 +29,69 @@
                                           <?php endforeach; ?>
                                         </select>
                                       </div>
+                                    </div>
 
-                                    <label class="col-md-4 control-label">旅する月：</label>
-                                      <div class="col-md-8 research">
+                                    <div class="hundle">
+                                      <label class="col-md-4 controls">旅する月：</label>
+                                        <div class="col-md-8 researchs">
 
-                                      <?php foreach($_SESSION['tsuki'] as $tsuki): ?>
-                                        <?php $checked = ''; ?>
-                                          <?php if (!empty($_SESSION['month'])) :?> 
-                                            <?php foreach ($_SESSION['month'] as $month): ?>
-                                                <?php if ($month == $tsuki): ?>
-                                                    <?php $checked = 'checked="checked"'; ?>
-                                                  <?php endif; ?>
-                                                <?php endforeach; ?>
-                                          <?php endif; ?>
-                                              <?php echo '<input type="checkbox" name="month[]" value="'.$tsuki.'" '. $checked .'>'; ?><?php echo $tsuki; ?>
-                                      <?php endforeach; ?>
-                                      </div>
-
-
-                                      <label class="col-md-4 control-label">交通手段：</label>
-                                        <div class="col-md-8 research">
-
-                                        <?php foreach($_SESSION['kotsu'] as $kotsu): ?>
+                                        <?php foreach($_SESSION['tsuki'] as $tsuki): ?>
                                           <?php $checked = ''; ?>
-                                            <?php if(!empty($_SESSION['transpotation'])): ?>
-                                              <?php foreach ($_SESSION['transpotation'] as $transpotation): ?>
-                                                <?php if ($transpotation == $kotsu): ?>
-                                                    <?php $checked = 'checked="checked"'; ?>
-                                                  <?php endif; ?>
-                                                <?php endforeach; ?>
+                                            <?php if (!empty($_SESSION['month'])) :?> 
+                                              <?php foreach ($_SESSION['month'] as $month): ?>
+                                                  <?php if ($month == $tsuki): ?>
+                                                      <?php $checked = 'checked="checked"'; ?>
+                                                    <?php endif; ?>
+                                                  <?php endforeach; ?>
                                             <?php endif; ?>
-                                              <?php echo '<input type="checkbox" name="transpotation[]" value="'.$kotsu.'" '. $checked .'>'; ?><?php echo $kotsu; ?>
+                                                <?php echo '<input type="checkbox" name="month[]" value="'.$tsuki.'" '. $checked .'>'; ?><?php echo $tsuki; ?>
                                         <?php endforeach; ?>
-                                        
-                                        </div>
-
-                                      <label class="col-md-4 control-label">投稿時期：</label>
-                                        <div class="col-md-8 research">
-                                          <select class="form-control" name='view' placeholder="選択してください">
-                                            <option value="">選択してください</option>
-                                              <?php if ($_SESSION['view'] == '1month'): ?>
-                                                <option value="1month" selected="selected">直近１ヶ月</option>
-                                              <?php else: ?>
-                                                <option value="1month">直近１ヶ月</option>
-                                              <?php endif; ?>
-                                              <?php if ($_SESSION['view'] == '3months'): ?>
-                                                <option value="3months" selected="selected">直近３ヶ月</option>
-                                              <?php else: ?>
-                                                <option value="3months">直近３ヶ月</option>
-                                              <?php endif; ?>
-                                              <?php if ($_SESSION['view'] == '6months'): ?>
-                                                <option value="6months" selected="selected">直近６ヶ月</option>
-                                              <?php else: ?>
-                                                <option value="6months">直近６ヶ月</option>
-                                              <?php endif; ?>
-                                          </select>
                                         </div>
                                       </div>
+
+                                      <div class="hundle">
+                                        <label class="col-md-4 controls">交通手段：</label>
+                                          <div class="col-md-8 researchs">
+
+                                          <?php foreach($_SESSION['kotsu'] as $kotsu): ?>
+                                            <?php $checked = ''; ?>
+                                              <?php if(!empty($_SESSION['transpotation'])): ?>
+                                                <?php foreach ($_SESSION['transpotation'] as $transpotation): ?>
+                                                  <?php if ($transpotation == $kotsu): ?>
+                                                      <?php $checked = 'checked="checked"'; ?>
+                                                    <?php endif; ?>
+                                                  <?php endforeach; ?>
+                                              <?php endif; ?>
+                                                <?php echo '<input type="checkbox" name="transpotation[]" value="'.$kotsu.'" '. $checked .'>'; ?><?php echo $kotsu; ?>
+                                          <?php endforeach; ?>
+
+                                          </div>
+                                        </div>
+
+                                        <div class="hundle">
+                                          <label class="col-md-4 controls">投稿時期：</label>
+                                            <div class="col-md-8 researchs">
+                                              <select class="form-control" name='view' placeholder="選択してください">
+                                                <option value="">選択してください</option>
+                                                  <?php if ($_SESSION['view'] == '1month'): ?>
+                                                    <option value="1month" selected="selected">直近１ヶ月</option>
+                                                  <?php else: ?>
+                                                    <option value="1month">直近１ヶ月</option>
+                                                  <?php endif; ?>
+                                                  <?php if ($_SESSION['view'] == '3months'): ?>
+                                                    <option value="3months" selected="selected">直近３ヶ月</option>
+                                                  <?php else: ?>
+                                                    <option value="3months">直近３ヶ月</option>
+                                                  <?php endif; ?>
+                                                  <?php if ($_SESSION['view'] == '6months'): ?>
+                                                    <option value="6months" selected="selected">直近６ヶ月</option>
+                                                  <?php else: ?>
+                                                    <option value="6months">直近６ヶ月</option>
+                                                  <?php endif; ?>
+                                              </select>
+                                            </div>
+                                          </div>
+                                      
 
                                       <!-- <label class="col-md-4 control-label"> タ グ ：</label>
                                         <div class="col-md-8 research">
