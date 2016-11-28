@@ -194,7 +194,7 @@
                           </p>
                         </div>
                         <div class="col-md-4">
-                          <img alt="Bootstrap Image Preview" src="../user_picture/<?php echo htmlspecialchars($search['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" />
+                          <img alt="Spot Image" src="../user_picture/<?php echo htmlspecialchars($search['picture_1'], ENT_QUOTES, 'UTF-8'); ?>" />
                         </div>
                       </div>
                   </div>

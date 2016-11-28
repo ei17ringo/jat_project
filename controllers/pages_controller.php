@@ -96,7 +96,7 @@
         }
       }
       $page             = new Page();
-      $searchContent    = $page->searchContent($_SESSION['month'], $_SESSION['prefecture'], $_SESSION['tranpotation'], $_SESSION['view']);
+      $searchContent    = $page->searchContent($_SESSION['month'], $_SESSION['prefecture'], $_SESSION['transpotation'], $_SESSION['view']);
       
       // if (!empty($_POST)) {
       //     if (isset($_POST['prefecture'])) {

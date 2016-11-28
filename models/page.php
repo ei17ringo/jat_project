@@ -104,11 +104,6 @@
         $viewSubQuery = ' AND p.`created` > now()-INTERVAL ' . $viewMonth . ' MONTH ';
       }
 
-      
-
-      
-
-      
 
       $sql = "SELECT * FROM `plans` p, `users` u," . $areaSubQuery . " ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id`" . $viewSubQuery . "" . $monthSubQuery . "" . $transpotationSubQuery . "ORDER BY p.`id` DESC";
       var_dump($sql);

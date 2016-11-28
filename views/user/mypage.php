@@ -15,7 +15,7 @@
             <div class="col-md-2 mypage-profile">
               <img alt="user-icon" src="../user_picture/<?php echo htmlspecialchars($_SESSION['login']['user_picture'], ENT_QUOTES, 'UTF-8'); ?>" width="140" height="140" />
               <h4>
-                <a href=""><?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?></a>
+                <?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?>
               </h4>
               <div class="favorite-number">
                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><?php echo "\n" . htmlspecialchars($likeNum['cnt']); ?>
@@ -44,7 +44,7 @@
                                   <div class="col-md-8">
                                       <div class="plan-title">
                                           <h3 class="plan-title-name">
-                                              <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                              <a href="../plan/detail/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($planContent['title']); ?></a>
                                           </h3>
                                       </div>
                                   </div>
@@ -53,18 +53,18 @@
 
                                   <div class="tag-favonum">
                                       <div class="col-md-12 tag-content-mypage">
-                                          <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span>
+                                          <!-- <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span> -->
                                       </div>
                                   </div>
 
                                   <div class="col-md-12">
                                       <div class="edit-btn">
-                                          <a href="#" class="active">
+                                          <a href="../plan/edit/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>" class="active">
                                               <div class="btn-set">
                                                   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                               </div>
                                           </a>
-                                          <a href="#" class="active">
+                                          <a href="../plan/delete/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>" class="active">
                                               <div class="btn-set">
                                                   <span class="glyphicon glyphicon-trash"></span>
                                               </div>
@@ -100,7 +100,7 @@
                                   交通手段<br>
                                 </p>
                                 <p class="plan-detail">
-                                  <a class="btn" href="#">View details »</a>
+                                  <a class="btn" href="../plan/detail/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>">View details »</a>
                                 </p>
                           </div>
                       </div>
@@ -121,7 +121,7 @@
                                   <div class="col-md-8">
                                       <div class="plan-title">
                                           <h3 class="plan-title-name">
-                                              <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                              <a href="../plan/detail/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($planContent['title']); ?></a>
                                           </h3>
                                       </div>
                                   </div>
@@ -136,12 +136,12 @@
 
                                       <div class="col-md-12">
                                           <div class="edit-btn">
-                                              <a href="#" class="active">
+                                              <a href="../plan/edit/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>" class="active">
                                                   <div class="btn-set">
                                                       <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                   </div>
                                               </a>
-                                              <a href="#" class="active">
+                                              <a href="../plan/delete/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>" class="active">
                                                   <div class="btn-set">
                                                       <span class="glyphicon glyphicon-trash"></span>
                                                   </div>
@@ -177,7 +177,7 @@
                                   交通手段<br>
                                 </p>
                                 <p class="plan-detail">
-                                  <a class="btn" href="#">View details »</a>
+                                  <a class="btn" href="">View details »</a>
                                 </p>
                           </div>
                       </div>
