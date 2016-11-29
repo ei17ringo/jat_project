@@ -13,10 +13,8 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-2 mypage-profile">
-              <img alt="user-icon" src="../user_picture/<?php echo htmlspecialchars($_SESSION['login']['user_picture'], ENT_QUOTES, 'UTF-8'); ?>" width="140" height="140" />
-              <h4>
-                <?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?>
-              </h4>
+              <img alt="user-icon" src="../user_picture/<?php echo htmlspecialchars($_SESSION['login']['user_picture'], ENT_QUOTES, 'UTF-8'); ?>" width="140" height="140" /><br>
+              <i class="fa fa-user" aria-hidden="true"></i> <?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?>
               <div class="favorite-number">
                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><?php echo "\n" . htmlspecialchars($likeNum['cnt'], ENT_QUOTES, 'UTF-8'); ?>
               </div>
@@ -80,32 +78,27 @@
 
                           <div class="plan-contents">
                               <p class="plan-idea">
-                                      目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year'], ENT_QUOTES, 'UTF-8'); ?>年<?php echo htmlspecialchars($planContent['visit_month'], ENT_QUOTES, 'UTF-8'); ?>月<br>
-                                  スポット：<a href=""></a><br>
-                                  
-                                  <br>
-                                  交通手段:<br>
-                                  <br>
+                                      目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year'], ENT_QUOTES, 'UTF-8'); ?>年<?php echo htmlspecialchars($planContent['visit_month'], ENT_QUOTES, 'UTF-8'); ?><br>
+
+                                  <?php foreach($postPlanSpot as $planSpot): ?>
+                                  <?php if($planContent['id'] == $planSpot['plan_id']): ?>
+                                  スポット：<a href="../spot/detail/<?php echo htmlspecialchars($planSpot['spot_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                  <?php echo htmlspecialchars($planSpot['spot_name'], ENT_QUOTES, 'UTF-8'); ?></a>    <<混み具合：<?php echo htmlspecialchars($planSpot['crowded'], ENT_QUOTES, 'UTF-8'); ?>>><br>
+                                  <i class="fa fa-arrow-right" aria-hidden="true"></i><?php echo htmlspecialchars($planSpot['comment'],ENT_QUOTES, 'UTF-8'); ?>
+                                  <br><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><br>
+                                  交通手段：<?php echo htmlspecialchars($planSpot['visit_type_name'], ENT_QUOTES, 'UTF-8'); ?>
+                                  <br><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><br>
+                                  <?php endif; ?>
                                   <?php endforeach; ?>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
+                                  <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                                  <br>帰宅
                                 </p>
                                 <p class="plan-detail">
                                   <a class="btn" href="../plan/detail/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>">View details »</a>
                                 </p>
                           </div>
                       </div>
+                    <?php endforeach; ?>
                   </div>
 
                   <div role="tabpanel" class="tab-pane" id="favorite_plan">

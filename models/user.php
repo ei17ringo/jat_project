@@ -61,7 +61,7 @@
       //   $rtn[] = $result;
       // }
       // 取得結果を返すresultsに入らない
-      return $results; 
+      return $results;
     }
 
 
@@ -93,7 +93,7 @@
 
 
     function postPlanSpot() {
-      $sql = sprintf('SELECT * FROM `plan_spots` ps, `plans` p WHERE ps.`id` = p.`id` AND p.`user_id` = %d',
+      $sql = sprintf('SELECT * FROM `plan_spots` ps, `plans` p WHERE ps.`plan_id` = p.`id` AND p.`user_id` = %d',
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
         );
       $record       = mysqli_query($this->dbconnect, $sql) or die (mysqli_error($this->dbconnect));
@@ -103,19 +103,6 @@
       }
       return $pscontents;
     }
-
-
-    // function samePlanId() {
-    //   $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plan_spots` ps, `plans` p WHERE ps.`plan_id` = p.`id` AND `user_id` = %d' FROM `plan_spots` group by `plan_id`,
-    //     mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
-    //   );
-    //   $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-    //   // 連想配列としてSQLの実行結果を受け取る(keyと値)
-    //   $likeNum = mysqli_fetch_assoc($record);
-
-    //   return $likeNum;
-    //   var_dump($likeNum);
-    // }
 
 
     function friendPlanContents($id) {
@@ -129,6 +116,19 @@
         $contents[] = $content;
       }
       return $contents;
+    }
+
+
+    function friendPlanSpot($id) {
+      $sql = sprintf('SELECT * FROM `plan_spots` ps, `plans` p WHERE ps.`plan_id` = p.`id` AND p.`user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $id)
+        );
+      $record       = mysqli_query($this->dbconnect, $sql) or die (mysqli_error($this->dbconnect));
+      $frcontents   = array();
+      while ($table = mysqli_fetch_assoc($record)) {
+        $frcontents[] = $table;
+      }
+      return $frcontents;
     }
 
 
@@ -248,34 +248,6 @@
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
         mysqli_real_escape_string($this->dbconnect, $id)
       );
-      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-    }
-
-
-    function edit($id) {
-      $sql = sprintf('SELECT * FROM `blogs` WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
-      $results = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-      $result  = mysqli_fetch_assoc($results);
-      return $result;
-    }
-
-
-    function update($post, $id) {
-      $sql = sprintf('UPDATE `blogs` SET `title`= "%s",`body`= "%s" WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $post['title']),
-        mysqli_real_escape_string($this->dbconnect, $post['body']),
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
-      mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
-    }
-
-    
-    function delete($id) {
-      $sql = sprintf('UPDATE `blogs` SET `delete_flag`= 1 WHERE `id` = %d',
-        mysqli_real_escape_string($this->dbconnect, $id)
-        );
       mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
     }
   }

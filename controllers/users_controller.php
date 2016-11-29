@@ -307,7 +307,8 @@
 
       $postPlanContents = $user->postPlanContents();
       $postPlanSpot     = $user->postPlanSpot();
-      var_dump($postPlanSpot);
+      // var_dump($postPlanContents);
+      // var_dump($postPlanSpot);
 
       require('views/layouts/application.php');
     }
@@ -353,6 +354,7 @@
 
 
       $friendPlanContents = $user->friendPlanContents($id);
+      $friendPlanSpot     = $user->friendPlanSpot($id);
 
       require('views/layouts/application.php');
     }

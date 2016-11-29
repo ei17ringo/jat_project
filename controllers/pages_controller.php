@@ -43,7 +43,7 @@
         }
         $_SESSION['prefecture']   = '';
         $_SESSION['month']        = '';
-        $_SESSION['tranpotation'] = '';
+        $_SESSION['transpotation'] = '';
         $_SESSION['view']         = '';
     }
       // function _new($sd)閉じ

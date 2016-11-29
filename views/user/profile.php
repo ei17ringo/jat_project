@@ -89,25 +89,20 @@
                   <div class="plan-contents">
                       <p class="plan-idea">
                               目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?>月<br>
-                          スポット：<a href=""></a><br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                          ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                          交通手段<br>
-                        </p>
-                        <p class="plan-detail">
+                                <?php foreach($friendPlanSpot as $fPlanSpot): ?>
+                                <?php if($planContent['id'] == $fPlanSpot['plan_id']): ?>
+                                  スポット：<a href="../spot/detail/<?php echo htmlspecialchars($fPlanSpot['spot_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                  <?php echo htmlspecialchars($fPlanSpot['spot_name'], ENT_QUOTES, 'UTF-8'); ?></a>    <<混み具合：<?php echo htmlspecialchars($fPlanSpot['crowded'], ENT_QUOTES, 'UTF-8'); ?>>><br>
+                                  <i class="fa fa-arrow-right" aria-hidden="true"></i><?php echo htmlspecialchars($fPlanSpot['comment'],ENT_QUOTES, 'UTF-8'); ?>
+                                  <br><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><br>
+                                  交通手段：<?php echo htmlspecialchars($fPlanSpot['visit_type_name'], ENT_QUOTES, 'UTF-8'); ?>
+                                  <br><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><br>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
+                                  <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                                  <br>帰宅
+                                </p>
+                                <p class="plan-detail">
                           <a class="btn" href="#">View details »</a>
                         </p>
                   </div>

@@ -106,7 +106,7 @@
 
 
       $sql = "SELECT * FROM `plans` p, `users` u," . $areaSubQuery . " ps WHERE p.`user_id` = u.`id` AND p.`id` = ps.`plan_id`" . $viewSubQuery . "" . $monthSubQuery . "" . $transpotationSubQuery . "ORDER BY p.`id` DESC";
-      var_dump($sql);
+      // var_dump($sql);
 
       $content = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       // 連想配列としてSQLの実行結果を受け取る(keyと値)
