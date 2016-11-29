@@ -83,13 +83,39 @@
         mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id']),
         $_SESSION['start']
       );
-      $content      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $record      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $contents     = array();
-      while ($table = mysqli_fetch_assoc($content)) {
-        $contents[] = $content;
+      while ($table = mysqli_fetch_assoc($record)) {
+        $contents[] = $table;
       }
-      return $content;
+      return $contents;
     }
+
+
+    function postPlanSpot() {
+      $sql = sprintf('SELECT * FROM `plan_spots` ps, `plans` p WHERE ps.`id` = p.`id` AND p.`user_id` = %d',
+        mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+        );
+      $record       = mysqli_query($this->dbconnect, $sql) or die (mysqli_error($this->dbconnect));
+      $pscontents   = array();
+      while ($table = mysqli_fetch_assoc($record)) {
+        $pscontents[] = $table;
+      }
+      return $pscontents;
+    }
+
+
+    // function samePlanId() {
+    //   $sql = sprintf('SELECT COUNT(*) AS cnt FROM `plan_spots` ps, `plans` p WHERE ps.`plan_id` = p.`id` AND `user_id` = %d' FROM `plan_spots` group by `plan_id`,
+    //     mysqli_real_escape_string($this->dbconnect, $_SESSION['login']['id'])
+    //   );
+    //   $record = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+    //   // 連想配列としてSQLの実行結果を受け取る(keyと値)
+    //   $likeNum = mysqli_fetch_assoc($record);
+
+    //   return $likeNum;
+    //   var_dump($likeNum);
+    // }
 
 
     function friendPlanContents($id) {

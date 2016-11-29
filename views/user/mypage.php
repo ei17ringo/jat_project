@@ -18,7 +18,7 @@
                 <?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?>
               </h4>
               <div class="favorite-number">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><?php echo "\n" . htmlspecialchars($likeNum['cnt']); ?>
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><?php echo "\n" . htmlspecialchars($likeNum['cnt'], ENT_QUOTES, 'UTF-8'); ?>
               </div>
             </div>
             <div class="col-md-8 mypage-main">
@@ -44,7 +44,7 @@
                                   <div class="col-md-8">
                                       <div class="plan-title">
                                           <h3 class="plan-title-name">
-                                              <a href="../plan/detail/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                              <a href="../plan/detail/<?php echo htmlspecialchars($planContent['id'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($planContent['title'], ENT_QUOTES, 'UTF-8'); ?></a>
                                           </h3>
                                       </div>
                                   </div>
@@ -74,17 +74,19 @@
                               </div>
 
                                   <div class="col-md-12">
-                                      <p>投稿者：<a><?php echo htmlspecialchars($_SESSION['login']['user_name']); ?></a>  作成日：<?php echo htmlspecialchars($planContent['created']); ?></p>
+                                      <p>投稿者：<a><?php echo htmlspecialchars($_SESSION['login']['user_name'], ENT_QUOTES, 'UTF-8'); ?></a>  作成日：<?php echo htmlspecialchars($planContent['created'], ENT_QUOTES, 'UTF-8'); ?></p>
                                   </div>
                           </div>
 
                           <div class="plan-contents">
                               <p class="plan-idea">
-                                      目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?>月<br>
+                                      目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year'], ENT_QUOTES, 'UTF-8'); ?>年<?php echo htmlspecialchars($planContent['visit_month'], ENT_QUOTES, 'UTF-8'); ?>月<br>
                                   スポット：<a href=""></a><br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
-                                  交通手段<br>
-                                  ◯◯◯◯◯◯◯◯◯◯◯◯<br>
+                                  
+                                  <br>
+                                  交通手段:<br>
+                                  <br>
+                                  <?php endforeach; ?>
                                   交通手段<br>
                                   ◯◯◯◯◯◯◯◯◯◯◯◯<br>
                                   交通手段<br>
@@ -104,7 +106,6 @@
                                 </p>
                           </div>
                       </div>
-                    <?php endforeach; ?>
                   </div>
 
                   <div role="tabpanel" class="tab-pane" id="favorite_plan">
