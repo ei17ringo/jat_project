@@ -16,7 +16,7 @@
             <div class="col-md-2 mypage-profile">
               <img alt="user-icon" src="<?php echo $path_adjust_string; ?>../user_picture/<?php echo $viewInfo['user_picture']; ?>" width="140" height="140">
               <h4>
-                <a><?php echo $viewInfo['user_name']; ?>さん</a>
+                <i class="fa fa-user" aria-hidden="true"></i> <a><?php echo $viewInfo['user_name']; ?>さん</a>
               </h4>
               <div class="favorite-number">
                 <?php if ((isset($viewOptions)) && ($viewOptions == "LIKE")): ?>
@@ -39,6 +39,7 @@
               </ul>
 
               <div class="post_plan">
+              <?php if(isset($friendPlanContents)): ?>
                 <?php foreach($friendPlanContents as $planContent): ?>
                   <div class="plans-show">
                       <div class="plans-title">
@@ -52,18 +53,18 @@
                           <div class="col-md-8">
                               <div class="plan-title">
                                   <h3 class="plan-title-name">
-                                      <a href="#"><?php echo htmlspecialchars($planContent['title']); ?></a>
+                                      <a href="../../plan/detail/<?php echo htmlspecialchars($planContent['id']); ?>"><?php echo htmlspecialchars($planContent['title']); ?></a>
                                   </h3>
                               </div>
                           </div>
                           <div class="col-md-2">
                           </div>
 
-                          <div class="tag-favonum">
+                          <!-- <div class="tag-favonum">
                               <div class="col-md-12 tag-content-mypage">
                                   <span class="glyphicon glyphicon-tags" aria-hidden="true">：◯◯◯◯abcdefghijklmnopqrstuvwxyz◯◯◯◯abcdefghijk</span>
                               </div>
-                          </div>
+                          </div> -->
 
                           <div class="col-md-12">
                               <div class="edit-btn">
@@ -88,14 +89,14 @@
 
                   <div class="plan-contents">
                       <p class="plan-idea">
-                              目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?>月<br>
+                              目的地：京都符    訪問した年月：<?php echo htmlspecialchars($planContent['visit_year']); ?>年<?php echo htmlspecialchars($planContent['visit_month']); ?><br>
                                 <?php foreach($friendPlanSpot as $fPlanSpot): ?>
                                 <?php if($planContent['id'] == $fPlanSpot['plan_id']): ?>
-                                  スポット：<a href="../spot/detail/<?php echo htmlspecialchars($fPlanSpot['spot_id'], ENT_QUOTES, 'UTF-8'); ?>">
-                                  <?php echo htmlspecialchars($fPlanSpot['spot_name'], ENT_QUOTES, 'UTF-8'); ?></a>    <<混み具合：<?php echo htmlspecialchars($fPlanSpot['crowded'], ENT_QUOTES, 'UTF-8'); ?>>><br>
+                                  スポット：<a href="../../spot/detail/<?php echo htmlspecialchars($fPlanSpot['spot_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                  <?php echo htmlspecialchars($fPlanSpot['spot_name'], ENT_QUOTES, 'UTF-8'); ?></a>    <混み具合：<?php echo htmlspecialchars($fPlanSpot['crowded'], ENT_QUOTES, 'UTF-8'); ?>><br>
                                   <i class="fa fa-arrow-right" aria-hidden="true"></i><?php echo htmlspecialchars($fPlanSpot['comment'],ENT_QUOTES, 'UTF-8'); ?>
                                   <br><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><br>
-                                  交通手段：<?php echo htmlspecialchars($fPlanSpot['visit_type_name'], ENT_QUOTES, 'UTF-8'); ?>
+                                  <?php echo htmlspecialchars($fPlanSpot['visit_type_name'], ENT_QUOTES, 'UTF-8'); ?>
                                   <br><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><br>
                                 <?php endif; ?>
                                 <?php endforeach; ?>
@@ -103,28 +104,42 @@
                                   <br>帰宅
                                 </p>
                                 <p class="plan-detail">
-                          <a class="btn" href="#">View details »</a>
+                          <a class="btn" href="../../plan/detail/<?php echo htmlspecialchars($planContent['id']); ?>">View details »</a>
                         </p>
                   </div>
                 <?php endforeach; ?>
+              <?php endif; ?>
+              <?php if($friendPlanContents == ''): ?>
+              <p>まだ投稿がありません。</p>
               </div>
-                
+                <div class="plans-show">
+                  <div class="plans-title">
+                      <div class="col-md-12">
+                          <div class="plan-title">
+                              <h3 class="plan-title-name">
+                                  <p>まだ投稿がありません。</p>
+                              </h3>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                <?php endif; ?>
                 <div class="col-md-12 mypage-pagi">
                   <ul class="pagination">
                     <?php if($page > 1): ?>
                       <li>
-                        <a href="mypage?page=1">最初へ</a>
+                        <a href="?page=1">最初へ</a>
                       </li>
                       <li>
-                        <a href="mypage?page=<?php echo $page -1; ?>">Prev</a>
+                        <a href="?page=<?php echo $page -1; ?>">Prev</a>
                       </li>
                     <?php endif; ?>
                     <?php if($page < $maxPage): ?>
                       <li>
-                        <a href="mypage?page=<?php echo $page +1; ?>">Next</a>
+                        <a href="?page=<?php echo $page +1; ?>">Next</a>
                       </li>
                       <li>
-                        <a href="mypage?page=<?php echo $maxPage; ?>">最後へ</a>
+                        <a href="?page=<?php echo $maxPage; ?>">最後へ</a>
                       </li>
                     <?php endif; ?>
                   </ul>

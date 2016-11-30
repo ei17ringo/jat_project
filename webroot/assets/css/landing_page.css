@@ -23,6 +23,23 @@ h6 {
     font-weight: 700;
 }
 
+
+a:link{
+    color:#0000ff; text-decoration:none
+}
+
+a:visited{
+    color:#0000ff; text-decoration:none
+}
+
+a:hover{
+    color:#0000ff; text-decoration:none
+}
+
+a:active{
+    color:#0000ff; text-decoration:none
+}
+
 .error_message{
     font-size: 15px;
     color: red;
@@ -264,7 +281,7 @@ h6 {
 .plan-idea{
     text-align: left;
     padding-left: 30px;
-    max-height: 200px;
+    max-height: 300px;
     overflow: auto;
 }
 
@@ -791,7 +808,7 @@ img.favorite-user-picture {
 
 .plans-title{
     min-height: 150px;
-    max-height: 300px;
+    max-height: 200px;
 }
 
 .plan-title{
@@ -805,7 +822,8 @@ img.favorite-user-picture {
     min-height: 30px;
     max-height: 100px;
     word-wrap: break-word;
-    padding-left: 20px;
+    padding-top: 15px;
+    font-size: 25px;
 }
 
 /*----------------------<<END>>plan_list------------------------*/

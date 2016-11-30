@@ -86,7 +86,7 @@
                                   <?php echo htmlspecialchars($planSpot['spot_name'], ENT_QUOTES, 'UTF-8'); ?></a>    <<混み具合：<?php echo htmlspecialchars($planSpot['crowded'], ENT_QUOTES, 'UTF-8'); ?>>><br>
                                   <i class="fa fa-arrow-right" aria-hidden="true"></i><?php echo htmlspecialchars($planSpot['comment'],ENT_QUOTES, 'UTF-8'); ?>
                                   <br><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><br>
-                                  交通手段：<?php echo htmlspecialchars($planSpot['visit_type_name'], ENT_QUOTES, 'UTF-8'); ?>
+                                  <?php echo htmlspecialchars($planSpot['visit_type_name'], ENT_QUOTES, 'UTF-8'); ?>
                                   <br><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><br>
                                   <?php endif; ?>
                                   <?php endforeach; ?>

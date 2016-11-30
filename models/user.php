@@ -24,8 +24,8 @@
         if($table['cnt']>0){
         //同じエラーが1件以上あったらエラー
         $error_message['user_name'] = 'duplicate';
+        return $error_message;
         }
-      return $error_message;
     }
 
 
@@ -106,14 +106,14 @@
 
 
     function friendPlanContents($id) {
-      $sql = sprintf('SELECT * FROM `plans` WHERE `user_id` = %d',
+      $sql = sprintf('SELECT * FROM `plans` WHERE `user_id` = %d LIMIT %d, 5',
         mysqli_real_escape_string($this->dbconnect, $id),
         $_SESSION['start']
       );
-      $content      = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
+      $record       = mysqli_query($this->dbconnect, $sql) or die(mysqli_error($this->dbconnect));
       $contents     = array();
-      while ($table = mysqli_fetch_assoc($content)) {
-        $contents[] = $content;
+      while ($table = mysqli_fetch_assoc($record)) {
+        $contents[] = $table;
       }
       return $contents;
     }
