@@ -175,10 +175,6 @@ if(!isset($_SESSION['spot']['duplicate'])&& (empty($sd))){return;
       function save(){
          $spot= new Spot();
         $viewOptions= $spot->save();
-       
-       // トップページへ
-// 　　　　　header('Location: mypage');
-//          exit();
       }
 
 

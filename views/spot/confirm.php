@@ -11,7 +11,7 @@
 <div class="container" style="margin-top:70px; margin-bottom:70px">
     <div class="row">
 
-  <form method="post" action="save" enctype="multipart/form-data">
+  <form method="post" action="/jat_project/spot/save" enctype="multipart/form-data">
 
         <div class="col-md-12">
             <div class="panel-group" id="accordion">

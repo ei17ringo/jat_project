@@ -106,7 +106,7 @@ function save() {
            unset($_SESSION['spot']);
 
      // mypageへリダイレクト
-     header('Location: mypage');
+     header('Location: ../user/mypage');
       exit();
       }
         }
